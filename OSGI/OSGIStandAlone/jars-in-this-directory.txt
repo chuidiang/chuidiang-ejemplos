@@ -1,0 +1,8 @@
+ El volumen de la unidad E es Datos Windows
+ El n£mero de serie del volumen es: F49F-5BD4
+
+ Directorio de E:\PROYECTOS\OSGI\OSGIStandAlone
+
+19/09/2013  09:46         1.392.230 org.eclipse.osgi_3.9.1.v20130814-1242.jar
+               1 archivos      1.392.230 bytes
+               0 dirs  24.156.041.216 bytes libres

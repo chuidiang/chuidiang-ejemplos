@@ -1,0 +1,22 @@
+ El volumen de la unidad E es Datos Windows
+ El n£mero de serie del volumen es: F49F-5BD4
+
+ Directorio de E:\PROYECTOS\OSGI\OSGIStandAlone\plugins
+
+16/02/2014  14:36    <DIR>          .
+16/02/2014  14:36    <DIR>          ..
+16/02/2014  14:36                 0 jars-in-this-directory.txt
+19/09/2013  09:45            57.646 org.apache.felix.gogo.command_0.10.0.v201209301215.jar
+19/09/2013  09:45            80.249 org.apache.felix.gogo.runtime_0.10.0.v201209301036.jar
+19/09/2013  09:45            60.827 org.apache.felix.gogo.shell_0.10.0.v201212101605.jar
+19/09/2013  09:45            93.013 org.eclipse.core.contenttype_3.4.200.v20130326-1255.jar
+19/09/2013  09:45            92.479 org.eclipse.core.jobs_3.5.300.v20130429-1813.jar
+19/09/2013  09:45            73.635 org.eclipse.core.runtime_3.9.0.v20130326-1255.jar
+19/09/2013  09:45            86.244 org.eclipse.equinox.app_1.3.100.v20130327-1442.jar
+19/09/2013  09:45           106.701 org.eclipse.equinox.common_3.6.200.v20130402-1505.jar
+19/09/2013  09:45           116.277 org.eclipse.equinox.console_1.0.100.v20130429-0953.jar
+19/09/2013  09:45           127.170 org.eclipse.equinox.preferences_3.5.100.v20130422-1538.jar
+19/09/2013  09:45           184.147 org.eclipse.equinox.registry_3.5.301.v20130717-1549.jar
+16/02/2014  13:21             1.537 OSGIHelloWorld_1.0.0.201402161321.jar
+              13 archivos      1.079.925 bytes
+               2 dirs  24.156.037.120 bytes libres
