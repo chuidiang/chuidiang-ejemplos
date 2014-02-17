@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OSGIBundleWithLog4jAndExport
+Bundle-SymbolicName: OSGIBundleWithLog4jAndExport
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.chuidiang.ejemplos.osgi_export.Activator
+Bundle-Vendor: com.chuidiang
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.osgi.framework;version="1.3.0"
+Export-Package: com.chuidiang.ejemplos.osgi_export.util
+Bundle-ClassPath: .,
+ lib/log4j-1.2.17.jar
