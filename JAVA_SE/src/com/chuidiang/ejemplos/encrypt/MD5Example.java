@@ -7,7 +7,7 @@ import org.apache.commons.codec.digest.MessageDigestAlgorithms;
 
 /**
  * Ejemplo para extraer MD5 de una cadena de texto. Como los bytes obtenidos no
- * son legibles, los escribimos tal cual, en hexadecimal y codificado base 64
+ * son legibles, los escribimos en hexadecimal y codificado base 64
  * con ayuda de la librería apache commons-codec.
  * 
  * @author Chuidiang
@@ -20,9 +20,6 @@ public class MD5Example {
       MessageDigest md = MessageDigest.getInstance(MessageDigestAlgorithms.MD5);
       md.update("texto a cifrar".getBytes());
       byte[] digest = md.digest();
-
-      // Se escribe tal cual
-      System.out.println(digest);
 
       // Se escribe byte a byte en hexadecimal
       for (byte b : digest) {
