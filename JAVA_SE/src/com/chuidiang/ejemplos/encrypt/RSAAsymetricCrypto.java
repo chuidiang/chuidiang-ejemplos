@@ -20,7 +20,7 @@ import javax.crypto.Cipher;
  * 
  * @author Chuidiang
  */
-public class AESAsymetricCrypto {
+public class RSAAsymetricCrypto {
    private static Cipher rsa;
 
    public static void main(String[] args) throws Exception {
