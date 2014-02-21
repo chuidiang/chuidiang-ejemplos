@@ -10,7 +10,7 @@ import com.chuidiang.ejemplos.osgi_services.sumador.Adder;
  */
 public class AdderImpl implements Adder {
 	@Override
-	public double suma(double a,double b){
+	public double add(double a,double b){
 		return a+b;
 	}
 	

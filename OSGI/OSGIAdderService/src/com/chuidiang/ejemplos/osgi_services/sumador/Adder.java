@@ -7,6 +7,6 @@ package com.chuidiang.ejemplos.osgi_services.sumador;
  */
 public interface Adder {
 
-	double suma(double a, double b);
+	double add(double a, double b);
 
 }

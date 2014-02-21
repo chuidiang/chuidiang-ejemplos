@@ -29,7 +29,7 @@ public class AdderConsumer {
 			public void run() {
 				while (true) {
 					if (null != sumador) {
-						System.out.println(sumador.suma(Math.random(), Math.random()));
+						System.out.println(sumador.add(Math.random(), Math.random()));
 					} else {
 						System.out.println("sumador es null");
 					}
