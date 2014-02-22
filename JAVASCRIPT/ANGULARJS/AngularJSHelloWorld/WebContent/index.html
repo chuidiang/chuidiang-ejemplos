@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<script src="lib/app.js"></script>
+<meta charset="ISO-8859-1">
+<title>AngularJS Basic Examples</title>
+</head>
+<body data-ng-app>
+	<h1>AngularJS Basic Examples</h1>
+	<h2>Data binding</h2>
+	<div data-ng-controller="HelloController">
+		<p>{{greeting}}</p>
+		<label>Greeting : </label><input data-ng-model="greeting" />
+	</div>
+
+	<h2>data-ng-if</h2>
+	<div data-ng-controller="CheckController">
+		<input type="checkbox" data-ng-model="checkbox"
+			data-ng-true-value="true" data-ng-change="toggle()" />
+		<p data-ng-if="visible">Visible</p>
+	</div>
+
+	<h2>data-ng-repeat</h2>
+	<div data-ng-controller="RepeatController">
+		<input type="number" data-ng-model="counter"
+			data-ng-change="updateModel()" />
+		<p data-ng-repeat="item in array">{{item}}</p>
+	</div>
+</body>
+</html>
