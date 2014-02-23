@@ -3,7 +3,7 @@ function HelloController($scope) {
 }
 
 function CheckController ($scope) {
-	$scope.checkbox = 'true';
+	$scope.checkbox='checked';
 	$scope.visible = true;
 	
 	$scope.toggle = function () {
