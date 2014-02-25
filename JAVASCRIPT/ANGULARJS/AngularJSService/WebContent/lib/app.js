@@ -14,7 +14,7 @@ myApp.controller('HttpController',function($scope,$http){
 	});
 });
 
-myApp.controller('ServiceController',function($scope,$http,Users){
+myApp.controller('ServiceController',function($scope,Users){
 	Users.query().success(function (data) {
 		$scope.items=data;
 	});
