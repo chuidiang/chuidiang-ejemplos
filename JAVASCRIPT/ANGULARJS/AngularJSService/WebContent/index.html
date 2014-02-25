@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<script src="lib/app.js"></script>
+<meta charset="ISO-8859-1">
+<title>Communicating AngularJS with Server</title>
+</head>
+<body data-ng-app="myApp">
+	<h1>Communicating AngularJS with Server</h1>
+	<h2>Using $http</h2>
+	<div data-ng-controller="HttpController">
+		<p data-ng-repeat="item in sameItems">{{item}}</p>
+	</div>
+	<h2>Using a Service</h2>
+	<div data-ng-controller="ServiceController">
+		<p data-ng-repeat="item in items">{{item}}</p>
+	</div>
+</body>
+</html>
