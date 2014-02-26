@@ -32,14 +32,19 @@ public class JsonExample2 {
       JsonParser parser = new JsonParser();
       
       JsonElement elementPimitive = parser.parse("true");
-      System.out.println(elementPimitive.getAsBoolean());
+      if (elementPimitive.isJsonPrimitive() &&
+            elementPimitive.getAsJsonPrimitive().isBoolean()){
+         System.out.println(elementPimitive.getAsBoolean());
+      }
       
       JsonElement elementObject = parser.parse("{'name':'Juan','age':22,'birthday':'Wed Feb 26 20:39:53 CET 2014'}");
-      System.out.println(elementObject.getAsJsonObject().get("name"));
+      System.out.println(elementObject.getAsJsonObject().get("name").getAsString());
       
-      JsonElement arrayElement = parser.parse("[{'name':'Juan','age':22,'birthday':'Wed Feb 26 20:44:23 CET 2014'},{'name':'Juan','age':22,'birthday':'Wed Feb 26 20:39:53 CET 2014'}]");
+      JsonElement arrayElement = parser.parse(
+            "[{'name':'Juan','age':22,'birthday':'Wed Feb 26 20:44:23 CET 2014'},"
+            + "{'name':'Juan','age':22,'birthday':'Wed Feb 26 20:39:53 CET 2014'}]");
       System.out.println(arrayElement.getAsJsonArray().size());
-      System.out.println(arrayElement.getAsJsonArray().get(0).getAsJsonObject().get("age"));
+      System.out.println(arrayElement.getAsJsonArray().get(0).getAsJsonObject().get("age").getAsInt());
    }
 
 }
