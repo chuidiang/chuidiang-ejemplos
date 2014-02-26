@@ -3,12 +3,7 @@ package com.chuidiang.ejemplos.json;
 import java.util.Date;
 
 public class Data {
-   
-   @Override
-   public String toString() {
-      return "Data [aString=" + aString + ", aInt=" + aInt + ", aInteger="
-            + aInteger + ", aDate=" + aDate + "]";
-   }
+
    public Data(String aString, int aInt, Integer aInteger, Date aDate) {
       super();
       this.aString = aString;
@@ -16,8 +11,16 @@ public class Data {
       this.aInteger = aInteger;
       this.aDate = aDate;
    }
-   private String aString="a String";
-   private int aInt=22;
-   private Integer aInteger=new Integer(11);
-   private Date aDate = new Date();
+
+   private String aString;
+   private int aInt;
+   private Integer aInteger;
+   private Date aDate;
+
+   @Override
+   public String toString() {
+      return "Data [aString=" + aString + ", aInt=" + aInt + ", aInteger="
+            + aInteger + ", aDate=" + aDate + "]";
+   }
+
 }
