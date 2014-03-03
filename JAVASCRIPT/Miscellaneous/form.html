@@ -11,7 +11,12 @@
 		<label>Integer : </label><input type="text" name="aInteger"></input></br> 
 		<label>Float : </label><input type="text" name="aFloat"></input></br>
 		<label>10 characters : </label><input type="text" name="tenChars"></input> </br>
-		<label>email : </label><input type="text" name="email"></input>
+		<label>email : </label><input type="text" name="email"></input></br>
+		<select name="aSelect">
+		<option value="Select one">Select one</option>
+		<option value="A">A</option>
+		<option value="B">B</option>
+		</select>
 		<input type="submit" value="Send"></input>
 	</form>
 </body>
@@ -30,6 +35,9 @@
 		}
 		var emailRegex = /^\w+@\w+\.\w+$/;
 		if (!form.email.value.match(emailRegex)) {
+			return false;
+		}
+		if (form.aSelect.value=="Select one"){
 			return false;
 		}
 		return true;
