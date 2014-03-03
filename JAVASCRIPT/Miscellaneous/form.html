@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="theForm" method="post" action="form.html"
+		onsubmit="return validate()">
+		<label>Integer : </label><input type="text" name="aInteger"></input></br> 
+		<label>Float : </label><input type="text" name="aFloat"></input></br>
+		<label>10 characters : </label><input type="text" name="tenChars"></input> </br>
+		<label>email : </label><input type="text" name="email"></input>
+		<input type="submit" value="Send"></input>
+	</form>
+</body>
+</html>
+<script>
+	var validate = function() {
+		var form = document.getElementById("theForm");
+		if (!form.aInteger.value || isNaN(parseInt(form.aInteger.value))) {
+			return false;
+		}
+		if (!form.aFloat.value || isNaN(parseFloat(form.aFloat.value))) {
+			return false;
+		}
+		if (form.tenChars.value.length < 10) {
+			return false;
+		}
+		var emailRegex = /^\w+@\w+\.\w+$/;
+		if (!form.email.value.match(emailRegex)) {
+			return false;
+		}
+		return true;
+	}
+</script>
