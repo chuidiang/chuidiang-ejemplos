@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<style>
+	.helpButton {
+	   background-color: cyan;
+	   margin-left:10px;
+	   cursor: pointer;
+	}
+	.help {
+		display : none;
+		border: solid 1px black;
+		background-color: cyan;
+	}
+	#container {
+		display:inline-block;
+		background-color:yellow;
+	}
+	</style>
+	<title>Help Slider Example</title>
+	<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>
+	$(function(){
+		$(".helpButton").click(function(){
+			$(this).nextAll(".help:first").slideToggle();
+		});
+		$(".help").width($("#container").width());
+	})
+	</script>
+</head>
+<body>
+	<form>
+		<div id="container">
+			<label>foo number: </label><input type="text"></input><span class="helpButton">?</span>
+			<p class="help">This is the help for foo number and it is a very large test</p><br/>
+			<label>bar number: </label><input type="text"></input><span class="helpButton">?</span>
+			<p class="help">This is the help for bar number field</p><br/>
+		</div>
+	</form>
+	<p>Another text</p>
+</body>
+</html>
