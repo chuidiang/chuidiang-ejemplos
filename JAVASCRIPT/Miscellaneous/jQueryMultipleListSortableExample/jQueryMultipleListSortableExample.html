@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet"
+   href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script
+   src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script
+   src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<style>
+.place {
+   border: solid 1px black;
+   height: 1em;
+   background-color: white;
+}
+
+ul {
+   min-height: 2.2em;
+   min-width: 5em;
+   background-color: activeborder;
+   margin: 10px;
+   list-style-type: none;
+   padding-left: 0px;
+   background-color: #eeeeee;
+}
+
+li {
+   border: dotted 1px gray;
+   margin: 0.1em;
+   padding: 0.5em;
+   list-style-position: inside;
+}
+
+div {
+   float: left;
+}
+</style>
+
+<title>jQuery Multiple List Sortable Example</title>
+<script>
+   $(function() {
+
+      $('#list1').sortable({
+         connectWith : "#list2",
+         placeholder : "place",
+         update : function() {
+            $('#result1').html($('#list1').sortable("toArray").toString());
+         }
+      });
+
+      $('#list2').sortable({
+         connectWith : "#list1",
+         placeholder : "place",
+         update : function() {
+            $('#result2').html($('#list2').sortable("toArray").toString());
+         }
+      });
+   })
+</script>
+</head>
+<body>
+   <div>
+      <ul id="list1"">
+         <li id="1">Item 1</li>
+         <li id="2">Item 2</li>
+         <li id="3">Item 3</li>
+         <li id="4">Item 4</li>
+      </ul>
+   </div>
+   <div>
+      <ul id="list2">
+         <li id="a">Item a</li>
+         <li id="b">Item b</li>
+         <li id="c">Item c</li>
+         <li id="d">Item d</li>
+      </ul>
+   </div>
+   <p id="result1" style="clear: both;"></p>
+   <p id="result2"></p>
+</body>
+</html>
