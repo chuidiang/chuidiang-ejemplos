@@ -18,6 +18,12 @@ myApp.directive ('ownattribute', function(){
    };
 });
 
+myApp.directive ('templateExample', function(){
+   return {
+      templateUrl : 'template.html'
+   };
+});
+
 myApp.controller ("myController", function($scope){
    $scope.counter=0;
    $scope.add = function(){
@@ -29,5 +35,24 @@ myApp.directive ('counter', function(){
    return {
       restrict: 'E',
       template : '<p>{{counter}}</p>'
+   };
+});
+
+myApp.directive ('transcludeTrueExample', function(){
+   return {
+      restrict : 'A',
+      transclude : true,
+      template : '<div><p ng-transclude></p></div>'
+   };
+});
+
+myApp.directive ('transcludeElementExample', function(){
+   return {
+      restrict : 'A',
+      transclude : 'element',
+      link : function (scope, element, attrs, controller, transcludeFn){
+         element.after(transcludeFn());
+         element.after("<p>Added Element</p>");
+      }
    };
 });

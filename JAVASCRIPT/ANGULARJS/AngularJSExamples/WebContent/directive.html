@@ -11,13 +11,25 @@
 </head>
 <body data-ng-app="myApp">
 
+   <h2>Own Tag example</h2>
    <owntag></owntag>
 
+   <h2>Own Attribute example</h2>
    <div data-ownattribute="hello you"></div>
 
+   <h2>Template URL Example</h2>
+   <div data-template-example></div>
+
+   <h2>Directive inside Controller Example</h2>   
    <div data-ng-controller="myController">
       <button data-ng-click="add()">Add</button>
       <counter></counter>
    </div>
+   
+   <h2>Transclude true Example</h2>
+   <div transclude-true-example>I'm Transclude true content</div>
+   
+   <h2>Transclude Element Example</h2>
+   <div transclude-element-example>I'm Original Transclude element content</div>
 </body>
 </html>
