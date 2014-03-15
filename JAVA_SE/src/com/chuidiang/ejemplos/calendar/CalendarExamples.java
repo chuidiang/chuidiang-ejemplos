@@ -1,17 +1,45 @@
 package com.chuidiang.ejemplos.calendar;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class CalendarExamples {
 
    public static void main(String[] args) {
+      
       today();
       setDate();
       getDate(Locale.getDefault());
       getDate(Locale.GERMAN);
       addSubstractDays();
       compareDates();
+      daysBetweenDates();
+      timeZone();
+   }
+
+   private static void timeZone() {
+      Calendar spanishToday = Calendar.getInstance(TimeZone.getDefault());
+      Calendar canadianToday = Calendar.getInstance(TimeZone.getTimeZone("Canada/Central"));
+      
+      System.out.println("Spanish hour "+spanishToday.get(Calendar.HOUR_OF_DAY));
+      System.out.println("Canadian hour "+canadianToday.get(Calendar.HOUR_OF_DAY));
+      
+      // Available TimeZones
+      String [] timeZones = TimeZone.getAvailableIDs();
+      System.out.println("Available Timezones "+Arrays.toString(timeZones));
+   }
+
+   private static void daysBetweenDates() {
+      Calendar aDay = Calendar.getInstance();
+      aDay.set(Calendar.MONTH, Calendar.MARCH);
+      Calendar otherDay = Calendar.getInstance();
+      otherDay.set(Calendar.MONTH, Calendar.FEBRUARY);
+      
+      long milisec = aDay.getTimeInMillis()-otherDay.getTimeInMillis();
+      long days = milisec/1000/60/60/24;
+      System.out.println("Days : "+days);
    }
 
    private static void compareDates() {
