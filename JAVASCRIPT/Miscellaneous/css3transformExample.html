@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>CSS3 Transform Example</title>
+<style>
+
+p {
+   background-color: aqua;
+   display:inline-block;
+   margin:20px;
+}
+
+.original {
+   background-color: white;
+   border: dotted black 1px;
+}
+
+.rotate {
+   -webkit-transform:rotate(45deg);
+   -moz-transform:rotate(45deg);
+   transform:rotate(45deg);
+}
+
+.rotateX {
+   -webkit-transform:rotateX(45deg);
+   -moz-transform:rotateX(45deg);
+   transform:rotateX(45deg);
+}
+
+.rotateY {
+   -webkit-transform:rotateY(45deg);
+   -moz-transform:rotateY(45deg);
+   transform:rotateY(45deg);
+}
+
+.rotateZ {
+   -webkit-transform:rotateZ(45deg);
+   -moz-transform:rotateZ(45deg);
+   transform:rotateZ(45deg);
+}
+
+.rotate3d {
+   -webkit-transform:rotate3d(1,1,1,60deg);
+   -moz-transform:rotate3d(1,1,1,60deg);
+   transform:rotate3d(1,1,1,60deg);
+}
+
+
+.translate {
+   -webkit-transform:translate(20px,20px);
+   -moz-transform:translate(20px,20px);
+   transform:translate(20px,20px);
+   display:inline-block;
+   position:absolute;
+   top: 0px;
+}
+
+.translateX {
+   -webkit-transform:translateX(20px);
+   -moz-transform:translateX(20px);
+   transform:translateX(20px);
+   display:inline-block;
+   position:absolute;
+   top: 0px;
+}
+
+.translateY {
+   -webkit-transform:translateY(20px);
+   -moz-transform:translateY(20px);
+   transform:translateY(20px);
+   display:inline-block;
+   position:absolute;
+   top: 0px;
+}
+
+.translateZ {
+   -webkit-transform:translateZ(20px);
+   -moz-transform:translateZ(20px);
+   transform:translateZ(20px);
+   display:inline-block;
+   position:absolute;
+   top: 0px;
+}
+
+.translate3d {
+   -webkit-transform:translate3d(10px,10px,-20px);
+   -moz-transform:translate3d(10px,10px,-20px);
+   transform:translate3d(10px,10px,-20px);
+   display:inline-block;
+   position:absolute;
+   top: 0px;
+}
+
+
+.scale {
+   -webkit-transform:scale3d(5,2,4);
+   ttransform:scale(5,2);
+   display:inline-block;
+}
+</style>
+</head>
+<body>
+<h2>rotate</h2>
+<p class="rotate">rotate</p>
+<p class="rotateX">rotateX</p>
+<p class="rotateY">rotateY</p>
+<p class="rotateZ">rotateZ</p>
+<p class="rotate3d">rotate3d</p>
+<h2>translate</h2>
+<div style="position:relative; display:inline-block;">
+<p class="original">translate</p>
+<p class="translate">translate</p>
+</div>
+<div style="position:relative; display:inline-block;">
+<p class="original">translateX</p>
+<p class="translateX">translateX</p>
+</div>
+<div style="position:relative; display:inline-block;">
+<p class="original">translateY</p>
+<p class="translateY">translateY</p>
+</div>
+<div style="position:relative; display:inline-block;">
+<p class="original">translateZ</p>
+<p class="translateZ">translateZ</p>
+</div>
+<div style="position:relative; display:inline-block;">
+<p class="original">translate3d</p><br/>
+<p class="translate3d">translate3d</p>
+</div>
+<h2>scale</h2>
+<p class="scale">scale</p>
+</body>
+</html>
