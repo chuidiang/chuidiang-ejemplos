@@ -5,11 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>CSS3 Transform Example</title>
 <style>
-
 p {
    background-color: aqua;
-   display:inline-block;
-   margin:20px;
+   margin: 20px;
+   display: inline-block;
 }
 
 .original {
@@ -18,118 +17,179 @@ p {
 }
 
 .rotate {
-   -webkit-transform:rotate(45deg);
-   -moz-transform:rotate(45deg);
-   transform:rotate(45deg);
+   -webkit-transform: rotate(45deg);
+   -moz-transform: rotate(45deg);
+   transform: rotate(45deg);
 }
 
 .rotateX {
-   -webkit-transform:rotateX(45deg);
-   -moz-transform:rotateX(45deg);
-   transform:rotateX(45deg);
+   -webkit-transform: rotateX(45deg);
+   -moz-transform: rotateX(45deg);
+   transform: rotateX(45deg);
 }
 
 .rotateY {
-   -webkit-transform:rotateY(45deg);
-   -moz-transform:rotateY(45deg);
-   transform:rotateY(45deg);
+   -webkit-transform: rotateY(45deg);
+   -moz-transform: rotateY(45deg);
+   transform: rotateY(45deg);
 }
 
 .rotateZ {
-   -webkit-transform:rotateZ(45deg);
-   -moz-transform:rotateZ(45deg);
-   transform:rotateZ(45deg);
+   -webkit-transform: rotateZ(45deg);
+   -moz-transform: rotateZ(45deg);
+   transform: rotateZ(45deg);
 }
 
 .rotate3d {
-   -webkit-transform:rotate3d(1,1,1,60deg);
-   -moz-transform:rotate3d(1,1,1,60deg);
-   transform:rotate3d(1,1,1,60deg);
+   -webkit-transform: rotate3d(1, 1, 1, 60deg);
+   -moz-transform: rotate3d(1, 1, 1, 60deg);
+   transform: rotate3d(1, 1, 1, 60deg);
 }
 
-
 .translate {
-   -webkit-transform:translate(20px,20px);
-   -moz-transform:translate(20px,20px);
-   transform:translate(20px,20px);
-   display:inline-block;
-   position:absolute;
+   -webkit-transform: translate(20px, 20px);
+   -moz-transform: translate(20px, 20px);
+   transform: translate(20px, 20px);
+   display: inline-block;
+   position: absolute;
    top: 0px;
 }
 
 .translateX {
-   -webkit-transform:translateX(20px);
-   -moz-transform:translateX(20px);
-   transform:translateX(20px);
-   display:inline-block;
-   position:absolute;
+   -webkit-transform: translateX(20px);
+   -moz-transform: translateX(20px);
+   transform: translateX(20px);
+   display: inline-block;
+   position: absolute;
    top: 0px;
 }
 
 .translateY {
-   -webkit-transform:translateY(20px);
-   -moz-transform:translateY(20px);
-   transform:translateY(20px);
-   display:inline-block;
-   position:absolute;
+   -webkit-transform: translateY(20px);
+   -moz-transform: translateY(20px);
+   transform: translateY(20px);
+   display: inline-block;
+   position: absolute;
    top: 0px;
 }
 
 .translateZ {
-   -webkit-transform:translateZ(20px);
-   -moz-transform:translateZ(20px);
-   transform:translateZ(20px);
-   display:inline-block;
-   position:absolute;
+   -webkit-transform: translateZ(20px);
+   -moz-transform: translateZ(20px);
+   transform: translateZ(20px);
+   display: inline-block;
+   position: absolute;
    top: 0px;
 }
 
 .translate3d {
-   -webkit-transform:translate3d(10px,10px,-20px);
-   -moz-transform:translate3d(10px,10px,-20px);
-   transform:translate3d(10px,10px,-20px);
-   display:inline-block;
-   position:absolute;
+   -webkit-transform: translate3d(10px, 10px, -20px);
+   -moz-transform: translate3d(10px, 10px, -20px);
+   transform: translate3d(10px, 10px, -20px);
+   display: inline-block;
+   position: absolute;
    top: 0px;
 }
 
-
 .scale {
-   -webkit-transform:scale3d(5,2,4);
-   ttransform:scale(5,2);
-   display:inline-block;
+   -webkit-transform: scale(2);
+   -moz-transform: scale(2);
+   transform: scale(2);
+   display: inline-block;
 }
+
+.scaleX {
+   -webkit-transform: scaleX(2);
+   -moz-transform: scaleX(2);
+   transform: scaleX(2);
+   display: inline-block;
+}
+
+.scaleY {
+   -webkit-transform: scaleY(2);
+   -moz-transform: scaleY(2);
+   transform: scaleY(2);
+   display: inline-block;
+}
+
+.scaleZ {
+   -webkit-transform: scaleZ(2);
+   -moz-transform: scaleZ(2);
+   transform: scaleZ(2);
+   display: inline-block;
+}
+
+.scale3d {
+   -webkit-transform: scale3d(2,2,2);
+   -moz-transform: scale3d(2,2,2);
+   transform: scale3d(2,2,2);
+   display: inline-block;
+}
+
+.skew {
+   -webkit-transform: skew(10deg,20deg);
+   -moz-transform: skew(10deg,20deg);
+   transform: skew(10deg,20deg);
+   display: inline-block;
+   padding:10px;
+}
+
+.skewX {
+   -webkit-transform: skewX(20deg);
+   -moz-transform: skewX(20deg);
+   transform: skewX(20deg);
+   display: inline-block;
+   padding:10px;
+}
+
+.skewY {
+   -webkit-transform: skewY(20deg);
+   -moz-transform: skewY(20deg);
+   transform: skewY(20deg);
+   display: inline-block;
+   padding:10px;
+}
+
 </style>
 </head>
 <body>
-<h2>rotate</h2>
-<p class="rotate">rotate</p>
-<p class="rotateX">rotateX</p>
-<p class="rotateY">rotateY</p>
-<p class="rotateZ">rotateZ</p>
-<p class="rotate3d">rotate3d</p>
-<h2>translate</h2>
-<div style="position:relative; display:inline-block;">
-<p class="original">translate</p>
-<p class="translate">translate</p>
-</div>
-<div style="position:relative; display:inline-block;">
-<p class="original">translateX</p>
-<p class="translateX">translateX</p>
-</div>
-<div style="position:relative; display:inline-block;">
-<p class="original">translateY</p>
-<p class="translateY">translateY</p>
-</div>
-<div style="position:relative; display:inline-block;">
-<p class="original">translateZ</p>
-<p class="translateZ">translateZ</p>
-</div>
-<div style="position:relative; display:inline-block;">
-<p class="original">translate3d</p><br/>
-<p class="translate3d">translate3d</p>
-</div>
-<h2>scale</h2>
-<p class="scale">scale</p>
+   <h2>rotate</h2>
+   <p class="rotate">rotate</p>
+   <p class="rotateX">rotateX</p>
+   <p class="rotateY">rotateY</p>
+   <p class="rotateZ">rotateZ</p>
+   <p class="rotate3d">rotate3d</p>
+   <h2>translate</h2>
+   <div style="position: relative; display: inline-block;">
+      <p class="original">translate</p>
+      <p class="translate">translate</p>
+   </div>
+   <div style="position: relative; display: inline-block;">
+      <p class="original">translateX</p>
+      <p class="translateX">translateX</p>
+   </div>
+   <div style="position: relative; display: inline-block;">
+      <p class="original">translateY</p>
+      <p class="translateY">translateY</p>
+   </div>
+   <div style="position: relative; display: inline-block;">
+      <p class="original">translateZ</p>
+      <p class="translateZ">translateZ</p>
+   </div>
+   <div style="position: relative; display: inline-block;">
+      <p class="original">translate3d</p>
+      <br />
+      <p class="translate3d">translate3d</p>
+   </div>
+   <h2>scale</h2>
+   <p class="scale">scale</p>
+   <p class="scaleX">scaleX</p>
+   <p class="scaleY">scaleY</p>
+   <p class="scaleZ">scaleZ</p>
+   <p class="scale3d">scale3d</p>
+   <h2>skew</h2>
+   <p class="skew">skew</p>
+   <p class="skewX">skewX</p>
+   <p class="skewY">skewY</p>
 </body>
 </html>
