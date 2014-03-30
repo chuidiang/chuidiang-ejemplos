@@ -31,9 +31,6 @@ public class MainVerticle extends Verticle {
             System.out.println("module deploying result "+arg0.result());
          }
       });
-      
-      
-      System.in.read();
    }
    
    /** It deploys PublisherVerticle and SubscriberVerticle */

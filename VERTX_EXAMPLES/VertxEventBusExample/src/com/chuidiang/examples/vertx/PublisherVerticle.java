@@ -1,5 +1,6 @@
 package com.chuidiang.examples.vertx;
 
+import org.vertx.java.core.Handler;
 import org.vertx.java.platform.Verticle;
 
 /**
@@ -8,25 +9,18 @@ import org.vertx.java.platform.Verticle;
  *
  */
 public class PublisherVerticle extends Verticle {
+   private int counter=0;
+   
    @Override
    public void start() {
       System.out.println("Publisher started");
-
-      new Thread(new Runnable() {
-
+      
+      long timerId = vertx.setPeriodic(1000, new Handler<Long>() {
          @Override
-         public void run() {
-            int counter = 0;
-            while (true) {
-               vertx.eventBus().publish("message","Message number "+counter);
-               System.out.println("sent " + counter++);
-               try {
-                  Thread.sleep(1000);
-               } catch (InterruptedException e) {
-                  e.printStackTrace();
-               }
-            }
+         public void handle(Long arg0) {
+            vertx.eventBus().publish("message","Message number "+counter);
+            System.out.println("sent " + counter++);
          }
-      }).start();
+      });
    }
 }
