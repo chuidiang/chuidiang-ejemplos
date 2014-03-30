@@ -1,0 +1,4 @@
+{
+   "main":"com.chuidiang.examples.vertx.MainVerticle",
+   "auto-redeploy": true
+}
