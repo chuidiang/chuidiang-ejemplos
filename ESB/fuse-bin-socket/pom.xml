@@ -6,7 +6,7 @@
   <artifactId>fuse-bin-socket</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
-  <name>Camel Blueprint Route</name>
+  <name>Binario Propio</name>
   <properties>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -126,13 +126,13 @@
         <version>2.3.7</version>
         <extensions>true</extensions>
         <executions>
-          <!-- execution>
+          <execution>
             <id>bundle-manifest</id>
             <phase>process-classes</phase>
             <goals>
               <goal>manifest</goal>
             </goals>
-          </execution-->
+          </execution>
         </executions>
         <configuration>
           <instructions>

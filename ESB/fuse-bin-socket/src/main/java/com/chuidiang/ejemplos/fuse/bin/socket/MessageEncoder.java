@@ -20,7 +20,6 @@ public class MessageEncoder extends OneToOneEncoder{
 				buffer[i]=bytes.get(i);
 			}
 			buffer[bytes.size()]=0;
-			System.out.println("va "+Arrays.toString(buffer));
 			return ChannelBuffers.wrappedBuffer(buffer);
 		}
 		
