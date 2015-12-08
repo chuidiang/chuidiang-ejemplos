@@ -1,6 +1,5 @@
 package com.chuidiang.ejemplos.fuse.bin.socket;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.jboss.netty.buffer.ChannelBuffers;
