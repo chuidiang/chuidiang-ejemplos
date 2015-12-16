@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:inputText value="#{helloWorld.message}" />
+	<h:form>
+		<p:commandButton action="page2" value="Another Page"></p:commandButton>
+	</h:form>
+	<p:accordionPanel>
+		<p:tab title="First Tab Title">
+			<h:outputText value="Lorem" />
+...More content for first tab
+</p:tab>
+		<p:tab title="Second Tab Title">
+			<h:outputText value="Ipsum" />
+		</p:tab>
+//any number of tabs
+</p:accordionPanel>
+
+</h:body>
+</html>
