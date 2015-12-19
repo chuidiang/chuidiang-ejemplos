@@ -6,7 +6,10 @@
 <h:head>
 </h:head>
 <h:body>
-<p:calendar></p:calendar>
-<p:commandButton action="index" value="Back"></p:commandButton>
+<h:form>
+<p:calendar value="#{calendar.date}"></p:calendar>
+<p:commandButton action="calendar" ajax="false" value="Change"></p:commandButton>
+</h:form>
+<p>#{calendar.date}</p>
 </h:body>
 </html>

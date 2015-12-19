@@ -6,20 +6,15 @@
 <h:head>
 </h:head>
 <h:body>
-	<p:inputText value="#{helloWorld.message}" />
-	<h:form>
-		<p:commandButton action="page2" value="Another Page"></p:commandButton>
-	</h:form>
 	<p:accordionPanel>
 		<p:tab title="First Tab Title">
 			<h:outputText value="Lorem" />
-...More content for first tab
-</p:tab>
+			<p>...More content for first tab</p>
+		</p:tab>
 		<p:tab title="Second Tab Title">
+			<p>...More content for second tab</p>
 			<h:outputText value="Ipsum" />
 		</p:tab>
-//any number of tabs
-</p:accordionPanel>
-
+	</p:accordionPanel>
 </h:body>
 </html>
