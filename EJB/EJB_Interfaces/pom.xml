@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.chuidiang.examples</groupId>
+	<artifactId>ejb_interfaces</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>ejb</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>de.smartics.maven.plugin</groupId>
+				<artifactId>smartics-jboss-modules-maven-plugin</artifactId>
+				<version>2.1.1</version>
+				<executions>
+					<execution>
+						<id>create-modules-archive</id>
+						<goals>
+							<goal>create-modules-archive</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<attach>true</attach>
+					<dependencyExcludes>
+						<exclude>
+							<groupId>com.sun</groupId>
+						</exclude>
+						<exclude>
+							<groupId>javax</groupId>
+						</exclude>
+					</dependencyExcludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

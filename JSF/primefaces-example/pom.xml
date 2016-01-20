@@ -44,7 +44,19 @@
 			<version>1.2</version>
 			<scope>compile</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>com.chuidiang.examples</groupId>
+			<artifactId>EJB_interfaces</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>primefaces-example</finalName>
@@ -58,6 +70,20 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+						<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Dependencies>com.chuidiang.examples.ejb_interfaces</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+
+			</plugin>
+			
 		</plugins>
 	</build>
 </project>

@@ -13,18 +13,20 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.chuidiang.examples.ejb.StatelesBean;
+
 @RunWith(Arquillian.class)
 public class TestNewSessionBean {
 
    @Deployment
    public static JavaArchive createDeployment() {
        return ShrinkWrap.create(JavaArchive.class,"test.jar")
-           .addClasses(StatelessBean.class,StatefullBean.class)
+           .addClasses(StatelessBeanImpl.class,StatefullBean.class)
            .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
    }
    
    @Inject
-   private StatelessBean statelessBean;
+   private StatelesBean statelessBeanImpl;
 
    @EJB
    private StatefullBean statefulBean;
@@ -32,8 +34,8 @@ public class TestNewSessionBean {
    @Test
    @InSequence(1)
    public void testSayHello() {
-      Assert.assertNotNull(statelessBean);
-      Assert.assertEquals("Hello", statelessBean.sayHello());
+      Assert.assertNotNull(statelessBeanImpl);
+      Assert.assertEquals("Hello", statelessBeanImpl.sayHello());
       Assert.assertNotNull(statefulBean);
       statefulBean.setValue(11);
       Assert.assertEquals(11, statefulBean.getValue());
@@ -42,8 +44,8 @@ public class TestNewSessionBean {
 //   @Test
 //   @InSequence(2)
 //   public void testSayHello2() {
-//      Assert.assertNotNull(statelessBean);
-//      Assert.assertEquals("Hello", statelessBean.sayHello());
+//      Assert.assertNotNull(statelessBeanImpl);
+//      Assert.assertEquals("Hello", statelessBeanImpl.sayHello());
 //      Assert.assertEquals(11, statefulBean.getValue());
 //   }
 }
