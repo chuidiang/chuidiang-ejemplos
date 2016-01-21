@@ -36,19 +36,11 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-
-
-
 		<dependency>
-			<groupId>org.jboss.arquillian.container</groupId>
-			<artifactId>arquillian-glassfish-embedded-3.1</artifactId>
-			<version>1.0.0.CR3</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.main.extras</groupId>
-			<artifactId>glassfish-embedded-all</artifactId>
-			<version>3.1.2</version>
+			<groupId>org.apache.openejb</groupId>
+			<artifactId>arquillian-openejb-embedded-4</artifactId>
+			<version>4.7.3</version>
+			<!-- provided because this dependency is necessary to compile and test -->
 			<scope>provided</scope>
 		</dependency>
 
@@ -66,7 +58,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
-		<finalName>EJB_Example</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -91,12 +83,25 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+					<archive>
 						<manifestEntries>
 							<Dependencies>com.chuidiang.examples.ejb_interfaces</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
+
 			</plugin>
+
 		</plugins>
+
 	</build>
+
 </project>
