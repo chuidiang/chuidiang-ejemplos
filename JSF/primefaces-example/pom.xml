@@ -14,19 +14,19 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+<!-- 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
+ -->		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>5.3</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
 			<version>2.2.12</version>
@@ -38,13 +38,14 @@
 			<version>2.2.12</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
+ -->		
+ <!-- <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
+ -->		<dependency>
 			<groupId>com.chuidiang.examples</groupId>
 			<artifactId>EJB_interfaces</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -53,7 +54,7 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
+			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
 		

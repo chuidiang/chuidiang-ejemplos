@@ -6,7 +6,7 @@
 	<groupId>com.chuidiang.examples</groupId>
 	<artifactId>EJB_Example</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>ejb</packaging>
 
 	<name>EJB_Example</name>
 
@@ -66,7 +66,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
-
+		<finalName>EJB_Example</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -91,25 +91,12 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-
-				<configuration>
-					<archive>
 						<manifestEntries>
 							<Dependencies>com.chuidiang.examples.ejb_interfaces</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
-
 			</plugin>
-
 		</plugins>
-
 	</build>
-
 </project>
