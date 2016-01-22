@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.chuidiang.examples</groupId>
-	<artifactId>EJB_Example</artifactId>
+	<artifactId>EJB_Bussiness</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>ejb</packaging>
 
-	<name>EJB_Example</name>
+	<name>EJB_Bussiness</name>
 
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -18,7 +18,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.chuidiang.examples</groupId>
-			<artifactId>ejb_interfaces</artifactId>
+			<artifactId>EJB_interfaces</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>

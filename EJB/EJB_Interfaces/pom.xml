@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.chuidiang.examples</groupId>
-	<artifactId>ejb_interfaces</artifactId>
+	<artifactId>EJB_interfaces</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>ejb</packaging>
+	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
