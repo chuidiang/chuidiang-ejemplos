@@ -1,5 +1,6 @@
 package com.chuidiang.ejemplos.fuse.controlbus.example;
 
+import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
@@ -10,7 +11,11 @@ public class Prueba {
 		Enumeration<NetworkInterface> networks = NetworkInterface.getNetworkInterfaces();
 		while(networks.hasMoreElements()){
 			NetworkInterface network = networks.nextElement();
-			System.out.println(network.getName()+" "+network.toString());
+			System.out.println(network.toString());
+			Enumeration<InetAddress> addresses = network.getInetAddresses();
+			while (addresses.hasMoreElements()){
+				System.out.println("    "+addresses.nextElement());
+			}
 			
 		}
 
