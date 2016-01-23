@@ -22,6 +22,12 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.191</version>
+			<scope>compile</scope>
+		</dependency>
 
 
 
@@ -36,14 +42,26 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+
+
 		<dependency>
-			<groupId>org.apache.openejb</groupId>
-			<artifactId>arquillian-openejb-embedded-4</artifactId>
-			<version>4.7.3</version>
-			<!-- provided because this dependency is necessary to compile and test -->
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<version>3.0.3.Final</version>
+			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.jboss.as</groupId>
+			<artifactId>jboss-as-arquillian-container-managed</artifactId>
+			<version>7.1.1.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.protocol</groupId>
+			<artifactId>arquillian-protocol-servlet</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -51,57 +69,71 @@
 			<dependency>
 				<groupId>org.jboss.arquillian</groupId>
 				<artifactId>arquillian-bom</artifactId>
-				<version>1.0.3.Final</version>
+				<version>1.1.10.Final</version>
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+
 	<build>
-
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.17</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ejb-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<ejbVersion>3.1</ejbVersion>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<Dependencies>com.chuidiang.examples.ejb_interfaces</Dependencies>
-						</manifestEntries>
-					</archive>
-				</configuration>
-
-			</plugin>
-
-		</plugins>
-
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.17</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<ejbVersion>3.1</ejbVersion>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+							</manifest>
+							<manifestEntries>
+								<Dependencies>com.chuidiang.examples.ejb_interfaces</Dependencies>
+							</manifestEntries>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>unpack</id>
+							<phase>process-test-classes</phase>
+							<goals>
+								<goal>unpack</goal>
+							</goals>
+							<configuration>
+								<artifactItems>
+									<artifactItem>
+										<groupId>org.jboss.as</groupId>
+										<artifactId>jboss-as-dist</artifactId>
+										<version>7.1.1.Final</version>
+										<type>zip</type>
+										<overWrite>false</overWrite>
+										<outputDirectory>target</outputDirectory>
+									</artifactItem>
+								</artifactItems>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
-
 </project>
