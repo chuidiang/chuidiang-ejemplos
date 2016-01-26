@@ -14,11 +14,11 @@ public class HelloWorld {
    private static final Logger LOG = Logger.getLogger(HelloWorld.class.getName());
    private String message="Hello World!";
    
-   @EJB(lookup="java:global/EJB_Example/StatelesBean")
+   @EJB(lookup="java:global/EJB_Bussiness/StatelesBean")
    private StatelesBean statelesBean;
    
    public String getMessage() {
-      return "tururu" + statelesBean.sayHello();
+      return message + statelesBean.sayHello();
    }
    public void setMessage(String message){
       LOG.info("Received "+message);
