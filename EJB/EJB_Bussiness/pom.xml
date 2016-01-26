@@ -11,7 +11,6 @@
 	<name>EJB_Bussiness</name>
 
 	<properties>
-		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -22,14 +21,6 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.191</version>
-			<scope>compile</scope>
-		</dependency>
-
-
 
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>

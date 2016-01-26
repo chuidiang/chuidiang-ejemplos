@@ -13,7 +13,7 @@ import com.chuidiang.examples.EJB_Example.model.User;
 public class UserDao {
    private static Logger LOG = Logger.getLogger(UserDao.class.toString());
 
-   @PersistenceContext(unitName = "test")
+   @PersistenceContext(unitName = "bussiness")
    private EntityManager entityManager;
 
    public void addUser(User user) {
