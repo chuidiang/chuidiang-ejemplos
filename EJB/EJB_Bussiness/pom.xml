@@ -10,11 +10,11 @@
 
 	<name>EJB_Bussiness</name>
 
-  	<scm>
-    	<connection>scm:git:https://github.com/chuidiang/chuidiang-ejemplos.git</connection>
-    	<developerConnection>scm:git:https://github.com/chuidiang/chuidiang-ejemplos.git</developerConnection>
-    	<url>https://github.com/chuidiang/chuidiang-ejemplos.git</url>
-  	</scm>
+	<scm>
+		<connection>scm:git:https://github.com/chuidiang/chuidiang-ejemplos.git</connection>
+		<developerConnection>scm:git:https://github.com/chuidiang/chuidiang-ejemplos.git</developerConnection>
+		<url>https://github.com/chuidiang/chuidiang-ejemplos.git</url>
+	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -76,6 +76,15 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+					<configuration>
+						<tagBase>https://github.com/chuidiang/chuidiang-ejemplos.git</tagBase>
+						<branchBase>https://github.com/chuidiang/chuidiang-ejemplos.git</branchBase>
+					</configuration>
+				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
