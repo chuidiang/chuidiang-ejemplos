@@ -11,7 +11,9 @@
 		<developerConnection>scm:git:https://github.com/chuidiang/chuidiang-ejemplos.git</developerConnection>
 		<url>https://github.com/chuidiang/chuidiang-ejemplos.git</url>
 	</scm>
-
+	<properties>
+		<project.scm.id>github</project.scm.id>
+	</properties>
 
 	<dependencies>
 		<dependency>
