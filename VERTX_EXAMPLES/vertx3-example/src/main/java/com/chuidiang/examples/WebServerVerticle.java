@@ -17,15 +17,15 @@ public class WebServerVerticle extends AbstractVerticle{
          
          
          if (request.path().endsWith("index.html")) {
-            request.response().setChunked(true);
             request.response().putHeader("content-type", "text/html");
             request.response().sendFile("src/main/webroot/index.html");
          } else {
             request.response().setChunked(true);
             request.response().putHeader("content-type", "text/plain");
-            request.response().write("Hello World!!");
+            request.response().write("No such file!!");
+            request.response().setStatusCode(404);
+            request.response().end();
          }
-         request.response().end();
       });
       
       server.listen();
