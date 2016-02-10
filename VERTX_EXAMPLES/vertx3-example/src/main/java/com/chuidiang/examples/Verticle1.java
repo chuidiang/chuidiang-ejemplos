@@ -9,7 +9,7 @@ public class Verticle1 extends AbstractVerticle {
 
    @Override
    public void start() throws Exception {
-      timerId = vertx.setPeriodic(100, message -> {
+      timerId = vertx.setPeriodic(1000, message -> {
          counter++;
          vertx.eventBus().publish("Verticle1", Integer.toString(counter));
       });

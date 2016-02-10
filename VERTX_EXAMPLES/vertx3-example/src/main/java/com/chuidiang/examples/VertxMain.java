@@ -8,6 +8,7 @@ public class VertxMain {
       Vertx vertx = Vertx.factory.vertx();
       vertx.deployVerticle(new Verticle1());
       vertx.deployVerticle(new Verticle2());
+      vertx.deployVerticle(new WebServerVerticle());
    }
 
 }
