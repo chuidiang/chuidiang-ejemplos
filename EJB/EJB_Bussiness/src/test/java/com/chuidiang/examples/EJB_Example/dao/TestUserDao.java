@@ -11,12 +11,14 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.chuidiang.examples.EJB_Example.model.User;
 
 @RunWith(Arquillian.class)
+@Ignore
 public class TestUserDao {
    
    @Deployment(name="daoTest", order=2)

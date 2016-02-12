@@ -8,12 +8,14 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.chuidiang.examples.ejb.StatelesBean;
 
 @RunWith(Arquillian.class)
+@Ignore
 public class TestNewSessionBean {
    
    @Deployment(name="dep2", order=2)
