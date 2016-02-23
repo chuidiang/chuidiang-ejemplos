@@ -22,8 +22,8 @@ import javax.ejb.Singleton;
  */
 @Singleton
 @LocalBean
-public class SingletonBean {
-   private static Logger LOG = Logger.getLogger(SingletonBean.class.getName());
+public class MainBean {
+   private static Logger LOG = Logger.getLogger(MainBean.class.getName());
 
    @Resource
    EJBContext context;
