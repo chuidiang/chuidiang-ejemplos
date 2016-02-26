@@ -9,8 +9,6 @@ import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 
-import org.jboss.vfs.spi.AssemblyFileSystem;
-
 @Stateless
 public class TheSlowWork {
    private static Logger LOG = Logger.getLogger(TheSlowWork.class.getName());
