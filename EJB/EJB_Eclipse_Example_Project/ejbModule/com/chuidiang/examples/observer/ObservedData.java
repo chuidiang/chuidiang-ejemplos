@@ -1,8 +1,6 @@
 package com.chuidiang.examples.observer;
 
-import java.io.Serializable;
-
-public class ObservedData implements Serializable {
+public class ObservedData {
    @Override
    public String toString() {
       return "ObservedData [aNumber=" + aNumber + ", aString=" + aString + "]";

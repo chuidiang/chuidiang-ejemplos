@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
@@ -16,7 +15,6 @@ import javax.inject.Inject;
  * @author Chuidiang
  */
 @Singleton
-@Startup
 public class FireObserver {
    private static final Logger LOG = Logger.getLogger(FireObserver.class.getName());
    
@@ -24,13 +22,12 @@ public class FireObserver {
    Event<ObservedData> event;
    
    private int aNumber=0;
-   private String aString="Hello";
    
    @Schedule(hour="*",minute="*",second="*/5")
    public void fireEvent(){
+      
       ObservedData data = new ObservedData();
-      aString = aString+" "+aNumber;
-      data.setaString(aString);
+      data.setaString("Hello "+aNumber);
       data.setaNumber(aNumber++);
       
       event.fire(data);
