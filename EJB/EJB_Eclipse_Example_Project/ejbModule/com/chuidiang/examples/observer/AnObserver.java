@@ -7,7 +7,7 @@ import javax.enterprise.event.Observes;
 
 /**
  * An EJB observer.
- * This EJB observes DataObserved data.
+ * This EJB observes ObservedData data.
  * 
  * @author Chuidiang
  *
@@ -16,7 +16,7 @@ import javax.enterprise.event.Observes;
 public class AnObserver {
    private static Logger LOG = Logger.getLogger(AnObserver.class.getName());
 
-   public void doSomething(@Observes DataObserved data) {
+   public void doSomething(@Observes ObservedData data) {
       LOG.info("Arrived "+data);
    }
 }

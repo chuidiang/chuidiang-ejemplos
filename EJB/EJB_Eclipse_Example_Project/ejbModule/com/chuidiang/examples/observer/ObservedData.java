@@ -2,10 +2,10 @@ package com.chuidiang.examples.observer;
 
 import java.io.Serializable;
 
-public class DataObserved implements Serializable {
+public class ObservedData implements Serializable {
    @Override
    public String toString() {
-      return "DataObserved [aNumber=" + aNumber + ", aString=" + aString + "]";
+      return "ObservedData [aNumber=" + aNumber + ", aString=" + aString + "]";
    }
    private int aNumber;
    private String aString;

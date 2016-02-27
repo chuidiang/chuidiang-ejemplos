@@ -10,7 +10,7 @@ import javax.inject.Inject;
 
 
 /**
- * This EJB produces DataObserved instances. 
+ * This EJB produces ObservedData instances. 
  * The class AnObserver will receive them.
  * 
  * @author Chuidiang
@@ -21,14 +21,14 @@ public class FireObserver {
    private static final Logger LOG = Logger.getLogger(FireObserver.class.getName());
    
    @Inject
-   Event<DataObserved> event;
+   Event<ObservedData> event;
    
    private int aNumber=0;
    private String aString="Hello";
    
    @Schedule(hour="*",minute="*",second="*/5")
    public void fireEvent(){
-      DataObserved data = new DataObserved();
+      ObservedData data = new ObservedData();
       aString = aString+" "+aNumber;
       data.setaString(aString);
       data.setaNumber(aNumber++);
