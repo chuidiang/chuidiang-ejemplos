@@ -1,11 +1,9 @@
-package com.chuidiang.examples.EJB_Example.observer;
+package com.chuidiang.examples.observer;
 
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
-
-import com.chuidiang.examples.ejb.observer.DataObserved;
 
 /**
  * An EJB observer.

@@ -1,4 +1,4 @@
-package com.chuidiang.examples.ejb.observer;
+package com.chuidiang.examples.observer;
 
 import java.io.Serializable;
 

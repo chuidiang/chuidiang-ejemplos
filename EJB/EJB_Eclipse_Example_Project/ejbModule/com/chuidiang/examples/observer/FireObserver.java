@@ -1,4 +1,4 @@
-package com.chuidiang.examples.EJB_Example.observer;
+package com.chuidiang.examples.observer;
 
 import java.util.logging.Logger;
 
@@ -7,8 +7,6 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-
-import com.chuidiang.examples.ejb.observer.DataObserved;
 
 
 /**
