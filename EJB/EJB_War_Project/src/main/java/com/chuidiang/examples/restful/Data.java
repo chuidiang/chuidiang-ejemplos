@@ -1,7 +1,10 @@
 package com.chuidiang.examples.restful;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
+/**
+ * The data to be used in the web service.
+ * @author Chuidiang
+ *
+ */
 public class Data {
    private int value;
    private String string;
