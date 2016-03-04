@@ -74,7 +74,7 @@ public class RestfulService {
     * @param data
     */
    @POST
-   @Path("/crea")
+   @Path("/create")
    @Consumes(MediaType.APPLICATION_JSON)
    public void save(Data data){
       LOG.info(data.toString()+ "created");
@@ -107,7 +107,6 @@ public class RestfulService {
     * which can do this job.
     */
    @DELETE
-   @Produces({MediaType.APPLICATION_JSON})
    @Path("{id}")
    public void remove(@PathParam("id") int id){
       if (id==1 || id==2){
