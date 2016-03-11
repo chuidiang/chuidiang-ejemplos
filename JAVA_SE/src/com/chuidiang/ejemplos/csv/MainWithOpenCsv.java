@@ -15,7 +15,7 @@ public class MainWithOpenCsv {
 
       CSVReader reader = null;
       try {
-         reader = new CSVReader(new FileReader("resources/Libro2.csv"),SEPARATOR,QUOTE);
+         reader = new CSVReader(new FileReader("files/Libro2.csv"),SEPARATOR,QUOTE);
          String[] nextLine=null;
          
          while ((nextLine = reader.readNext()) != null) {

@@ -15,7 +15,7 @@ public class JavascriptWithHtmlUnit {
 
    public static void main(String[] args) throws Exception {
       WebClient webClient = new WebClient();
-      HtmlPage page = webClient.getPage("file:resources/JavascriptWithHtmlUnit.html");
+      HtmlPage page = webClient.getPage("file:files/JavascriptWithHtmlUnit.html");
       
       // Sale "hola", puesto que se ha ejecutado el codigo javascript de la pagina
       System.out.println(page.getElementById("unDiv").getTextContent());

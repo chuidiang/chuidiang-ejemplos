@@ -11,7 +11,7 @@ public class LoadFileProperties {
    public static void main(String[] args) {
       Properties p = new Properties();
       try {
-         p.load(new FileReader("resources/properties/config.properties"));
+         p.load(new FileReader("files/properties/config.properties"));
          System.out.println("uno="+p.getProperty("uno"));
          
          p.setProperty("cuatro", "4");

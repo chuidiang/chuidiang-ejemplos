@@ -21,7 +21,7 @@ public class MainWithoutLibrary {
       
       try {
          
-         br =new BufferedReader(new FileReader("resources/Libro1.csv"));
+         br =new BufferedReader(new FileReader("files/Libro1.csv"));
          String line = br.readLine();
          while (null!=line) {
             String [] fields = line.split(SEPARATOR);
