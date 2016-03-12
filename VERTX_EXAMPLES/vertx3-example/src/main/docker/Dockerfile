@@ -17,4 +17,4 @@ COPY ./verticles $VERTICLE_HOME/
 # Launch the verticle
 WORKDIR $VERTICLE_HOME
 ENTRYPOINT ["sh", "-c"]
-CMD ["vertx run $VERTICLE_NAME"]
+CMD ["vertx run $VERTICLE_NAME -cluster -cluster-port 4321"]

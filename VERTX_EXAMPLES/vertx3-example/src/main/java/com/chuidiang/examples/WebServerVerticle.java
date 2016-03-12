@@ -1,12 +1,14 @@
 package com.chuidiang.examples;
 
-import java.util.logging.Logger;
+
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpServer;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 
 public class WebServerVerticle extends AbstractVerticle{
-   private Logger LOG = Logger.getLogger(WebServerVerticle.class.getName());
+   private Logger LOG = LoggerFactory.getLogger(WebServerVerticle.class);
    
    @Override
    public void start() throws Exception {
