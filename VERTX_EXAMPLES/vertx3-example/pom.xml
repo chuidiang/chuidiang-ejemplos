@@ -13,7 +13,55 @@
 		</dependency>
 	</dependencies>
 	<properties>
-	<maven.compiler.target>1.8</maven.compiler.target>
-	<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.2.8</version>
+				<executions>
+					<execution>
+						<id>docker</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+
+					<!-- Configure the image name -->
+					<imageName>chuidiang/vertx-hello</imageName>
+					<resources>
+						<resource>
+							<targetPath>/verticles</targetPath>
+							<directory>${project.build.directory}</directory>
+							<includes>
+								<include>${project.artifactId}-${project.version}.jar</include>
+							</includes>
+						</resource>
+						<resource>
+							<targetPath>/verticles</targetPath>
+							<directory>.</directory>
+							<includes>
+								<include>src/main/webroot/index.html</include>
+							</includes>
+						</resource>
+
+						<!-- don't forget to also add all the dependencies required by your 
+							application -->
+					</resources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
