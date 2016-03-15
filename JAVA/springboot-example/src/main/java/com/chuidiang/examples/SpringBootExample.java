@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @EnableAutoConfiguration
 public class SpringBootExample {
 
+   // It Opens port 8080 
     @RequestMapping("/")
     @ResponseBody
     String home() {
