@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 
@@ -52,11 +54,11 @@ public class GreetingController {
    }
 
    @RequestMapping(method = RequestMethod.POST, path = "/greeting")
-   public Greeting add(@PathParam(value = "content") String content) {
+   public Greeting add(@RequestParam(value = "content") String content) {
       return data.addGreeting(content);
    }
 
-   @RequestMapping(method = RequestMethod.PUT, path = "/greeting/{id}", consumes="application/json")
+   @RequestMapping(method = RequestMethod.PUT, path = "/greeting/{id}")
    public Greeting add(@PathVariable Integer id,
          @RequestBody Greeting greeting)
                throws NoSuchRequestHandlingMethodException {
