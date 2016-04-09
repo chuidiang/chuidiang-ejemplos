@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="Adder Consumer">
+   <implementation class="com.chuidiang.examples.osgi_client.AdderConsumer"/>
+   <reference bind="setAdder" cardinality="1..1" 
+   		interface="com.chuidiang.examples.osgi_interface.Adder" 
+   		policy="static" unbind="removeAdder" name="Adder" />
+</scr:component>

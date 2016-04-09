@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="Simple Adder">
-   <implementation class="com.chuidiang.examples.internal.AdderImpl"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="AdderImpl">
+   <implementation class="com.chuidiang.examples.osgi_server.AdderImpl"/>
    <service>
-      <provide interface="com.chuidiang.examples.Adder"/>
+      <provide interface="com.chuidiang.examples.osgi_interface.Adder"/>
    </service>
    <property name="service.exported.interfaces" value="*"/>
    <property name="service.exported.configs" value="org.apache.cxf.ws"/>

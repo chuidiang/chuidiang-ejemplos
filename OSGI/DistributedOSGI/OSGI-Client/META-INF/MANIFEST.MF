@@ -1,12 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: OSGI-Server
-Bundle-SymbolicName: OSGI-Server
+Bundle-Name: OSGI-Client
+Bundle-SymbolicName: OSGI-Client
 Bundle-Version: 1.0.0
-Bundle-Activator: com.chuidiang.examples.osgi_server.Activator
+Bundle-Activator: com.chuidiang.examples.osgi_client.Activator
 Bundle-Vendor: chuidiang
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Service-Component: OSGI-INF/*.xml
 Import-Package: org.osgi.framework;version="1.3.0",
- com.chuidiang.examples.osgi_interface;version="1.0.0"
+ org.osgi.util.tracker;version="1.3.0",
+ com.chuidiang.examples.osgi_interface;version="1.0.0" 
 Bundle-ActivationPolicy: lazy

@@ -1,6 +1,6 @@
-package com.chuidiang.examples.internal;
+package com.chuidiang.examples.osgi_server;
 
-import com.chuidiang.examples.Adder;
+import com.chuidiang.examples.osgi_interface.Adder;
 
 public class AdderImpl implements Adder {
 
