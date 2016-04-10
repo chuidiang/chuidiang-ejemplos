@@ -8,11 +8,11 @@ public class AdderConsumer {
    private Logger log = Logger.getLogger(AdderConsumer.class.getName());
    private Adder adder;
 
-   public void setAdder(Adder adder) {
-      this.adder = adder;
+   public void setAdder(Adder newAdder) {
+      this.adder = newAdder;
       Thread t = new Thread() {
          public void run() {
-            while (true) {
+            while (null!=adder) {
                try {
                   Thread.sleep(1000);
                   log.info("3+4=" + AdderConsumer.this.adder.add(3, 4));

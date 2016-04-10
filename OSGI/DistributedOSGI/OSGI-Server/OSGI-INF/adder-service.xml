@@ -6,5 +6,5 @@
    </service>
    <property name="service.exported.interfaces" value="*"/>
    <property name="service.exported.configs" value="org.apache.cxf.ws"/>
-   <property name="org.apache.cxf.ws.address" value="http://localhost:9090/adder"/>
+   <property name="org.apache.cxf.ws.address" value="http://localhost:9091/adder"/>
 </scr:component>
