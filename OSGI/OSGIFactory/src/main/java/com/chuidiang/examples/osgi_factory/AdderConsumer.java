@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.osgi.service.component.ComponentFactory;
-
 import com.chuidiang.examples.osgi_factory.interfaces.IfzAdder;
 
 public class AdderConsumer {

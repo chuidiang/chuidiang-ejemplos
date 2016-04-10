@@ -2,14 +2,12 @@ package com.chuidiang.examples.osgi_factory;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.ComponentFactory;
-import org.osgi.service.component.ComponentInstance;
 
 public class Activator implements BundleActivator {
    private static final Logger LOG = Logger
