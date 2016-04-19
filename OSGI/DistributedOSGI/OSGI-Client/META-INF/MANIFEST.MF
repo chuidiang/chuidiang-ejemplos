@@ -12,5 +12,7 @@ Import-Package: org.osgi.framework;version="1.3.0",
  com.chuidiang.examples.osgi_interface;version="1.0.0",
  org.apache.cxf.interceptor,
  org.apache.cxf.message,
- org.apache.cxf.phase
+ org.apache.cxf.phase,
+ io.vertx.core.eventbus;version="3.2.1",
+ io.vertx.core;version="3.2.1"
 Bundle-ActivationPolicy: lazy

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="VertxConsumer">
+   <implementation class="com.chuidiang.examples.osgi_client.vertx.VertxConsumer"/>
+   <reference bind="setEventBus" cardinality="0..1" 
+   		interface="io.vertx.core.eventbus.EventBus" 
+   		policy="dynamic" unbind="removeEventBus" name="OsgiSender" />
+</scr:component>

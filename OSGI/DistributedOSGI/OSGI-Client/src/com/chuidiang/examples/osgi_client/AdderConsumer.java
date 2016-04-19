@@ -9,6 +9,7 @@ public class AdderConsumer {
    private Adder adder;
 
    public void setAdder(Adder newAdder) {
+      log.info("llega adder");
       this.adder = newAdder;
       Thread t = new Thread() {
          public void run() {

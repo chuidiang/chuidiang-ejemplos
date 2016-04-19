@@ -20,7 +20,7 @@ public class Activator implements BundleActivator {
 	   // This ñapa is needed only if you use ds equinox implementation !!!!!
 	   tracker = new ServiceTracker(context, Adder.class.getName(), null);
       tracker.open();
-      
+      log.info("A la escucha");
 	}
 
 	/*
