@@ -8,7 +8,7 @@ import akka.actor.Props;
  * Hello world!
  *
  */
-public class App 
+public class HelloActorMain 
 {
     public static void main( String[] args )
     {
