@@ -22,12 +22,8 @@ public class Server2Main {
       
       // Create an actor that handles cluster domain events
       ActorRef clusterListener = system
-            .actorOf(Props.create(HelloActor.class), "clusterListener");
+            .actorOf(Props.create(Publisher.class), "publisher");
 
-      // Add subscription of cluster events
-      Cluster.get(system).subscribe(clusterListener, ClusterDomainEvent.class);
-      
-      
       while (true){
          clusterListener.tell("Hello", clusterListener);
          Thread.sleep(1000);
