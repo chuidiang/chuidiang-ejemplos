@@ -19,7 +19,7 @@ public class Server1Main {
       ActorSystem system = ActorSystem.create("ClusterSystem");
 
       // Create an actor that handles cluster domain events
-      ActorRef clusterListener = system.actorOf(Props.create(Subscriber.class),
+      ActorRef subscriber = system.actorOf(Props.create(Subscriber.class),
             "subscriptor");
    }
 }

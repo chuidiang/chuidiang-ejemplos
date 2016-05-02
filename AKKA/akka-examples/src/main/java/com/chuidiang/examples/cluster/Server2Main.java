@@ -1,14 +1,10 @@
 package com.chuidiang.examples.cluster;
 
-import com.chuidiang.examples.HelloActor;
-import com.chuidiang.examples.HelloActorMain;
 import com.typesafe.config.ConfigFactory;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import akka.cluster.Cluster;
-import akka.cluster.ClusterEvent.ClusterDomainEvent;
 
 public class Server2Main {
    public static void main(String[] args) throws InterruptedException {
@@ -21,11 +17,11 @@ public class Server2Main {
       ActorSystem system = ActorSystem.create("ClusterSystem", ConfigFactory.defaultApplication());
       
       // Create an actor that handles cluster domain events
-      ActorRef clusterListener = system
+      ActorRef publisher = system
             .actorOf(Props.create(Publisher.class), "publisher");
 
       while (true){
-         clusterListener.tell("Hello", clusterListener);
+         publisher.tell("Hello", publisher);
          Thread.sleep(1000);
       }
       
