@@ -1,25 +1,22 @@
 package com.chuidiang.ejemplos;
 
 import java.io.FileNotFoundException;
-import java.util.concurrent.TimeUnit;
 
 import com.hazelcast.config.Config;
-import com.hazelcast.config.XmlConfigBuilder;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IAtomicLong;
-import com.hazelcast.core.IMap;
 import com.hazelcast.core.IQueue;
 
 /**
- * Hello world!
- *
+ * Hazelcast atomic integer example.
+ * If several instances of this program are launched, only the first one become producer.
+ * The other instances will be consumers.
  */
 public class AtomicExample 
 {
     public static void main( String[] args ) throws FileNotFoundException, InterruptedException
     {
-       System.out.println(Math.sqrt(2));
        Config config = new Config();
        HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance(config);
        
