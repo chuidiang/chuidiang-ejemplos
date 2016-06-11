@@ -11,3 +11,5 @@
 .settings
 target
 *~
+
+.gradle
