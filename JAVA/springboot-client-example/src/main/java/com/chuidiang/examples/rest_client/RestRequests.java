@@ -1,15 +1,10 @@
 package com.chuidiang.examples.rest_client;
 
-import java.util.logging.Logger;
-
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 public class RestRequests {
-   private static final Logger log = Logger
-         .getLogger(RestRequests.class.toString());
-
    public void getOneGreeting(RestTemplate restTemplate) {
       // We want Greeting at index=0
       Greeting aGreeting = restTemplate
