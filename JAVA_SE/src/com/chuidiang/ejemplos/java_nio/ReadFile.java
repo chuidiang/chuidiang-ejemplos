@@ -1,8 +1,10 @@
 package com.chuidiang.ejemplos.java_nio;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,41 +20,52 @@ public class ReadFile {
       readAsLines();
    }
 
-   private static void readAsLines() throws IOException {
+   private static void readAsLines() {
       // Standard println
-      Stream<String> stream = Files.lines(Paths.get(fileName));
-      stream.forEach(System.out::println);
+      try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+         stream.forEach(System.out::println);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
 
       // My own method of my own class
-      stream = Files.lines(Paths.get(fileName));
       LinePrinter printer = new LinePrinter();
-      stream.forEach(printer::println);
-      
+      try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+         stream.forEach(printer::println);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
       // This works also
       // stream.forEach((s)->System.out.println(s));
 
+      // With BufferedReader
+      try (BufferedReader reader = Files
+            .newBufferedReader(Paths.get(fileName))) {
+         reader.lines().forEach(System.out::println);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
    }
 
-   private static void readAsBytes() throws IOException {
+   private static void readAsBytes() {
       Path path = Paths
             .get("src/com/chuidiang/ejemplos/java_nio/ReadFile.java");
-      FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
-      ByteBuffer buffer = ByteBuffer.allocate(100);
 
-      try {
-         int bytesRead = channel.read(buffer);
-         while (bytesRead != -1) {
+      ByteBuffer buffer = ByteBuffer.allocate(100);
+      String fileEncoding = System.getProperty("file.encoding");
+
+      try (FileChannel channel = FileChannel.open(path,
+            StandardOpenOption.READ)) {
+
+         while (channel.read(buffer) > 0) {
             buffer.flip();
-            while (buffer.hasRemaining()) {
-               System.out.print((char) buffer.get());
-            }
+            System.out.print(Charset.forName(fileEncoding).decode(buffer));
             buffer.compact();
-            bytesRead = channel.read(buffer);
+
          }
       } catch (Exception e) {
          e.printStackTrace();
-      } finally {
-         channel.close();
       }
    }
 
