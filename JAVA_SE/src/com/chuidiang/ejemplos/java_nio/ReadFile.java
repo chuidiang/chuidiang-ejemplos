@@ -22,7 +22,7 @@ public class ReadFile {
 
    private static void readAsLines() {
       // Standard println
-      try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+      try (Stream<String> stream = Files.lines(Paths.get(fileName),Charset.defaultCharset())) {
          stream.forEach(System.out::println);
       } catch (IOException e) {
          e.printStackTrace();
