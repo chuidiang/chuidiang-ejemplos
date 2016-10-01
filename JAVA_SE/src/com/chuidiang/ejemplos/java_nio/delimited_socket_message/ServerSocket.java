@@ -30,7 +30,7 @@ class Client implements Runnable {
       ByteBuffer buffer = ByteBuffer.allocate(100);
       try {
          // read bytes into buffer
-         while (channel.read(buffer) > 0) {
+         while (channel.read(buffer) > -1) {
             buffer.flip();
             int beginMessage=0;
             int endMessage=0;
