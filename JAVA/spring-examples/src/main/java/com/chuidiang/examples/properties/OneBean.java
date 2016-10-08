@@ -1,4 +1,4 @@
-package com.chuidiang.examples;
+package com.chuidiang.examples.properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

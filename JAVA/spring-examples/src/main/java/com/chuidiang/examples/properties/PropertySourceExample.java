@@ -1,4 +1,4 @@
-package com.chuidiang.examples;
+package com.chuidiang.examples.properties;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

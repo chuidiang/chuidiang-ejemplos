@@ -1,4 +1,4 @@
-package com.chuidiang.examples;
+package com.chuidiang.examples.properties;
 
 public class AnotherBean {
    private String anotherString;

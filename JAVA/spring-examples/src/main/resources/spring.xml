@@ -25,9 +25,9 @@
 		<property name="ignoreResourceNotFound" value="true" />
 	</bean>
 
-	<context:component-scan base-package="com.chuidiang.examples" />
+	<context:component-scan base-package="com.chuidiang.examples.properties" />
 	
-	<bean class="com.chuidiang.examples.AnotherBean" name="anotherBean">
+	<bean class="com.chuidiang.examples.properties.AnotherBean" name="anotherBean">
 		<property name="anotherString" value="${string:default string}"/>
 		<property name="anotherInt" value="${int:-22}"/>
 		<property name="anotherBool" value="${bool:true}"/>
