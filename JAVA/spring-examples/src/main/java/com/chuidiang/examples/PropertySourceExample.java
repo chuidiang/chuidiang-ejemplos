@@ -17,6 +17,13 @@ public class PropertySourceExample {
       System.out.println(bean.getaInt());
       System.out.println(bean.getaString());
       System.out.println(bean.isaBool());
+      
+      // Get another bean and show it's content
+      AnotherBean anotherBean = (AnotherBean)context.getBean("anotherBean");
+      System.out.println(anotherBean.getAnotherInt());
+      System.out.println(anotherBean.getAnotherString());
+      System.out.println(anotherBean.isAnotherBool());
+
    }
 
 }
