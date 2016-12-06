@@ -5,10 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
@@ -82,7 +79,7 @@ public class TheMainWindow {
       mainWindow.getContentPane().add(chatArea);
       mainWindow.getContentPane().add(textToSend, BorderLayout.SOUTH);
       mainWindow.pack();
-      mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       mainWindow.setLocationRelativeTo(null);
       mainWindow.setVisible(true);
       return mainWindow;
