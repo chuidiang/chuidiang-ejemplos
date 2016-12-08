@@ -2,11 +2,11 @@ package com.chuidiang.examples.bean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.cdi.Eager;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Person {
@@ -15,6 +15,9 @@ public class Person {
     long id;
     private String name;
     private Date birthday;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Car> cars;
 
     public long getId() {
         return id;
@@ -40,12 +43,21 @@ public class Person {
         this.birthday = birthday;
     }
 
+    public Set<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", birthday=" + birthday +
+                ", cars=" + cars +
                 '}';
     }
 }
