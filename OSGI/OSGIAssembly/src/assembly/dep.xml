@@ -21,7 +21,7 @@
 			<outputDirectory>/bundle</outputDirectory>
 			<unpack>false</unpack>
 			<scope>runtime</scope>
-			<useTransitiveDependencies>false</useTransitiveDependencies>
+			<useTransitiveDependencies>true</useTransitiveDependencies>
 			<excludes>
 				<exclude>com.chuidiang.examples:OSGIAssembly</exclude>
 				<exclude>org.apache.felix:org.apache.felix.main</exclude>

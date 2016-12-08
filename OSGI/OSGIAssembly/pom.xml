@@ -25,7 +25,11 @@
 			<artifactId>org.apache.felix.main</artifactId>
 			<version>5.4.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-core</artifactId>
+			<version>3.2.1</version>
+		</dependency>
 		<dependency>
 			<groupId>com.chuidiang.examples</groupId>
 			<artifactId>OSGIFactory</artifactId>

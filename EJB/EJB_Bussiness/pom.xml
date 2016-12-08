@@ -74,7 +74,7 @@
 
 
 	<build>
-		<pluginManagement>
+		
 			<plugins>
 				<plugin>
 					<artifactId>maven-release-plugin</artifactId>
@@ -136,6 +136,6 @@
 					</executions>
 				</plugin>
 			</plugins>
-		</pluginManagement>
+		
 	</build>
 </project>

@@ -7,4 +7,4 @@ Then the result should be <z>
 Examples:
 |x|y|z|
 |3|4|7|
-|2|1|2|
+|2|1|3|
