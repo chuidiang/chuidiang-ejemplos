@@ -1,15 +1,16 @@
-package com.chuidiang.examples.bean;
+package com.chuidiang.examples.init;
 
+import com.chuidiang.examples.bean.Car;
+import com.chuidiang.examples.bean.Person;
+import com.chuidiang.examples.bean.PersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.stream.IntStream;
 
 
-@Component
 public class Initializer {
     private static Logger log = LoggerFactory.getLogger(Initializer.class);
 
