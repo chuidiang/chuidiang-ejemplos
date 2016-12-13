@@ -13,3 +13,5 @@ target
 *~
 
 .gradle
+.idea
+build
