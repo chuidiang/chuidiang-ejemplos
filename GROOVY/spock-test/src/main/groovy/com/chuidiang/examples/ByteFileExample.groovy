@@ -13,5 +13,12 @@ println bytes
 // De uno en uno
 file.eachByte { b -> println b}
 
+// copia de fichero
+def file2 = new File("byteFile2.dat")
+file2.bytes = file.bytes
+
+println file2.bytes
+
 // Borrado
 file.deleteOnExit()
+file2.deleteOnExit()
