@@ -11,7 +11,8 @@
 .settings
 target
 *~
-
+.iml
 .gradle
 .idea
 build
+classes
