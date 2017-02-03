@@ -23,7 +23,7 @@
 				<configuration>
 					<manifestLocation>META-INF</manifestLocation>
 					<instructions>
-						<Export-Package></Export-Package>
+						<Export-Package>com.chuidiang.examples.osgi_module2.interfaz</Export-Package>
 						<Import-Package></Import-Package>
 						<Bundle-Activator>com.chuidiang.examples.osgi_module2.Activator</Bundle-Activator>
 						<Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>

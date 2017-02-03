@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="Module2Service"
+               activate="start" deactivate="stop" immediate="true" >
+    <implementation class="com.chuidiang.examples.osgi_module2.Service2"/>
+    <service>
+        <provide interface="com.chuidiang.examples.osgi_module2.interfaz.IfzService2"/>
+    </service>
+</scr:component>
