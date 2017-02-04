@@ -1,6 +1,5 @@
 package com.chuidiang.examples.osgi_module1;
 
-import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedService;
 import org.slf4j.Logger;
