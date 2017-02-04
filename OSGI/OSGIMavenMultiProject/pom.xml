@@ -47,6 +47,19 @@
 			<version>1.1.9</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.configadmin</artifactId>
+			<version>1.8.12</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.fileinstall</artifactId>
+			<version>3.5.8</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 	<modules>
 		<module>OSGIModule1</module>
