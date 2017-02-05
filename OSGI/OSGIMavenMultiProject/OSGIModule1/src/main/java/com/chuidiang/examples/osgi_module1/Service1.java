@@ -1,6 +1,7 @@
 package com.chuidiang.examples.osgi_module1;
 
 import com.chuidiang.examples.osgi_module1.interfaz.IfzService1;
+import com.chuidiang.examples.osgi_module2.interfaz.IfzIhm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,5 +17,13 @@ public class Service1 implements IfzService1 {
 
     public void stop(){
         log.info("Service1 stops");
+    }
+
+    public void setIhm(IfzIhm ihm){
+
+    }
+
+    public void unsetIhm(IfzIhm ihm){
+
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="Configurator1"
-               configuration-pid="Configurator1" configuration-policy="require"
+               configuration-pid="Configurator1"
                activate="start" deactivate="stop" immediate="true">
     <implementation class="com.chuidiang.examples.osgi_module1.Configurator"/>
     <service>
