@@ -18,6 +18,7 @@ import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,53 +29,13 @@ public class Main {
     public static String GIT_REPOSITORY="D:/JAVIER/PROYECTOS/vts/.git";
 
     public static void main(String[] args) throws Exception {
-        FileRepositoryBuilder builder = new FileRepositoryBuilder();
-        Repository repository = builder.setGitDir(new File(GIT_REPOSITORY))
-                .readEnvironment() // scan environment GIT_* variables
-                .findGitDir() // scan up the file system tree
-                .build();
-        Ref develop = repository.exactRef("develop");
-
-        RevWalk walk = new RevWalk(repository);
-        RevFilter filter = MessageRevFilter.create("(?i)IMARE-23.");
-        walk.setRevFilter(filter);
-        walk.markStart(walk.parseCommit(repository.resolve("HEAD")));
-        walk.forEach((commit)->{
-            System.out.println(commit.getAuthorIdent().getWhen()+": "+commit.getAuthorIdent().getName());
-            System.out.println(commit.getFullMessage());git
-            ObjectId objectId = commit.getTree().getId();
-            RevCommit parent = commit.getParent(0);
-            PatchIdDiffFormatter formatter = new PatchIdDiffFormatter();
-            formatter.setRepository(repository);
-            try {
-                List<DiffEntry> entries = formatter.scan(parent,objectId);
-
-                entries.forEach((entry)-> {
-                    try {
-                        FileHeader header = formatter.toFileHeader(entry);
-                        System.out.println(header.getChangeType()+" "+getPath(header));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            System.out.println("-----------------------------------------------");
-        });
-
+        HtmlFormat format = new HtmlFormat();
+        format.open("salida.html");
+        GitAnalyzer analyzer = new GitAnalyzer(GIT_REPOSITORY,"develop");
+        for (int i=1;i<400;i++) {
+            analyzer.analyze(format, "(?i)IMARE-"+i+"\\D", "IMARE-"+i);
+        }
+        format.close();
     }
 
-    private static String getPath (FileHeader header){
-        if (DiffEntry.ChangeType.DELETE.equals(header.getChangeType())){
-            return header.getOldPath();
-        }
-        if (DiffEntry.ChangeType.ADD.equals(header.getChangeType())){
-            return header.getNewPath();
-        }
-        if (header.getOldPath().equals(header.getNewPath())){
-            return header.getOldPath();
-        }
-        return (header.getOldPath()+" -> "+header.getNewPath());
-    }
 }
