@@ -4,12 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by JAVIER on 25/02/2017.
  */
 public class HtmlFormat {
 
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("DD-MMM-YYYY HH:mm:ss");
     private PrintWriter printWriter;
 
     public void open(String file) throws FileNotFoundException {
@@ -26,8 +29,15 @@ public class HtmlFormat {
         printWriter.println("<tr><th>Revision</th><th>Fecha</th><th>Autor</th><th>Mensaje</th></tr>");
     }
 
-    public void addChange(String revision, String date, String user, String message, String [] files) {
-        printWriter.println(MessageFormat.format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",revision, date, user, message.replaceAll("\n","<br/>")));
+    public void addChange(String revision, Date date, String user, String message, String [] files) {
+        printWriter.println(MessageFormat.format(
+                "<tr><td rowspan=\"2\">{0}</td><td rowspan=\"2\">{1}</td><td rowspan=\"2\">{2}</td><td>{3}</td></tr>",
+                revision, DATE_FORMAT.format(date), user, message.replaceAll("\n","<br/>")+"<br/>"));
+        String filesText = "";
+        for (String file : files){
+            filesText = filesText + file + "<br/>";
+        }
+        printWriter.println("<tr><td>"+filesText+"</td></tr>");
     }
 
     public void endIssue(){

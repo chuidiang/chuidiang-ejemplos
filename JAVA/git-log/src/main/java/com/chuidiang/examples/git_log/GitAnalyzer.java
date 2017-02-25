@@ -15,6 +15,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class GitAnalyzer {
                 RevCommit commit = iterator.next();
 
                 String commitNumber = commit.getId().getName();
-                String date = commit.getAuthorIdent().getWhen().toString();
+                Date date = commit.getAuthorIdent().getWhen();
                 String author = commit.getAuthorIdent().getName();
                 String comment = commit.getFullMessage();
 
