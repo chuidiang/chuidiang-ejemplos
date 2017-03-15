@@ -29,6 +29,8 @@ public class Main {
     public static String GIT_REPOSITORY="D:/JAVIER/PROYECTOS/vts/.git";
 
     public static void main(String[] args) throws Exception {
+        TheWindow window = new TheWindow();
+        window.setVisible(true);
         HtmlFormat format = new HtmlFormat();
         format.open("salida.html");
         GitAnalyzer analyzer = new GitAnalyzer(GIT_REPOSITORY,"develop");

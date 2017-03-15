@@ -57,8 +57,6 @@ public class GitAnalyzer {
                 String author = commit.getAuthorIdent().getName();
                 String comment = commit.getFullMessage();
 
-                System.out.println(commit.getAuthorIdent().getWhen() + ": " + commit.getAuthorIdent().getName());
-                System.out.println(commit.getFullMessage());
                 ObjectId objectId = commit.getTree().getId();
                 RevCommit parent = commit.getParent(0);
                 PatchIdDiffFormatter formatter = new PatchIdDiffFormatter();
@@ -72,7 +70,6 @@ public class GitAnalyzer {
                     entries.forEach((entry) -> {
                         try {
                             FileHeader header = formatter.toFileHeader(entry);
-                            System.out.println(header.getChangeType() + " " + getPath(header));
                             files.add(header.getChangeType() + " " + getPath(header));
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -82,8 +79,6 @@ public class GitAnalyzer {
                     e.printStackTrace();
                 }
                 format.addChange(commitNumber, date, author, comment, files.toArray(new String[]{}));
-
-                System.out.println("-----------------------------------------------");
             }
             format.endIssue();
         } catch(Exception e) {

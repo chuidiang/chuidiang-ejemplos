@@ -1,0 +1,39 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.chuidiang.examples</groupId>
+    <artifactId>groovy-examples</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!-- 2.8.0-01 and later require maven-compiler-plugin 3.1 or higher -->
+                <version>3.1</version>
+                <configuration>
+                    <compilerId>groovy-eclipse-compiler</compilerId>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-compiler</artifactId>
+                        <version>2.9.1-01</version>
+                    </dependency>
+                    <!-- for 2.8.0-01 and later you must have an explicit dependency on groovy-eclipse-batch -->
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-batch</artifactId>
+                        <version>2.3.7-01</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <!-- any version of Groovy \>= 1.8.2 should work here -->
+            <version>2.4.9</version>
+        </dependency>
+    </dependencies>
+</project>

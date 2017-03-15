@@ -11,8 +11,13 @@
 .settings
 target
 *~
-.iml
+*.iml
+*.versionsBackup
 .gradle
 .idea
 build
 classes
+/NETBEANS/netbeans-platform-osgi/felixsample/nbproject/private/
+/NETBEANS/netbeans-platform-osgi/felixsample/module1/nbproject/private/
+/NETBEANS/netbeans-platform-osgi/felixsample/showbundles/nbproject/private/
+/NETBEANS/netbeans-platform-osgi/application-con-osgi/nbproject/private/

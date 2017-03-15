@@ -26,4 +26,9 @@ public class Service1 implements IfzService1 {
     public void unsetIhm(IfzIhm ihm){
 
     }
+
+    @Override
+    public void someMethod(int someParameter) {
+        log.info("Some Method Implementation");
+    }
 }

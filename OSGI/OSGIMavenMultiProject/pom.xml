@@ -17,22 +17,34 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>junit</groupId>-->
+			<!--<artifactId>junit</artifactId>-->
+			<!--<version>4.12</version>-->
+			<!--<scope>test</scope>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 			<version>6.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.osgi</groupId>-->
+			<!--<artifactId>org.osgi.compendium</artifactId>-->
+			<!--<version>5.0.0</version>-->
+			<!--<scope>provided</scope>-->
+		<!--</dependency>-->
 		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
-			<version>5.0.0</version>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.9</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf.dosgi</groupId>
+			<artifactId>cxf-dosgi-repository</artifactId>
+			<version>2.0.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -42,25 +54,24 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.1.9</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.configadmin</artifactId>
 			<version>1.8.12</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.apache.felix.fileinstall</artifactId>
-			<version>3.5.8</version>
-			<scope>provided</scope>
-		</dependency>
-
-	</dependencies>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.felix</groupId>-->
+			<!--<artifactId>org.apache.felix.fileinstall</artifactId>-->
+			<!--<version>3.5.8</version>-->
+			<!--<scope>provided</scope>-->
+		<!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.aries.rsa</groupId>-->
+            <!--<artifactId>repository</artifactId>-->
+            <!--<version>1.9.0</version>-->
+            <!--<type>pom</type>-->
+        <!--</dependency>-->
+    </dependencies>
 	<modules>
 		<module>OSGIModule1</module>
 		<module>OSGIModule2</module>
