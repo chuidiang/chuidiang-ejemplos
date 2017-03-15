@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1489229782313
+Build-Jdk: 1.8.0_91
+Built-By: JAVIER
+Bundle-ManifestVersion: 2
+Bundle-Name: OSGI Panel Window
+Bundle-SymbolicName: com.chuidiang.examples.OSGIPanelWindow
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Embed-Dependency: *;scope=compile|runtime
+Embed-Directory: lib
+Embed-Transitive: true
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.5))"
+Service-Component: OSGI-INF/*.xml
+Tool: Bnd-3.2.0.201605172007
