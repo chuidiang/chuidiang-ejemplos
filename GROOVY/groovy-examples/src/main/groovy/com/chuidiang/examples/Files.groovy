@@ -13,13 +13,13 @@ class Files {
 
         // copy text file
         def sourceFile = new File("pom.xml")
-        new File("pom.copy.xml").withPrintWriter { writer ->
+        new File("target/pom.copy.xml").withPrintWriter { writer ->
             sourceFile.eachLine { line ->
                 writer.println(line)
             }
         }
 
-        def destinationFile = new File("pom.copy.2.xml")
+        def destinationFile = new File("target/pom.copy.2.xml")
         destinationFile << sourceFile.text
     }
 }
