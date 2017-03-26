@@ -34,8 +34,8 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <!-- any version of Groovy \>= 1.8.2 should work here -->
             <version>2.4.10</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.spockframework</groupId>
