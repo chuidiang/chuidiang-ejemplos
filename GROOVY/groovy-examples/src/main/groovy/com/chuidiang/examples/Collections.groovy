@@ -5,10 +5,6 @@ import groovy.transform.TypeChecked
 class Collections {
     static void main(String[] args) {
 
-        int [] c = [1,2,3,5]
-        int [] d = [2,4]
-        println c+d
-
         List a = [1,2,3,4]
         List b = [2,5]
         List result = a-b
