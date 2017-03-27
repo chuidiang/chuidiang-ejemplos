@@ -2,14 +2,38 @@ package com.chuidiang.examples
 
 import groovy.transform.TypeChecked
 
-@TypeChecked
 class Collections {
     static void main(String[] args) {
+
+        int [] c = [1,2,3,5]
+        int [] d = [2,4]
+        println c+d
+
+        List a = [1,2,3,4]
+        List b = [2,5]
+        List result = a-b
+        println result
+
+        a = [1,2,3,4]
+        b = [2,4]
+        a.removeAll b
+        println a
+
+        a = [1,2,3,4]
+        a.removeAll { value -> value%2==0}
+        println a
+
+
+        a = [1,1,3,4,5,2,4,1,5,7]
+        a.unique()
+        println a
+
 
         println 'Array'
         Integer[] array = [1, 2, 3, 4]
         Integer[] anotherArray = [5, 6, 7, 8]
         doThingsWithArrays (array, anotherArray)
+
 
 
         println 'List'
@@ -18,8 +42,8 @@ class Collections {
         doThingsWithCollections(strings, moreStrings)
 
         println 'Set'
-        Set integers = [1, 2, 3, 1, 2, 3] as Set
-        Set moreIntegers = [3, 4, 5] as Set
+        Set integers = [1, 2, 3, 1, 2, 3]
+        Set moreIntegers = [3, 4, 5]
         doThingsWithCollections(integers, moreIntegers)
 
         println 'Map'
@@ -86,6 +110,10 @@ class Collections {
         println " addAll()  ${collection1}"
 
         println collection1.toSet()
+
+
+        def result = collection1.findAll{value -> return value.toString().contains('hello')}
+        println result
     }
 
     static void doThingsWithMaps(Map map, Map anotherMap){
