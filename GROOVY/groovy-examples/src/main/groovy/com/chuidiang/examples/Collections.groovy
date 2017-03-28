@@ -5,6 +5,9 @@ import groovy.transform.TypeChecked
 class Collections {
     static void main(String[] args) {
 
+        collectExamples()
+        findExamples()
+
         List a = [1,2,3,4]
         List b = [2,5]
         List result = a-b
@@ -59,6 +62,20 @@ class Collections {
         } else {
             println 'It hasn\'t data'
         }
+    }
+
+    static void collectExamples() {
+        def a = [1,2,3,4,5]
+
+        println a.collect { it*2}
+
+        def b = []
+        a.collect(b) { it*2}
+        println b
+
+        a = [1,2,[3,4],5]
+        println a.collect { it * 2 }
+        println a.collectNested { it * 2 }
     }
 
     static void doThingsWithArrays (Integer[] collection1, Integer[] collection2) {
@@ -123,5 +140,17 @@ class Collections {
         }
         println " Sum of Maps  ${anotherMap + map} "
 
+    }
+
+    static void findExamples() {
+        def a = [0,0,1,2,0,1]
+        println a.findAll()
+        println a.findAll { it<2}
+
+        println a.find()
+        println a.find { it<2}
+
+        println a.findResult { it>0? it*2 : null }
+        println a.findResult (11, { it>2? it/2 : null })
     }
 }
