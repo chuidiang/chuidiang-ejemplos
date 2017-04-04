@@ -22,10 +22,30 @@ class RegExpExamples {
             println it
         }
 
-        // extrack groups
+        // extract groups
         matcher = 'abc ebf' =~ /(.)b(.)/
         matcher.each {
             println "In ${it[0]}, I found ${it[1]} and ${it[2]}"
+        }
+
+        // Pattern
+        def pattern = ~/abc/
+        assert ! pattern.matcher('b').matches()
+        assert pattern.matcher('abc').matches()
+
+        // switch case with patterns
+        switch ('abc'){
+            case ~/a/ :
+                println "No"
+                break;
+            case ~/abc/:
+                println "Yes"
+                break;
+            case ~/c/:
+                println "No"
+                break;
+            default:
+                println "Default"
         }
     }
 }
