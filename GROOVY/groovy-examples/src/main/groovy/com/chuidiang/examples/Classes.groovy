@@ -8,8 +8,11 @@ import groovy.transform.ToString
 class Classes {
     static void main(String [] args){
         AClass a = new AClass(anInt:2, aDate:new Date())
+        AClass b = new AClass()
         println a
         println a.getAnInt()
+        println b
+        println b.getaDate()
 
         a.with {
             println anInt
@@ -18,14 +21,22 @@ class Classes {
             println something
             println aDouble
         }
+
+        a.anInt = 3
+        println a.anInt
+
+        a.setAnInt(11)
+        println a.getAnInt()
     }
 
-    @ToString(includeNames = true)
-    static class AClass {
-        int anInt
-        String anString
-        Date aDate
-        def something
-        double aDouble
-    }
 }
+
+@ToString(includeNames = true, excludes = ['something','aDouble'])
+class AClass {
+    int anInt
+    String anString
+    Date aDate
+    def something
+    double aDouble
+}
+
