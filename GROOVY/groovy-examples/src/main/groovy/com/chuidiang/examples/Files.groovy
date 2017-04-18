@@ -1,12 +1,17 @@
 package com.chuidiang.examples
 
+import groovy.transform.TypeChecked
 
 
 /**
  * Created by JAVIER on 15/03/2017.
  */
+@TypeChecked
 class Files {
     static void main(String[] args){
+
+        // File Read
+
         new File("pom.xml").eachLine { line -> println line}
 
         new File("pom.xml").eachLine ( "utf-8") {
@@ -34,10 +39,33 @@ class Files {
         def destinationFile = new File("target/pom.copy.2.xml")
         destinationFile << sourceFile.text
 
-        lines = ['uno','dos','tres']
-        File file = new File('target/output.txt')
-        lines.each {
-            file.text < it
+        // File write
+        new File('target/output.txt').write 'One line of the file\nAnother line '
+
+        new File('target/output.txt').text < 'One line of the file\nAnother line '
+
+        lines = ['one','two','three']
+        def file = new File('target/output.txt')
+
+        lines.each { line ->
+            file << "$line\n"
         }
+
+        lines.each { line ->
+            file.append "$line\n"
+        }
+
+        file.withPrintWriter { writer ->
+            lines.each { line ->
+                writer.println line
+            }
+        }
+
+        file.withPrintWriter('utf-8') { writer ->
+            lines.each { line ->
+                writer.println line
+            }
+        }
+
     }
 }
