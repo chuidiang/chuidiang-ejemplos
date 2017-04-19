@@ -1,6 +1,6 @@
 package com.chuidiang.ejemplos.random;
 
-import java.util.PrimitiveIterator;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -12,7 +12,7 @@ public class Java8RandomExample {
         Random random = new Random();
 
         IntStream intStream = random.ints(10, 1, 7);
-        final PrimitiveIterator.OfInt iterator = intStream.iterator();
+        Iterator iterator = intStream.iterator();
 
         while (iterator.hasNext()){
             System.out.println("Random Number "+iterator.next());

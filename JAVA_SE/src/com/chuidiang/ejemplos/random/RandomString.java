@@ -10,8 +10,8 @@ import java.util.Random;
 public class RandomString {
     public static void main(String[] args) {
         // One big random number printed in base 32
-        SecureRandom random = new SecureRandom();
-        System.out.println("Random String " + new BigInteger(130, random).toString(32));
+        Random random = new Random();
+        System.out.println("Random String " + new BigInteger(50, random).toString(32));
 
 
         // Choose random chars from an array.
