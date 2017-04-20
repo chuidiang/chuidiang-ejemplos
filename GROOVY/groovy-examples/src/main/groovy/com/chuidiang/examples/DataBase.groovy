@@ -22,11 +22,13 @@ class DataBase {
         );''')
 
         for (name in ['Pedro':'Gomez','Juan':'Lopez','Antonio':'Garcia']) {
-            sql.executeInsert("""
+            def ids  = sql.executeInsert("""
                 insert into Author
                 values (null,?,?)
                 """,
                 [name.key, name.value])
+
+            ids.each {println it}
         }
 
         sql.eachRow("select * from Author") { row ->
