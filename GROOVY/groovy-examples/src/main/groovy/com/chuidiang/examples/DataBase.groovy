@@ -29,6 +29,32 @@ class DataBase {
                 [name.key, name.value])
 
             ids.each {println it}
+
+            ids  = sql.executeInsert("""
+                insert into Author
+                values (null, $name.key, $name.value)
+                """)
+
+            ids.each {println it}
+
+            def person = [name:name.key, surname:name.value]
+
+            ids  = sql.executeInsert("""
+                insert into Author
+                values (null, :name, :surname)
+                """, person)
+
+            ids.each {println it}
+
+            person = new Person(name:name.key, surname:name.value)
+
+            ids  = sql.executeInsert("""
+                insert into Author
+                values (null, :name, :surname)
+                """, person)
+
+            ids.each {println it}
+
         }
 
         sql.eachRow("select * from Author") { row ->
@@ -37,4 +63,9 @@ class DataBase {
 
         sql.close()
     }
+}
+
+class Person {
+    String name
+    String surname
 }
