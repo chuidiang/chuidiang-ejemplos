@@ -1,6 +1,5 @@
 package com.chuidiang.examples
 
-import com.chuidiang.examples.test.Stack
 import spock.lang.Specification
 
 /**
@@ -11,6 +10,7 @@ class StackTest extends Specification{
     Stack stack = new Stack()
 
     def "push and pop single element"() {
+
         when:
             stack.push(11)
 
@@ -20,6 +20,7 @@ class StackTest extends Specification{
     }
 
     def "push two elements, pop last added"() {
+
         when:
             stack.push(11)
             stack.push(12)
