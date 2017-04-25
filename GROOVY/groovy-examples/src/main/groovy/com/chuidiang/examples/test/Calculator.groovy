@@ -1,7 +1,9 @@
-package com.chuidiang.examples
+package com.chuidiang.examples.test
+
+import com.chuidiang.examples.NegativeResultException
 
 /**
- * Created by JAVIER on 25/03/2017.
+ * Created by JAVIER on 25/04/2017.
  */
 class Calculator {
     static int counter=0;
@@ -14,11 +16,7 @@ class Calculator {
     }
 
     int subs (int a, int b){
-        if (b>a) throw new NegativeResultException()
         return a-b
     }
 
-    int "vamos a sumar numeros" (int a, int b){
-        return a+b
-    }
 }
