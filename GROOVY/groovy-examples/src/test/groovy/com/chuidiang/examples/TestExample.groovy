@@ -29,15 +29,14 @@ class TestExample extends Specification {
 
     def "1+1=2" () {
         expect: "I add 1 and 1"
-            2 == calculator.add(1,1)
+            calculator.add(1,1) == 2
     }
 
     def "2+2=4" () {
         when: "I add 2 and 2"
-            def result=calculator.add(2,2)
 
         then:
-            assert 2+2==result
+            calculator.add(2,2) == 4
     }
 
     def "javaCalculator" () {
