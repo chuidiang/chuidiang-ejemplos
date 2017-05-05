@@ -1,3 +1,5 @@
+import math
+
 print ( "%d" % 11)
 
 print ("Los valores son %d y %d" % (11,33))
@@ -16,7 +18,14 @@ print ("Los valores son {2}, {1} y {0}".format(1,2,3))
 print ("{pepe} y {juan}".format(juan=1, pepe=2))
 
 print ("Valor formateado {:10.2f}".format(12.34567))
+print ("pi = {pi:6.4f} y e = {e:6.4f}".format(pi=math.pi, e=math.e))
 
-valor=11
+theDict = {'one':1, 'two':2, 'three':3}
+print ("el dict[two] es {[two]}".format(theDict))
+print ("el dict[two] es {0[two]}".format(theDict))
+print ("el dict[two] es {someName[two]}".format(someName=theDict))
 
-print ( f"El valor es {valor:05d}")
+valor=12.3456
+print (f"El valor es {valor}")
+print ( f"El valor es {valor:10.2f}")
+print ( f"el dict[two] es {theDict['two']}")
