@@ -6,8 +6,16 @@ print(match)
 if (match == None):
     print("No se encuentra número al principio de la cadena")
 
+# re.search busca al principio de la cadena. Encuentra el 1.
+match= re.match('\\d', '1234')
+print(match)
+if (match != None):
+    print(f"encontrado {match.group()}")
+    print(f"desde posición {match.pos} hasta {match.span()[1]}")
+
+
 # re.search busca a lo largo de la cadena. el 1.
-match= re.search(r'\d', 'a1234')
+match= re.search('\\d', 'a1234')
 print(match)
 if (match != None):
     print(f"encontrado {match.group()}")
