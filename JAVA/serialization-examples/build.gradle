@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+repositories {
+   mavenLocal()
+   mavenCentral()
+}
+
+dependencies {
+   compile group: 'com.esotericsoftware', name: 'kryo', version: '4.0.0'
+}
