@@ -7,16 +7,17 @@ import com.sun.org.apache.xpath.internal.SourceTree;
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.util.Date;
 
 /**
  * Created by chuidiang on 3/06/17.
  */
-public class KiroExample {
+public class KryoExample {
     public static void main(String[] args) {
         Kryo serializer = new Kryo();
-        serializer.setInstantiatorStrategy(new Kryo.DefaultInstantiatorStrategy(new StdInstantiatorStrategy()));
+
+        // It's necessary for classes without default constructor
+        serializer.setInstantiatorStrategy(
+                new Kryo.DefaultInstantiatorStrategy(new StdInstantiatorStrategy()));
 
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         Output os = new Output(byteStream);

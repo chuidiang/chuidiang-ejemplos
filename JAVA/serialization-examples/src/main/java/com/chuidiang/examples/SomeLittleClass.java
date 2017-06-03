@@ -1,5 +1,6 @@
 package com.chuidiang.examples;
 
+import java.io.Externalizable;
 import java.io.Serializable;
 import java.util.Date;
 
