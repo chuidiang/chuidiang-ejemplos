@@ -1,11 +1,12 @@
 package com.chuidiang.examples;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by chuidiang on 3/06/17.
  */
-public class SomeLittleClass {
+public class SomeLittleClass implements Serializable {
     private int id;
     private Integer someInteger;
     private String someString;

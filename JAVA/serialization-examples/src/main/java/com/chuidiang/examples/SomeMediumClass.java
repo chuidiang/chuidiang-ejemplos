@@ -1,5 +1,6 @@
 package com.chuidiang.examples;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Created by chuidiang on 3/06/17.
  */
-public class SomeMediumClass {
+public class SomeMediumClass implements Serializable {
     private String[] stringArray;
     private List<SomeLittleClass> list;
 
