@@ -1,6 +1,5 @@
 package com.chuidiang.examples;
 
-import java.io.Externalizable;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,6 +12,7 @@ public class SomeLittleClass implements Serializable {
     private String someString;
     private Date someDate;
 
+    // There is no default constructor.
     public SomeLittleClass(int id){
         this.id=id;
     }
