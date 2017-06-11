@@ -1,4 +1,4 @@
-apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'eclipse'
 
 repositories {
@@ -6,5 +6,6 @@ repositories {
    mavenCentral()
 }
 
-dependencies {   
+dependencies {
+   compile 'org.codehaus.groovy:groovy-all:2.4.10'
 }
