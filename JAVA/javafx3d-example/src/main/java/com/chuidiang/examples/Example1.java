@@ -1,6 +1,7 @@
 package com.chuidiang.examples;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -8,22 +9,36 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by chuidiang on 11/06/17.
  */
 public class Example1 extends Application {
-    public static Stage primaryStage;
     public static void main(String[] args)  {
         launch(args);
-
     }
 
     @Override
     public void start(Stage primaryStage)  {
+        buildAndShowMainWindow(primaryStage);
+        addButtonAction(primaryStage);
+        startClockTimer();
+    }
+
+    @Override
+    public void stop(){
+        clockTimer.cancel();
+    }
+
+    private void buildAndShowMainWindow(Stage primaryStage) {
         primaryStage.setTitle("Hello World!!");
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -31,16 +46,21 @@ public class Example1 extends Application {
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(25, 25, 25, 25));
 
-        Button button = new Button("Click me!");
+        button = new Button("Click me!");
         gridPane.add(button,1,1);
 
         text = new TextField();
         gridPane.add(text, 2, 1);
 
+        clockLabel = new Label();
+        gridPane.add(clockLabel, 1,2, 2, 1);
+
         Scene scene = new Scene(gridPane);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
 
+    private void addButtonAction(Stage primaryStage) {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -58,6 +78,25 @@ public class Example1 extends Application {
         });
     }
 
+    private void startClockTimer() {
+        clockTimer = new Timer();
+        clockTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        clockLabel.setText(new Date().toString());
+                    }
+                });
+
+            }
+        }, 0, 1000);
+    }
+
     private Stage secondWindow=null;
     private TextField text;
+    private Label clockLabel;
+    private Button button;
+    private Timer clockTimer;
 }
