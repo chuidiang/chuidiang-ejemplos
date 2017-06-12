@@ -1,0 +1,13 @@
+.root {
+    -fx-font-size:24px;
+    -fx-background-color:gray;
+}
+
+.label {
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+#TheButton {
+    -fx-background-color:cyan;
+    -fx-border-color:black;
+}
