@@ -1,5 +1,7 @@
 package com.chuidiang.examples;
 
+import com.sun.javafx.geom.transform.Affine3D;
+import com.sun.javafx.geom.transform.BaseTransform;
 import com.sun.javafx.sg.prism.NGNode;
 import javafx.application.Application;
 import javafx.geometry.Point3D;
@@ -7,10 +9,9 @@ import javafx.scene.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Material;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.DrawMode;
-import javafx.scene.shape.Mesh;
-import javafx.scene.shape.MeshView;
-import javafx.scene.shape.TriangleMesh;
+import javafx.scene.shape.*;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 /**
@@ -24,15 +25,19 @@ public class Graphic3dExample extends Application{
     public MeshView meshView;
 
     @Override
+    public void stop(){
+        System.exit(0);
+    }
+    @Override
     public void start(Stage primaryStage) throws Exception {
         Group root = new Group();
         Scene scene = new Scene(root, 800, 600, Color.BLACK);
         primaryStage.setScene(scene);
 
         TriangleMesh mesh = new TriangleMesh();
-        for (int y=0;y<100;y++){
-            for (int x = 0; x<100; x++){
-                mesh.getPoints().addAll(x*10, y*10, (float)(Math.sin(x/5.0)*20.0+Math.sin(y/3.0)*25.0) );
+        for (int y=-50;y<50;y++){
+            for (int x = -50; x<50; x++){
+                mesh.getPoints().addAll(x, y, (float)(Math.sin(x/5.0)*2.0+Math.sin(y/3.0)*3.0) );
             }
         }
         mesh.getTexCoords().addAll(0,0);
@@ -44,17 +49,37 @@ public class Graphic3dExample extends Application{
         }
         meshView = new MeshView(mesh);
 
-        meshView.setDrawMode(DrawMode.LINE);
-        meshView.setMaterial(new PhongMaterial());
 
+        meshView.setDrawMode(DrawMode.FILL);
+        meshView.setMaterial(new PhongMaterial(Color.AQUAMARINE));
+        //meshView.setRotationAxis(new Point3D(0, -5, 0));
+        //meshView.setRotate(10);
 //        meshView.setTranslateY(100);
 //        meshView.setTranslateZ(200);
-        double cc = Math.PI/4.0;
-        matrixRotateNode(meshView, 0,cc*1.8, -0.2);
+        double cc = 45;
+//        meshView.getTransforms().add(new Rotate(0,0,0));
+        matrixRotateNode(meshView, 0,80, -20);
         root.getChildren().add(meshView);
 
-        PerspectiveCamera camera = new PerspectiveCamera(false);
-        camera.setTranslateY(100.0);
+        Box xAxis = new Box(100,1,1);
+        xAxis.setMaterial(new PhongMaterial(Color.RED));
+        matrixRotateNode(xAxis, 0,80, -20);
+        root.getChildren().add(xAxis);
+
+        Box yAxis = new Box(1,100,1);
+        yAxis.setMaterial(new PhongMaterial());
+        matrixRotateNode(yAxis, 0,80, -20);
+        root.getChildren().add(yAxis);
+
+        PerspectiveCamera camera = new PerspectiveCamera(true);
+//        camera.setFieldOfView(30);
+        camera.setTranslateZ(-200.0);
+
+//        camera.setTranslateY(500.0);
+//        camera.setTranslateX(200.0);
+        camera.setNearClip(0.1);
+        camera.setFarClip(400.0);
+
         scene.setCamera(camera);
 
 
@@ -63,12 +88,23 @@ public class Graphic3dExample extends Application{
         new Thread(new Runnable() {
             @Override
             public void run() {
+                float yCalculus = 50f;
                 while (true) {
-                    try {
-                        Thread.sleep(100);
 
-                        float value = ((TriangleMesh)meshView.getMesh()).getPoints().get(332);
-                        ((TriangleMesh)meshView.getMesh()).getPoints().set(332,value-(float)1);
+                    try {
+                        Thread.sleep(50);
+                        for (int y=0;y<99;y++) {
+                            for (int x=0;x<100;x++) {
+                                float value = ((TriangleMesh) meshView.getMesh()).getPoints().get(getZindex(x,y+1));
+                                ((TriangleMesh) meshView.getMesh()).getPoints().set(getZindex(x,y), value);
+                            }
+                        }
+                        for (int x = -50; x<50; x++){
+                            float value= (float)(Math.sin(x/5.0)*2.0+Math.sin(yCalculus/3.0)*3.0) ;
+                            ((TriangleMesh) meshView.getMesh()).getPoints().set(getZindex(x+50,99), value);
+                        }
+                        yCalculus+=1f;
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -77,7 +113,20 @@ public class Graphic3dExample extends Application{
         }).start();
     }
 
+    private int getXindex (float x, float y){
+        return (int)(x*3 + y*300);
+    }
+    private int getYindex (float x, float y){
+        return (int)(x*3 + y*300+1);
+    }
+    private int getZindex (float x, float y){
+        return (int)(x*3 + y*300+2);
+    }
+
     private void matrixRotateNode(Node n, double alf, double bet, double gam){
+        alf = alf*Math.PI/180.0;
+        bet = bet*Math.PI/180.0;
+        gam = gam*Math.PI/180.0;
         double A11=Math.cos(alf)*Math.cos(gam);
         double A12=Math.cos(bet)*Math.sin(alf)+Math.cos(alf)*Math.sin(bet)*Math.sin(gam);
         double A13=Math.sin(alf)*Math.sin(bet)-Math.cos(alf)*Math.cos(bet)*Math.sin(gam);
