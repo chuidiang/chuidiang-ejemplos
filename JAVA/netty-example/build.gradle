@@ -1,0 +1,11 @@
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+
+repositories {
+   mavenLocal()
+   mavenCentral()
+}
+
+dependencies {
+   compile group: 'io.netty', name: 'netty-all', version: '4.1.16.Final'
+}
