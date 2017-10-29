@@ -1,5 +1,6 @@
 package com.chuidiang.examples;
 
+import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -8,38 +9,55 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
- * Created by chuidiang on 28/10/17.
+ * Created by chuidiang on 29/10/17.
  */
-public class DiscardServer {
-
+public class Client {
     private int port;
 
-    public DiscardServer(int port) {
+    public Client(int port) {
         this.port = port;
+
+        new Thread() {
+            public void run() {
+                for (int i = 0;i < 10; i++)
+                {
+                    try {
+                        Thread.sleep(1000);
+                        handler.send(new Data());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }.start();
+
     }
 
+    public SecondHandler handler = new SecondHandler();
+
     public void run() throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup(); // (1)
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
-            ServerBootstrap b = new ServerBootstrap(); // (2)
-            b.group(bossGroup, workerGroup)
-                    .channel(NioServerSocketChannel.class) // (3)
-                    .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
+            Bootstrap b = new Bootstrap(); // (2)
+            b.group(workerGroup)
+                    .channel(NioSocketChannel.class) // (3)
+                    .handler(new ChannelInitializer<SocketChannel>() { // (4)
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new KryoDecoderHandler());
                             ch.pipeline().addLast(new KryoEncoderHandler());
-                            ch.pipeline().addLast(new SecondHandler());
+                            ch.pipeline().addLast(handler);
+
                         }
                     })
-                    .option(ChannelOption.SO_BACKLOG, 128)          // (5)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
+                    .option(ChannelOption.SO_KEEPALIVE, true); // (6)
 
             // Bind and start to accept incoming connections.
-            ChannelFuture f = b.bind(port).sync(); // (7)
+            ChannelFuture f = b.connect("localhost", port).sync(); // (7)
 
             // Wait until the server socket is closed.
             // In this example, this does not happen, but you can do that to gracefully
@@ -47,7 +65,6 @@ public class DiscardServer {
             f.channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();
-            bossGroup.shutdownGracefully();
         }
     }
 
@@ -58,6 +75,7 @@ public class DiscardServer {
         } else {
             port = 8080;
         }
-        new DiscardServer(port).run();
+        new Client(port).run();
     }
+
 }

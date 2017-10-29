@@ -8,4 +8,5 @@ repositories {
 
 dependencies {
    compile group: 'io.netty', name: 'netty-all', version: '4.1.16.Final'
+   compile group: 'com.esotericsoftware', name: 'kryo', version: '4.0.1'
 }
