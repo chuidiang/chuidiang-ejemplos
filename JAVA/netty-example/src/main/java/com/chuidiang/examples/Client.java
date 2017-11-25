@@ -22,10 +22,10 @@ public class Client {
 
         new Thread() {
             public void run() {
-                for (int i = 0;i < 10; i++)
+                for (int i = 0;i < 1000; i++)
                 {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                         handler.send(new Data());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -75,7 +75,9 @@ public class Client {
         } else {
             port = 8080;
         }
-        new Client(port).run();
+        for (int i=0;i<1000;i++) {
+            new Client(port).run();
+        }
     }
 
 }

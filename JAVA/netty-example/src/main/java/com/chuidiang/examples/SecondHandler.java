@@ -20,7 +20,7 @@ public class SecondHandler extends ChannelDuplexHandler {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg){
-        System.out.println("Soy el Segundo handler "+msg);
+        System.out.println(Thread.currentThread().getName()+" Soy el Segundo handler "+msg);
         ReferenceCountUtil.release(msg);
     }
 
@@ -32,7 +32,7 @@ public class SecondHandler extends ChannelDuplexHandler {
     public void send(Data data) {
 
         if (null!=ctx){
-            System.out.println("send "+data);
+            System.out.println(Thread.currentThread().getName()+ " send "+data);
             ctx.writeAndFlush(data);
         }
     }
