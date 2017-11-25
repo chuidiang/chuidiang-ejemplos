@@ -1,10 +1,8 @@
 package com.chuidiang.examples;
 
 import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.ByteBufferOutput;
 import com.esotericsoftware.kryo.io.Output;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufOutputStream;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
@@ -18,9 +16,9 @@ public class KryoEncoderHandler extends MessageToByteEncoder<Object> {
     @Override
     protected void encode(ChannelHandlerContext ctx, Object msg, ByteBuf out) throws Exception {
         System.out.println("encode");
-        Output output = new Output(new byte[2000]);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        Output output = new Output(bos);
         kryo.writeClassAndObject(output, msg);
-        System.out.println(output.toBytes().length);
         out.writeInt(output.toBytes().length);
         out.writeBytes(output.toBytes());
     }

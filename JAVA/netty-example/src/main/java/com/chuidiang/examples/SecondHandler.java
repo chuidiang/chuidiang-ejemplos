@@ -1,9 +1,7 @@
 package com.chuidiang.examples;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
 import io.netty.util.ReferenceCountUtil;
 
@@ -15,6 +13,7 @@ public class SecondHandler extends ChannelDuplexHandler {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("ctx = "+ctx);
         this.ctx = ctx;
     }
 

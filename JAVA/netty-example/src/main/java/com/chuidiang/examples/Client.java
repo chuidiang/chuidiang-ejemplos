@@ -1,14 +1,12 @@
 package com.chuidiang.examples;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
@@ -69,14 +67,22 @@ public class Client {
     }
 
     public static void main(String[] args) throws Exception {
-        int port;
+        final int port;
         if (args.length > 0) {
             port = Integer.parseInt(args[0]);
         } else {
             port = 8080;
         }
-        for (int i=0;i<1000;i++) {
-            new Client(port).run();
+        for (int i=0;i<10;i++) {
+            new Thread(){
+                public void run() {
+                    try {
+                        new Client(port).run();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
         }
     }
 

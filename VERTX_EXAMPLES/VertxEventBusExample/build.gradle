@@ -1,0 +1,12 @@
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+
+repositories {
+   mavenLocal()
+   mavenCentral()
+}
+
+dependencies {
+   compile group: 'io.vertx', name: 'vertx-core', version: '2.1.6'
+   compile group: 'io.vertx', name: 'vertx-platform', version: '2.1.6'
+}
