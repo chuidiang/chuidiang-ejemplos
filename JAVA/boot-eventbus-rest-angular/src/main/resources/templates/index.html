@@ -1,9 +1,14 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" data-ng-app="app">
 <head>
     <title>Ejemplo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/app.js"></script>
 </head>
-<body>
-    <p>Hola Mundo!!</p>
+<body data-ng-controller="appController as app">
+    <p>Hola Mundo !!</p>
+    <p>{{app.texto}}</p>
+    <button data-ng-click="app.llamadaGet()">GET Random</button>
+    <p>Random = <span>{{app.random}}</span></p>
 </body>
 </html>
