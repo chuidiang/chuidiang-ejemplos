@@ -27,5 +27,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.codehaus.groovy:groovy')
+	compile group: 'io.vertx', name: 'vertx-core', version: '3.5.0'
+	compile group: 'io.vertx', name: 'vertx-sockjs-service-proxy', version: '3.5.0'
+	compile group: 'io.vertx', name: 'vertx-service-proxy', version: '3.5.0'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
