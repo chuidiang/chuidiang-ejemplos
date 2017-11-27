@@ -18,8 +18,6 @@ import java.util.function.Function;
 @Component
 class VertxHttpServer extends AbstractVerticle {
 
-
-
         @Override
         public void start() throws Exception {
 
@@ -47,8 +45,6 @@ class VertxHttpServer extends AbstractVerticle {
             }));
 
             vertx.createHttpServer().requestHandler(router.&accept).listen(8081);
-
-            vertx.setPeriodic(1000, {id -> vertx.eventBus().publish("prueba","hola")})
         }
     }
 

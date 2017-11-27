@@ -9,8 +9,10 @@ angular.module('app', [])
            console.log("Registrando handler");
            app.eventBus.registerHandler("prueba", function (err, msg) {
               console.log("I have received a message: " + msg.body);
+              $scope.$apply(function(){
+                app.eventBusReceived = msg.body;
+              });
            });
-           app.eventBus.publish("prueba", "hola tu");
         };
     app.eventBus.onerror = function(err) {
         console.log(err);

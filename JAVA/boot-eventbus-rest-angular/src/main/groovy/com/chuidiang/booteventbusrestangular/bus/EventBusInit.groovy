@@ -21,10 +21,12 @@ class EventBusInit {
     @Autowired
     VertxHttpServer server;
 
+    private EventBus eb;
+
     @PostConstruct
     void init() {
         Vertx vertx = Vertx.vertx();
-        final EventBus eb = vertx.eventBus();
+        eb = vertx.eventBus();
         vertx.setPeriodic(1000, { id ->
                 RandomNumber data = new RandomNumber(value: Math.random())
                 String dataAsJson = Json.encode(data)
