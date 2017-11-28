@@ -1,24 +1,52 @@
 angular.module('app', [])
-  .controller('appController', function($scope, $http) {
+
+angular.module('app').service ('eventBus', function(){
+
+    this.eventBus = new EventBus('http://localhost:8081/eventbus/');
+    this.conectado = false
+
+    this.eventBus.onopen = () => {
+       this.conectado = true
+    };
+
+    this.eventBus.onerror = function(err) {
+        this.conectado = false
+    }
+
+    this.registerHandler = (topic, handler) => {
+       if (!this.conectado){
+          setTimeout( () => {
+                if (!this.conectado){
+                   console.log("No conectado tras dos segundos ");
+                   return;
+                }
+                this.eventBus.registerHandler(topic,handler);
+          },2000 )
+          return;
+       }
+       this.eventBus.registerHandler(topic, handler);
+    }
+
+    this.publish = (topic, data) => {
+       if (!this.conectado){
+          setTimeout(()=>{
+             if (!this.conectado){
+                console.log("No conectado en dos segundos")
+                return
+             }
+             this.eventBus.publish(topic,data)
+          },2000)
+          return
+       }
+       this.eventBus.publish(topic,data)
+    }
+})
+
+
+angular.module('app').controller('appController', ['$scope','$http','eventBus', function($scope, $http, eventBus) {
     var app = this;
 
     console.log("inicializacion controller");
-
-    app.eventBus = new EventBus('http://localhost:8081/eventbus/');
-    app.eventBus.onopen = () => {
-           console.log("Registrando handler");
-           app.eventBus.registerHandler("prueba", function (err, msg) {
-              console.log("I have received a message: " + msg.body);
-              $scope.$apply(function(){
-                app.eventBusReceived = msg.body;
-              });
-           });
-        };
-    app.eventBus.onerror = function(err) {
-        console.log(err);
-    }
-
-
 
     app.texto='Hola Angular';
 
@@ -28,4 +56,18 @@ angular.module('app', [])
                     app.random = response.data.value;
                 });
     }
-})
+
+    app.publish = function (topic, data){
+       eventBus.publish(topic,data)
+    }
+
+    console.log("Registrando handler");
+    eventBus.registerHandler("prueba", function (err, msg) {
+        console.log("I have received a message: " + msg.body);
+        $scope.$apply(function(){
+            app.eventBusReceived = msg.body;
+        });
+    });
+
+}])
+

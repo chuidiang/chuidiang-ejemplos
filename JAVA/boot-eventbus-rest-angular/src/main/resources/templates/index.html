@@ -14,6 +14,7 @@
     <p>{{app.texto}}</p>
     <button data-ng-click="app.llamadaGet()">GET Random</button>
     <p>Random = <span>{{app.random}}</span></p>
+    <p><button data-ng-click="app.publish('prueba','desde navegador va')">SEND to EventBus</button></p>
     <p>Recibido por Event Bus = <span>{{app.eventBusReceived}}</span></p>
 </body>
 </html>
