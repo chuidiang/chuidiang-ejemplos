@@ -1,5 +1,6 @@
 package com.chuidiang.booteventbusrestangular.rest
 
+import com.chuidiang.booteventbusrestangular.logic.RandomNumber
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController;
