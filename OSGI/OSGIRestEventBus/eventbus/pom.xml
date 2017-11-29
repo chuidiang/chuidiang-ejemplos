@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>com.chuidiang.examples</groupId>
+      <artifactId>OSGIRestEventBus</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+   </parent>
+   <groupId>com.chuidiang.examples</groupId>
+   <artifactId>eventbus</artifactId>
+   <packaging>bundle</packaging>
+
+   <name>OSGI eventbus Example</name>
+   <url>http://chuwiki.chuidiang.org</url>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-bundle-plugin</artifactId>
+            <version>3.3.0</version>
+            <extensions>true</extensions>
+            <configuration>
+               <manifestLocation>META-INF</manifestLocation>
+               <instructions>
+                  <Export-Package></Export-Package>
+                  <Import-Package></Import-Package>
+                  <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+                  <Embed-Transitive>true</Embed-Transitive>
+                  <Embed-Directory>lib</Embed-Directory>
+               </instructions>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-scr-plugin</artifactId>
+            <version>1.25.0</version>
+            <dependencies>
+               <dependency>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-simple</artifactId>
+                  <version>1.5.2</version>
+               </dependency>
+            </dependencies>
+         </plugin>
+      </plugins>
+   </build>
+</project>
