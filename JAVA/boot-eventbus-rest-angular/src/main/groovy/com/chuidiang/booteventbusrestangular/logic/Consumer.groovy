@@ -1,6 +1,6 @@
 package com.chuidiang.booteventbusrestangular.logic
 
-import com.chuidiang.booteventbusrestangular.bus.EventBusInit
+import com.chuidiang.booteventbusrestangular.bus.VertxInit
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct
 @Component
 class Consumer {
     @Autowired
-    EventBusInit eb;
+    VertxInit eb;
 
     @PostConstruct
     init() {

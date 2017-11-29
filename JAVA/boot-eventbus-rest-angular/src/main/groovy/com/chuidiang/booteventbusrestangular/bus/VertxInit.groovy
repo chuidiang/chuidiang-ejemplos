@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct
  * Created by chuidiang on 25/11/17.
  */
 @Component
-class EventBusInit {
+class VertxInit {
     @Autowired
     List<AbstractVerticle> verticles;
 

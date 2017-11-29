@@ -16,7 +16,7 @@ import java.util.function.Function;
  * Created by chuidiang on 25/11/17.
  */
 @Component
-class VertxHttpServer extends AbstractVerticle {
+class HttpEventBusBridge extends AbstractVerticle {
 
         @Override
         public void start() throws Exception {

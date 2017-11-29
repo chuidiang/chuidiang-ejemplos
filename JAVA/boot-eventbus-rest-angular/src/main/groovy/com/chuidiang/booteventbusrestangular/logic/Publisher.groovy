@@ -1,6 +1,6 @@
 package com.chuidiang.booteventbusrestangular.logic
 
-import com.chuidiang.booteventbusrestangular.bus.EventBusInit
+import com.chuidiang.booteventbusrestangular.bus.VertxInit
 import io.vertx.core.json.Json
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct
 @Component
 class Publisher {
     @Autowired
-    EventBusInit eb;
+    VertxInit eb;
 
     @PostConstruct
     init(){
