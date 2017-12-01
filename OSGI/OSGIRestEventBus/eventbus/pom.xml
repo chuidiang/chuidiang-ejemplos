@@ -23,8 +23,10 @@
             <configuration>
                <manifestLocation>META-INF</manifestLocation>
                <instructions>
-                  <Export-Package></Export-Package>
-                  <Import-Package></Import-Package>
+                  <Export-Package>com.chuidiang.examples.interfaces</Export-Package>
+                  <Import-Package>com.google.*;resolution:=optional,sun.*</Import-Package>
+                  <DynamicImport-Package>io.vertx.core;version=3.5.0,
+                     io.vertx.core.eventbus;version=3.5.0</DynamicImport-Package>
                   <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                   <Embed-Transitive>true</Embed-Transitive>
                   <Embed-Directory>lib</Embed-Directory>
@@ -45,4 +47,18 @@
          </plugin>
       </plugins>
    </build>
+   <dependencies>
+      <dependency>
+         <groupId>io.vertx</groupId>
+         <artifactId>vertx-core</artifactId>
+         <version>3.5.0</version>
+         <scope>provided</scope>
+         <exclusions>
+            <exclusion>
+               <groupId>log4j</groupId>
+               <artifactId>log4j</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+   </dependencies>
 </project>

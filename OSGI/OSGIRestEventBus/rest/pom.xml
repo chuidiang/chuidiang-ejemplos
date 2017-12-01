@@ -24,7 +24,7 @@
                <manifestLocation>META-INF</manifestLocation>
                <instructions>
                   <Export-Package></Export-Package>
-                        <Import-Package></Import-Package>
+                  <Import-Package>com.chuidiang.examples.interfaces</Import-Package>
                   <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                   <Embed-Transitive>true</Embed-Transitive>
                   <Embed-Directory>lib</Embed-Directory>
@@ -45,4 +45,14 @@
          </plugin>
       </plugins>
    </build>
+
+   <dependencies>
+      <dependency>
+         <groupId>com.chuidiang.examples</groupId>
+         <artifactId>eventbus</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+         <scope>provided</scope>
+      </dependency>
+   </dependencies>
+
 </project>
