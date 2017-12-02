@@ -29,11 +29,27 @@ public class VertxInit implements EventBusIfz  {
     @Activate
     public void start() {
         System.out.println("Arranca bundle VertxInit");
+
+        theStrangeStarter();
+    }
+
+    /**
+     * Si se instancia Vertx.vertx() sin mas, salta un error java de ServiceProvider
+     * diciendo que VertxFactory no es "subtype". Esta forma extraña de arranque,
+     * sacada de este ejemplo de vertx
+     * https://github.com/vert-x3/vertx-examples/blob/master/osgi-examples/src/main/java/io/vertx/example/osgi/TcclSwitch.java
+     * parece funcionar.
+     * La alternativa es poner las dependencias de OSGI en el manifiesto como DynamicInport-Package en
+     * vez de como Import-Package
+     */
+    private void theStrangeStarter() {
+        ClassLoader original = Thread.currentThread().getContextClassLoader();
         try {
+            Thread.currentThread().setContextClassLoader(VertxInit.class.getClassLoader());
             vertx = Vertx.vertx();
             eb = vertx.eventBus();
-        } catch (Throwable e){
-            e.printStackTrace();
+        } finally {
+            Thread.currentThread().setContextClassLoader(original);
         }
     }
 
