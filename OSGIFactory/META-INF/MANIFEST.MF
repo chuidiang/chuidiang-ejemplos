@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1460482955591
-Build-Jdk: 1.8.0_05
-Built-By: JAVIER
+Bnd-LastModified: 1512214156896
+Build-Jdk: 1.7.0_21
+Built-By: vladimir
 Bundle-Activator: com.chuidiang.examples.osgi_factory.Activator
 Bundle-ManifestVersion: 2
 Bundle-Name: OSGI Dynamic Factory with Declarative Services Example
