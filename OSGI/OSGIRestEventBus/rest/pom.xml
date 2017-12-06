@@ -26,7 +26,6 @@
                   <Export-Package>com.chuidiang.examples.rest</Export-Package>
                   <Import-Package>com.chuidiang.examples.interfaces,javax.ws.rs,
                   org.osgi.framework</Import-Package>
-                  <Bundle-Activator>com.chuidiang.examples.rest.Activator</Bundle-Activator>
                   <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                   <Embed-Transitive>true</Embed-Transitive>
                   <Embed-Directory>lib</Embed-Directory>
@@ -53,6 +52,12 @@
          <groupId>com.chuidiang.examples</groupId>
          <artifactId>eventbus</artifactId>
          <version>0.0.1-SNAPSHOT</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>javax.ws.rs</groupId>
+         <artifactId>javax.ws.rs-api</artifactId>
+         <version>2.1</version>
          <scope>provided</scope>
       </dependency>
    </dependencies>

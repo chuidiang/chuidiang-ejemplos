@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.chuidiang.examples</groupId>
+        <artifactId>OSGIRestEventBus</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <groupId>com.chuidiang.examples</groupId>
+    <artifactId>dependencies</artifactId>
+    <packaging>jar</packaging>
+    <description>Bundles necesarios para ejecutar el ejemplo</description>
+    <!-- Añadir como bundles los de estas dependencias y sus dependencias
+         transitivas.
+         mvn dependency:copy-dependencies metera todos los jar en target/dependency
+         mvn dependency:tree permite ver todas estas dependencias en stdout-->
+
+    <name>Solo para traer dependencias necesarias</name>
+    <url>http://chuwiki.chuidiang.org</url>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.http.bridge</artifactId>
+            <version>3.0.18</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.http.servlet-api</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.http.jetty</artifactId>
+            <version>3.4.6</version>
+            <exclusions>
+                <!-- Se excluye esta, para que funcione es necesaria la
+                     org.apache.felix.http.servlet-api -->
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.eventadmin</artifactId>
+            <version>1.4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eclipsesource.jaxrs</groupId>
+            <artifactId>publisher</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+
+    </dependencies>
+        </project>

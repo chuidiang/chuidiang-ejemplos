@@ -12,16 +12,13 @@ import java.text.MessageFormat;
  * Created by chuidiang on 29/11/17.
  */
 @Component
-public class RestService {
+public class EventBusClient {
     int count=0;
-    public RestService(){
-        System.out.println("A mi tambien me instancian");
-    }
     private EventBusIfz eb;
 
     @Activate
     public void start() {
-        System.out.println("Arranca bundle RestService");
+        System.out.println("Arranca bundle EventBusClient");
     }
 
     @Deactivate

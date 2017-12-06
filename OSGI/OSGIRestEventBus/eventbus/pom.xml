@@ -25,7 +25,7 @@
                <instructions>
                   <Export-Package>com.chuidiang.examples.interfaces</Export-Package>
                   <Import-Package>com.google.*;resolution:=optional,sun.*,io.vertx.core;version=3.5.0,
-                     io.vertx.core.eventbus;version=3.5.0</Import-Package>
+                     io.vertx.core.eventbus;version=3.5.0,javax.ws.rs</Import-Package>
                   <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                   <Embed-Transitive>true</Embed-Transitive>
                   <Embed-Directory>lib</Embed-Directory>
