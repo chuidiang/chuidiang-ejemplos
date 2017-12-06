@@ -45,5 +45,6 @@
 	<modules>
 		<module>eventbus</module>
 		<module>rest</module>
+		<module>dependencies</module>
 	</modules>
 </project>

@@ -23,8 +23,10 @@
             <configuration>
                <manifestLocation>META-INF</manifestLocation>
                <instructions>
-                  <Export-Package></Export-Package>
-                  <Import-Package>com.chuidiang.examples.interfaces</Import-Package>
+                  <Export-Package>com.chuidiang.examples.rest</Export-Package>
+                  <Import-Package>com.chuidiang.examples.interfaces,javax.ws.rs,
+                  org.osgi.framework</Import-Package>
+                  <Bundle-Activator>com.chuidiang.examples.rest.Activator</Bundle-Activator>
                   <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                   <Embed-Transitive>true</Embed-Transitive>
                   <Embed-Directory>lib</Embed-Directory>
