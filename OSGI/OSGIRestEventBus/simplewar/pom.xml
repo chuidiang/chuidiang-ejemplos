@@ -63,39 +63,11 @@
                         <Bundle-SymbolicName>simplewar</Bundle-SymbolicName>
                         <Bundle-ClassPath>.,WEB-INF/classes,{maven-dependencies}</Bundle-ClassPath>
                         <Web-ContextPath>/simplewar</Web-ContextPath>
-                        <Webapp-Context>simplewar</Webapp-Context>
                         <Embed-Dependency>*;scope=compile;inline=false</Embed-Dependency>
                         <Embed-Directory>WEB-INF/lib</Embed-Directory>
                     </instructions>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.felix</groupId>-->
-                <!--<artifactId>maven-scr-plugin</artifactId>-->
-                <!--<version>1.25.0</version>-->
-                <!--<configuration>-->
-                    <!--<supportedProjectTypes>-->
-                        <!--<supportedProjectType>war</supportedProjectType>-->
-                    <!--</supportedProjectTypes>-->
-                <!--</configuration>-->
-                <!--<dependencies>-->
-                    <!--<dependency>-->
-                        <!--<groupId>org.slf4j</groupId>-->
-                        <!--<artifactId>slf4j-simple</artifactId>-->
-                        <!--<version>1.5.2</version>-->
-                    <!--</dependency>-->
-                    <!--<dependency>-->
-                        <!--<groupId>org.apache.felix</groupId>-->
-                        <!--<artifactId>org.apache.felix.scr.ds-annotations</artifactId>-->
-                        <!--<version>1.2.10</version>-->
-                    <!--</dependency>-->
-                <!--</dependencies>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--&lt;!&ndash; Enable this plugin for all modules &ndash;&gt;-->
-                <!--<groupId>org.apache.felix</groupId>-->
-                <!--<artifactId>maven-bundle-plugin</artifactId>-->
-            <!--</plugin>-->
         </plugins>
     </build>
 
