@@ -5,20 +5,19 @@ import First.*;
 
 public class Main {
 
+    public static final String TOPIC_NAME = "Struct_1";
     private final String partitionName = new String("AnStructPartition");
+
     private DomainParticipantFactory domainParticipantFactory;
     private DomainParticipant participant;
-    private AnStructTypeSupport anStructTS;
+
     private String anStructTypeName;
-    private TopicQosHolder topicQosHolder;
     private Topic anStructTopic;
-    private PublisherQosHolder publisherQosHolder;
+
     private Publisher publisher;
-    private DataWriter parentWriter;
-    private AnStructDataWriter talker;
-    private SubscriberQosHolder subQos;
-    private Subscriber chatSubscriber;
-    private DataReader datareader;
+    private AnStructDataWriter anStructDataWriter;
+
+    private Subscriber subscriber;
     private AnStructDataReader reader;
 
     public static void main(String[] args) throws InterruptedException {
@@ -55,10 +54,10 @@ public class Main {
         data.aText = "text" + data.id;
 
         while (true) {
-            talker.write(data, HANDLE_NIL.value);
+            anStructDataWriter.write(data, HANDLE_NIL.value);
             data.id++;
             data.aText = "text" + data.id;
-            Thread.sleep(1000);
+            Thread.sleep(500);
             System.out.println("va");
         }
     }
@@ -109,44 +108,41 @@ public class Main {
     }
 
     private void createReader() {
-        datareader = chatSubscriber.create_datareader(
+        DataReader datareader = subscriber.create_datareader(
                 anStructTopic,
                 DATAREADER_QOS_USE_TOPIC_QOS.value,
                 null,
                 STATUS_MASK_NONE.value);
+
         reader = AnStructDataReaderHelper.narrow(datareader);
     }
 
     private void createSubscriber() {
         int status;
-        subQos = new SubscriberQosHolder();
+        SubscriberQosHolder subQos = new SubscriberQosHolder();
         status = participant.get_default_subscriber_qos(subQos);
         subQos.value.partition.name = new String[1];
         subQos.value.partition.name[0] = partitionName;
 
-        chatSubscriber = participant.create_subscriber(
+        subscriber = participant.create_subscriber(
                 subQos.value, null, STATUS_MASK_NONE.value);
-        chatSubscriber.set_default_datareader_qos(new DataReaderQos());
+        subscriber.set_default_datareader_qos(new DataReaderQos());
     }
 
     private void createWriter() {
-        DataWriterQosHolder dataWriterQosHolder = new DataWriterQosHolder();
-        publisher.get_default_datawriter_qos(dataWriterQosHolder);
-        publisher.copy_from_topic_qos(dataWriterQosHolder, topicQosHolder.value);
-        dataWriterQosHolder.value.writer_data_lifecycle.autodispose_unregistered_instances = false;
 
-        parentWriter = publisher.create_datawriter(
+        DataWriter dataWriter = publisher.create_datawriter(
                 anStructTopic,
-                dataWriterQosHolder.value,
+                DATAWRITER_QOS_USE_TOPIC_QOS.value,
                 null,
                 STATUS_MASK_NONE.value);
 
-        talker = AnStructDataWriterHelper.narrow(parentWriter);
+        anStructDataWriter = AnStructDataWriterHelper.narrow(dataWriter);
     }
 
     private void createPublisher() {
 
-        publisherQosHolder = new PublisherQosHolder();
+        PublisherQosHolder publisherQosHolder = new PublisherQosHolder();
         participant.get_default_publisher_qos(publisherQosHolder);
         publisherQosHolder.value.partition.name = new String[1];
         publisherQosHolder.value.partition.name[0] = partitionName;
@@ -158,14 +154,14 @@ public class Main {
 
     private void createTopic() {
 
-        topicQosHolder = new TopicQosHolder();
+        TopicQosHolder topicQosHolder = new TopicQosHolder();
         participant.get_default_topic_qos(topicQosHolder);
         topicQosHolder.value.reliability.kind =
                 ReliabilityQosPolicyKind.RELIABLE_RELIABILITY_QOS;
         topicQosHolder.value.durability.kind = DurabilityQosPolicyKind.TRANSIENT_DURABILITY_QOS;
 
         anStructTopic = participant.create_topic(
-                "Struct_1",
+                TOPIC_NAME,
                 anStructTypeName,
                 topicQosHolder.value,
                 null,
@@ -175,7 +171,7 @@ public class Main {
     }
 
     private void registerType() {
-        anStructTS = new AnStructTypeSupport();
+        AnStructTypeSupport anStructTS = new AnStructTypeSupport();
         anStructTypeName = anStructTS.get_type_name();
         anStructTS.register_type(participant, anStructTypeName);
         System.out.println("registrado tipo");
