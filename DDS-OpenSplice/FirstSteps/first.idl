@@ -1,0 +1,7 @@
+module First {
+   struct AnStruct {
+      long id;
+      string aText;
+   }; 
+#pragma keylist AnStruct id
+};
