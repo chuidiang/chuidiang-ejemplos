@@ -82,22 +82,25 @@ public class Main {
                     SampleInfoSeqHolder infoSeq = new SampleInfoSeqHolder();
 
 
-                    ws._wait(conditions, duration);
-                    System.out.println("Fin wait " + conditions.value.length);
-                    int status = reader.take(
-                            seqHolder,
-                            infoSeq,
-                            LENGTH_UNLIMITED.value,
-                            ANY_SAMPLE_STATE.value,
-                            ANY_VIEW_STATE.value,
-                            ALIVE_INSTANCE_STATE.value);
+                    int waitStatus = ws._wait(conditions, duration);
+                    if (waitStatus == RETCODE_OK.value) {
+
+                        System.out.println("Fin wait " + conditions.value.length);
+                        reader.take(
+                                seqHolder,
+                                infoSeq,
+                                LENGTH_UNLIMITED.value,
+                                ANY_SAMPLE_STATE.value,
+                                ANY_VIEW_STATE.value,
+                                ALIVE_INSTANCE_STATE.value);
 
 
-                    if (null != seqHolder.value) {
-                        for (int i = 0; i < seqHolder.value.length; i++) {
-                            System.out.println(seqHolder.value[i].id);
-                            System.out.println(seqHolder.value[i].aText);
-                            System.out.println("-----------");
+                        if (null != seqHolder.value) {
+                            for (int i = 0; i < seqHolder.value.length; i++) {
+                                System.out.println(seqHolder.value[i].id);
+                                System.out.println(seqHolder.value[i].aText);
+                                System.out.println("-----------");
+                            }
                         }
                     }
 
@@ -118,15 +121,13 @@ public class Main {
     }
 
     private void createSubscriber() {
-        int status;
         SubscriberQosHolder subQos = new SubscriberQosHolder();
-        status = participant.get_default_subscriber_qos(subQos);
+        participant.get_default_subscriber_qos(subQos);
         subQos.value.partition.name = new String[1];
         subQos.value.partition.name[0] = partitionName;
 
         subscriber = participant.create_subscriber(
                 subQos.value, null, STATUS_MASK_NONE.value);
-        subscriber.set_default_datareader_qos(new DataReaderQos());
     }
 
     private void createWriter() {
