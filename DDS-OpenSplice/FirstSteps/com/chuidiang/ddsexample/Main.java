@@ -3,6 +3,9 @@ package com.chuidiang.ddsexample;
 import DDS.*;
 import First.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main {
 
     public static final String TOPIC_NAME = "Struct_1";
@@ -44,19 +47,48 @@ public class Main {
         startReading();
 
 
-        startWriting();
+//        startWriting();
+        startWritingWithRegistration();
         return;
     }
 
     private void startWriting() throws InterruptedException {
         AnStruct data = new AnStruct();
-        data.id = 1;
+        int counter=1;
+        data.id = counter;
         data.aText = "text" + data.id;
 
         while (true) {
             anStructDataWriter.write(data, HANDLE_NIL.value);
-            data.id++;
-            data.aText = "text" + data.id;
+            data.id = counter%5;
+            counter++;
+            data.aText = "text" + counter;
+            Thread.sleep(500);
+            System.out.println("va");
+        }
+    }
+
+    private void startWritingWithRegistration() throws InterruptedException {
+        Map<Integer, Long> handles = new HashMap<>();
+
+        for (int i=0;i<5;i++) {
+            AnStruct data = new AnStruct();
+            data.id=i;
+            data.aText="text"+i;
+            long handle = anStructDataWriter.register_instance(data);
+            handles.put(data.id, handle);
+        }
+
+        AnStruct data = new AnStruct();
+        int counter=0;
+        data.id=counter;
+        data.aText="text"+counter;
+        while (true) {
+            long handle = handles.get(data.id);
+            anStructDataWriter.write(data, handle);
+            data.id = counter%5;
+            counter++;
+            data.aText = "text" + counter;
             Thread.sleep(500);
             System.out.println("va");
         }
@@ -90,7 +122,9 @@ public class Main {
                                 seqHolder,
                                 infoSeq,
                                 LENGTH_UNLIMITED.value,
-                                ANY_SAMPLE_STATE.value,
+//                                ANY_SAMPLE_STATE.value,
+                                DDS.NOT_READ_SAMPLE_STATE.value,
+//                                DDS.NEW_VIEW_STATE.value,
                                 ANY_VIEW_STATE.value,
                                 ALIVE_INSTANCE_STATE.value);
 
@@ -99,8 +133,9 @@ public class Main {
                             for (int i = 0; i < seqHolder.value.length; i++) {
                                 System.out.println(seqHolder.value[i].id);
                                 System.out.println(seqHolder.value[i].aText);
-                                System.out.println("-----------");
+
                             }
+                            System.out.println("-----------");
                         }
                     }
 
