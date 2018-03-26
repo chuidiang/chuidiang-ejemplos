@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+repositories {
+   mavenLocal()
+   mavenCentral()
+}
+
+dependencies {
+   compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.0.CR1'
+   compile group: 'org.hibernate', name: 'hibernate-spatial', version: '5.3.0.CR1'
+   compile group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
+   compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+}

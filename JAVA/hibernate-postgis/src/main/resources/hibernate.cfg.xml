@@ -1,0 +1,18 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+      <!-- Database connection settings -->
+      <property name="connection.driver_class">org.postgresql.Driver</property>
+      <property name="connection.url">jdbc:postgresql://localhost/postgis_test</property>
+      <property name="connection.username">postgres</property>
+      <property name="connection.password">postgres</property>
+      <!-- SQL dialect -->
+      <property name="dialect">org.hibernate.spatial.dialect.postgis.PostgisNoSQLMM</property>
+      <!-- Drop and re-create the database schema on startup -->
+      <property name="hbm2ddl.auto">create</property>
+
+      <mapping class="com.chuidiang.examples.hibernatepostgis.TheData" />
+   </session-factory>
+</hibernate-configuration>
