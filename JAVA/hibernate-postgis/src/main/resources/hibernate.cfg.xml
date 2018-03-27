@@ -9,7 +9,7 @@
       <property name="connection.username">postgres</property>
       <property name="connection.password">postgres</property>
       <!-- SQL dialect -->
-      <property name="dialect">org.hibernate.spatial.dialect.postgis.PostgisNoSQLMM</property>
+      <property name="dialect">org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect</property>
       <!-- Drop and re-create the database schema on startup -->
       <property name="hbm2ddl.auto">create</property>
 

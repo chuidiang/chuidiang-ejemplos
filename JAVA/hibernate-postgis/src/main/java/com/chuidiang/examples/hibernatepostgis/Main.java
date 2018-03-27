@@ -1,10 +1,8 @@
 package com.chuidiang.examples.hibernatepostgis;
 
 import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.CoordinateSequence;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
-import com.vividsolutions.jts.geom.impl.CoordinateArraySequence;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -13,11 +11,12 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class Main {
+    private static GeometryFactory geometryFactory = new GeometryFactory();
+
     public static void main(String[] args) {
 
         SessionFactory sessionFactory = new Configuration().configure()
                 .buildSessionFactory();
-
         try {
             insertGeometry(sessionFactory);
             queryGeometry(sessionFactory);
@@ -51,12 +50,10 @@ public class Main {
 
         TheData theData = session.get(TheData.class, 1L);
 
-        CoordinateSequence seq = new CoordinateArraySequence(new Coordinate[]{
+        LineString geometry = geometryFactory.createLineString(new Coordinate[]{
                 new Coordinate(5,6),
                 new Coordinate(7,8),
                 new Coordinate(9,10)});
-
-        LineString geometry = new LineString(seq,new GeometryFactory());
         theData.setTheGeometry(geometry);
 
         session.saveOrUpdate(theData);
@@ -86,11 +83,10 @@ public class Main {
     private static void insertGeometry(SessionFactory sessionFactory) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
+
         TheData data = new TheData();
         data.setId(1L);
-        CoordinateSequence seq = new CoordinateArraySequence(new Coordinate[]{new Coordinate(1,2), new Coordinate(3,4)});
-
-        LineString geometry = new LineString(seq,new GeometryFactory());
+        LineString geometry = geometryFactory.createLineString(new Coordinate[]{new Coordinate(1,2), new Coordinate(3,4)});
         data.setTheGeometry(geometry);
 
         session.save(data);
