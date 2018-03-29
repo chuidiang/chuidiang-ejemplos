@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+repositories {
+   mavenLocal()
+   mavenCentral()
+}
+
+dependencies {
+	compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+}
