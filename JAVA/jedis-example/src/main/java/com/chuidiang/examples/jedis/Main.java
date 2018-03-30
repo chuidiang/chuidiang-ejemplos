@@ -4,14 +4,10 @@ import redis.clients.jedis.Jedis;
 
 public class Main {
 
-    private static Jedis jedis;
-
     public static void main(String[] args) throws InterruptedException {
-        jedis = new Jedis("192.168.99.100",6379);
 
         new KeyspaceEventsSubscriptorThread();
 
-        setAndGet();
 
         new ListReaderThread();
         new SubscriberThread();
@@ -21,16 +17,24 @@ public class Main {
         new PublisherThread();
         new HashSetThread();
 
-//        getInfo();
+        getInfo();
     }
 
     private static void getInfo() {
-        System.out.println(jedis.info());
+        try (Jedis jedis = Pool.getResource()) {
+            System.out.println(jedis.info());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private static void setAndGet() {
-        jedis.set("foo", "bar");
-        String value = jedis.get("foo");
-        System.out.println(value);
+        try (Jedis jedis = Pool.getResource()) {
+            jedis.set("foo", "bar");
+            String value = jedis.get("foo");
+            System.out.println(value);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
