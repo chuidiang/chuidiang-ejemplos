@@ -9,13 +9,17 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         jedis = new Jedis("192.168.99.100",6379);
 
+        new KeyspaceEventsSubscriptorThread();
+
         setAndGet();
 
         new ListReaderThread();
         new SubscriberThread();
+        new HashGetThread();
 
         new ListWriterThread();
         new PublisherThread();
+        new HashSetThread();
 
 //        getInfo();
     }
