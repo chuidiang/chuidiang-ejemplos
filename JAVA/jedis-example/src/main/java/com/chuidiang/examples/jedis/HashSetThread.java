@@ -15,14 +15,10 @@ public class HashSetThread extends Thread{
         try (Jedis jedis = Pool.getResource()) {
             while (true) {
                 double value = Math.random();
-                int key = random.nextInt() % 10;
-                jedis.hset("hash", Integer.toString(key), Double.toString(value));
-                jedis.lpush("lastFieldUpdated", Integer.toString(key));
-                try {
-                    Thread.sleep((long) (1000 * value));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                String field = "Field"+random.nextInt(10);
+                jedis.hset("hash", field, Double.toString(value));
+                jedis.lpush("lastUpdatedField", field);
+                Thread.sleep((long) (1000 * value));
             }
         } catch (Exception e){
             e.printStackTrace();

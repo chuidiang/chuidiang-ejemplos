@@ -8,6 +8,7 @@ public class Main {
 
         new KeyspaceEventsSubscriptorThread();
 
+        setAndGet();
 
         new ListReaderThread();
         new SubscriberThread();

@@ -13,11 +13,7 @@ public class ListWriterThread extends Thread {
             while (true) {
                 double number = Math.random();
                 jedis.rpush("list1", "ListWriter : " + Double.toString(number));
-                try {
-                    Thread.sleep((long) (number * 1000));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Thread.sleep((long) (number * 1000));
             }
         } catch (Exception e){
             e.printStackTrace();
