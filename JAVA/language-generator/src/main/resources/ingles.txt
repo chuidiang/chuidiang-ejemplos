@@ -1,0 +1,5 @@
+The limited performance was understood to be a problem from the start, and a requirement for a higher
+performance replacement was published in 1964. British Aircraft Corporation (BAC) won a 1967 development
+contract along with Vickers and Bristol Aerojet. Although only slightly longer and heavier than Seacat, it
+offered dramatically higher performance, with a top speed on the order of Mach 3 and an effective range roughly
+double that of Seacat. Additionally, it had a fully automated guidance system that made engagements much simpler.

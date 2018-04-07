@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="Idiomas" default="todo">
+	<target name="todo" depends="empaqueta, zip">
+	</target>
+
+	<target name="empaqueta" depends="compila">
+	<manifest file="MANIFEST.MF">
+    		<attribute name="Built-By" value="Chuidiang"/>
+      		<attribute name="Main-Class" 
+		value="chuidiang.reconocedor_idioma.PruebaCorrelacionIdiomas"/>
+  	</manifest>
+		<jar 
+			basedir="class"
+			destfile="jar/idiomas.jar"
+			manifest="MANIFEST.MF">
+			<fileset dir="." includes="*.txt"/>
+			<fileset file="build.xml"/>
+			<fileset file="src/chuidiang/reconocedor_idioma/PruebaCorrelacionIdiomas.java"/>
+		</jar>
+		</target>
+
+	<target name="compila">
+		<javac srcdir="src" destdir="class"/>
+	</target>
+
+	<target name="zip">
+		<zip destfile="idiomas.zip" basedir="src" includes="**/*.java"/>
+	</target>
+</project>
+
