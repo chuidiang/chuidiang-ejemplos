@@ -17,27 +17,24 @@ import java.util.Arrays;
 public class GenerateTestVessels {
     public static String[] types = {"patera","lancha","barco"};
     public static Instances getData() throws Exception {
-        ArrayList<Attribute> atts;
+        ArrayList<Attribute> atts = new ArrayList<>();
         Instances       data;
-
         double[]        vals;
 
 
-
-        // 1. set up attributes
-        atts = new ArrayList<>();
-        // - numeric
-
+        // Atributos, diciendo nombre y posibles valores. Si no se indica
+        // nada, son numéricos.
         atts.add(new Attribute("type", Arrays.asList(types)));
         atts.add(new Attribute("size"));
         atts.add(new Attribute("vmax"));
         atts.add(new Attribute("vmin"));
         atts.add(new Attribute("mmsi", Arrays.asList("si","no")));
 
-        // 2. create Instances object
+        // Creamos el conjunto de datos, de momento vacío, indicando qué atributos
+        // van a llevar.
         data = new Instances("MyData", atts, 0);
 
-        // 3. fill with data
+        // Rellenamos datos.
         // pateras
         for (int i=0;i<10;i++) {
             vals = getPatera(data.numAttributes());
