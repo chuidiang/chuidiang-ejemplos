@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+repositories {
+   mavenLocal()
+   mavenCentral()
+}
+
+dependencies {
+   compile group: 'nz.ac.waikato.cms.weka', name: 'weka-stable', version: '3.8.2'
+}
