@@ -67,7 +67,7 @@ public class GenerateTestVessels {
         double[] vals;
         vals = new double[numAttributes];
         vals[0]=2; // barco
-        vals[1]=Math.random()*10+50; // grande
+        vals[1]=Math.random()*30+50; // grande
         vals[2]=Math.random()*5+25; // media
         vals[3]=Math.random()*2+5; // rapida
         vals[4]=0; // con mmsi
@@ -90,7 +90,7 @@ public class GenerateTestVessels {
         vals = new double[numAttributes];
         vals[0]=1; // lancha
         vals[1]=Math.random()*10+10; // pequeña
-        vals[2]=Math.random()*10+50; // rapida
+        vals[2]=Math.random()*25+25; // rapida
         vals[3]=Math.random()*2+5; // rapida
         vals[4]=1; // sin mmsi
         return vals;
