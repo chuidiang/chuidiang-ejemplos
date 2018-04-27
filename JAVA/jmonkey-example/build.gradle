@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+    //maven { url "http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine" }
+}
+
+def jme3 = [v:'3.2.1-stable', g:'org.jmonkeyengine']
+dependencies {
+	compile "${jme3.g}:jme3-core:${jme3.v}"
+	compile "${jme3.g}:jme3-desktop:${jme3.v}"
+	runtime "${jme3.g}:jme3-lwjgl:${jme3.v}"
+}
