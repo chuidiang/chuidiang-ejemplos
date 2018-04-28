@@ -18,7 +18,7 @@ public class Vessels extends SimpleApplication {
 
     public static void main(String[] args){
         Vessels app = new Vessels();
-//        app.setShowSettings(false);
+        app.setShowSettings(false);
         app.start();
     }
 
@@ -30,7 +30,14 @@ public class Vessels extends SimpleApplication {
         Axis axis = new Axis(assetManager);
         rootNode.attachChild(axis); // put this node in the scene
 
-        Vessel vessel = new Vessel("Federica", assetManager, 10f, new Vector3f(100f,0f,-100f));
+        Vessel vessel = new Vessel(assetManager, new VesselData(
+                name:"Federica",
+                high: 1f,
+                length: 10f,
+                beam: 1f,
+                heading: new Vector3f(10,0,-10),
+                speed: 1
+        ));
         rootNode.attachChild(vessel);
 
         Sea s = new Sea(assetManager);
@@ -39,6 +46,7 @@ public class Vessels extends SimpleApplication {
         cam.setLocation(new Vector3f(10f,10f,100f));
         getFlyByCamera().setZoomSpeed(10f);
 
+        // Uncomment to save a video in your home dir.
 //        stateManager.attach(new VideoRecorderAppState());
     }
 

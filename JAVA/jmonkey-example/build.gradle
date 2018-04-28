@@ -1,4 +1,4 @@
-apply plugin: 'java'
+apply plugin: 'groovy'
 
 repositories {
     jcenter()
@@ -7,6 +7,8 @@ repositories {
 
 def jme3 = [v:'3.2.1-stable', g:'org.jmonkeyengine']
 dependencies {
+	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.15'
+
 	compile "${jme3.g}:jme3-core:${jme3.v}"
 	compile "${jme3.g}:jme3-desktop:${jme3.v}"
 	runtime "${jme3.g}:jme3-lwjgl:${jme3.v}"
