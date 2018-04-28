@@ -1,15 +1,13 @@
-package com.chuidiang.examples.jmonkey;
+package com.chuidiang.examples.jmonkey
 
-import com.jme3.app.DebugKeysAppState;
-import com.jme3.app.FlyCamAppState;
-import com.jme3.app.SimpleApplication;
-import com.jme3.audio.AudioListenerState;
-import com.jme3.math.Vector3f;
-import com.jme3.scene.Node;
+import com.jme3.app.DebugKeysAppState
+import com.jme3.app.FlyCamAppState
+import com.jme3.app.SimpleApplication
+import com.jme3.audio.AudioListenerState
+import com.jme3.math.Vector3f
 
 public class Vessels extends SimpleApplication {
-    private Node pivot;
-
+    def vessels = new ArrayList<>();
 
     public Vessels(){
         super(new FlyCamAppState(), new AudioListenerState(), new DebugKeysAppState());
@@ -30,15 +28,20 @@ public class Vessels extends SimpleApplication {
         Axis axis = new Axis(assetManager);
         rootNode.attachChild(axis); // put this node in the scene
 
-        Vessel vessel = new Vessel(assetManager, new VesselData(
-                name:"Federica",
-                high: 1f,
-                length: 10f,
-                beam: 1f,
-                heading: new Vector3f(10,0,-10),
-                speed: 1
-        ));
-        rootNode.attachChild(vessel);
+        VesselGenerator.data.each {data ->
+            Vessel vessel = new Vessel(assetManager, data);
+            vessels.add(vessel)
+            rootNode.attachChild(vessel);
+        }
+
+//        Spatial strangeBall = assetManager.loadModel("essex_scb-125_generic.obj");
+//        Material mat_default = new Material(
+//                assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+//        Material mat_default = new Material(
+//                assetManager, "aircraft/aircraft.mtl");
+//        mat_default.setTexture("ColorMap", getAssetManager().loadTexture("barco/Metal_Aluminum_Anodized.png"))
+//        strangeBall.setMaterial(mat_default);
+//        rootNode.attachChild(strangeBall);
 
         Sea s = new Sea(assetManager);
         rootNode.attachChild(s);
@@ -46,12 +49,18 @@ public class Vessels extends SimpleApplication {
         cam.setLocation(new Vector3f(10f,10f,100f));
         getFlyByCamera().setZoomSpeed(10f);
 
+//        DirectionalLight sun = new DirectionalLight();
+//        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f).normalizeLocal());
+//        rootNode.addLight(sun);
+
         // Uncomment to save a video in your home dir.
 //        stateManager.attach(new VideoRecorderAppState());
     }
 
     @Override
     public void simpleUpdate(float tpf) {
-        rootNode.getChild("Federica").move(new Vector3f(tpf,0f,tpf));
+        vessels.each {Vessel vessel ->
+            vessel.move(tpf);
+        }
     }
 }
