@@ -15,9 +15,11 @@ public class Vessel extends Node {
 
     public Vessel(AssetManager assetManager, VesselData data){
         super (data.getName());
-        data.getHeading().normalizeLocal();
         this.data=data;
-        Box vessel = new Box(data.getLength(), data.getBeam(),data.getHigh());
+
+        Vector3f heading =Utils.headingToVector3f(data.getHeading());
+
+        Box vessel = new Box(data.getBeam(), data.getHigh(),data.getLength());
 
         Geometry geom = new Geometry(data.getName(), vessel);  // create cube geometry from the shape
         Material mat = new Material(assetManager,
@@ -25,7 +27,7 @@ public class Vessel extends Node {
 //        mat.setColor("Color", ColorRGBA.Red);   // set color of material to blue
         mat.setTexture("ColorMap", assetManager.loadTexture("silver_metal_sign_textured_T.png"));
         geom.setMaterial(mat);                   // set the cube's material
-        geom.lookAt(data.getHeading(),Vector3f.UNIT_Y);
+        geom.lookAt(heading,Vector3f.UNIT_Y);
         attachChild(geom);
 
         Cylinder smokestack = new Cylinder(5,5,data.getBeam()/2f, data.getHigh()*2f);
@@ -41,8 +43,9 @@ public class Vessel extends Node {
     }
 
     public void move(float tpf){
-        move(new Vector3f(-data.getHeading().getZ()*tpf,
+        Vector3f heading =Utils.headingToVector3f(data.getHeading());
+        move(new Vector3f(heading.getX()*tpf*data.getSpeed(),
                 0f,
-                data.getHeading().getX()*tpf));
+                heading.getZ()*tpf*data.getSpeed()));
     }
 }

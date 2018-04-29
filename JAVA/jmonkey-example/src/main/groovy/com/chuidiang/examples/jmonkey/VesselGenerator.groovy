@@ -1,7 +1,5 @@
 package com.chuidiang.examples.jmonkey
 
-import com.jme3.math.Vector3f
-
 class VesselGenerator {
 
     public static VesselData[] data = [
@@ -10,7 +8,7 @@ class VesselGenerator {
                 high: 1f,
                 length: 10f,
                 beam: 1f,
-                heading: new Vector3f(10, 0, -1),
+                heading: 90,
                 speed: 1
         ),
         new VesselData(
@@ -18,7 +16,7 @@ class VesselGenerator {
                 high: 2f,
                 length: 12f,
                 beam: 1.6f,
-                heading: new Vector3f(10, 0, 10),
+                heading: 110,
                 speed: 2
         ),
         new VesselData(
@@ -26,14 +24,15 @@ class VesselGenerator {
                 high: 0.5f,
                 length: 6,
                 beam: 0.5f,
-                heading: new Vector3f(-10, 0, -10),
+                heading: 130,
                 speed: 3
-        ),        new VesselData(
+        ),
+        new VesselData(
                 name: "Josechu",
                 high: 0.75f,
                 length: 3,
                 beam: 0.5f,
-                heading: new Vector3f(-10, 0, 10),
+                heading: 150,
                 speed: 4
         )
     ] as VesselData[];
