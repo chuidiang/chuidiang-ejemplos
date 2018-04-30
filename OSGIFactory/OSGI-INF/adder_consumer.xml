@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+	immediate="true" 
+	name="com.chuidiang.examples.osgi_factory.adder_consumer"
+	activate="init">
+   <implementation class="com.chuidiang.examples.osgi_factory.AdderConsumer"/>
+   <reference bind="addAdder" 
+       cardinality="0..n" 
+       interface="com.chuidiang.examples.osgi_factory.interfaces.IfzAdder" 
+       policy="dynamic" 
+       unbind="removeAdder"/>
+</scr:component>

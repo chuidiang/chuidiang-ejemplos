@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+    activate="activate"  
+    factory="com.chuidiang.examples.osgi_factory.adder_factory" 
+    name="com.chuidiang.examples.osgi_factory.adder">
+   <implementation class="com.chuidiang.examples.osgi_factory.AdderImpl"/>
+   <service>
+      <provide interface="com.chuidiang.examples.osgi_factory.interfaces.IfzAdder"/>
+   </service>
+</scr:component>
