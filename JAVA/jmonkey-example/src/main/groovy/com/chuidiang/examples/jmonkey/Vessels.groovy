@@ -7,18 +7,12 @@ import com.jme3.app.DebugKeysAppState
 import com.jme3.app.FlyCamAppState
 import com.jme3.app.SimpleApplication
 import com.jme3.audio.AudioListenerState
-import com.jme3.light.DirectionalLight
-import com.jme3.material.Material
-import com.jme3.math.*
-import com.jme3.renderer.queue.RenderQueue
-import com.jme3.scene.Geometry
+import com.jme3.math.Vector3f
 import com.jme3.scene.Node
-import com.jme3.scene.shape.Quad
 import com.jme3.texture.Image
 import com.jme3.util.BufferUtils
 import com.jme3.util.Screenshots
 import com.jme3.util.SkyFactory
-import com.jme3.water.SimpleWaterProcessor
 
 import java.awt.image.BufferedImage
 import java.nio.ByteBuffer
@@ -58,20 +52,15 @@ public class Vessels extends SimpleApplication {
         cam.setLocation(new Vector3f(10f, 10f, 100f));
         getFlyByCamera().setZoomSpeed(10f);
 
-        Geometry seabedGemetry = createSeabed()
-        sceneNode.attachChild(seabedGemetry);
+        sceneNode.attachChild(new Seabed(getAssetManager()));
 
         sceneNode.attachChild(
                 SkyFactory.createSky(getAssetManager(), "sky.jpg", SkyFactory.EnvMapType.SphereMap));
 
-        Geometry water = createWater(sceneNode)
-        rootNode.attachChild(water);
+        rootNode.attachChild(new Sea(assetManager, sceneNode, getViewPort()));
 
 
-
-
-        DirectionalLight sun = createLight()
-        rootNode.addLight(sun);
+        rootNode.addLight(new Sun());
 
         rootNode.attachChild(sceneNode);
 
@@ -84,51 +73,6 @@ public class Vessels extends SimpleApplication {
         });
     }
 
-    private DirectionalLight createLight() {
-        DirectionalLight sun = new DirectionalLight();
-        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f).normalizeLocal());
-        sun
-    }
-
-    private Geometry createSeabed() {
-        Quad seabed = new Quad(2000, 2000);
-        Geometry deepGeometry = new Geometry("seabed", seabed);
-        Material deepMaterial = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        deepMaterial.setColor("Color", new ColorRGBA(0, 0.3, 0.3, 1));
-        deepGeometry.setMaterial(deepMaterial);
-        deepGeometry.setLocalRotation(new Quaternion().fromAngleAxis(-FastMath.HALF_PI, Vector3f.UNIT_X));
-        deepGeometry.setLocalTranslation(-1000, -10, 1000);
-        deepGeometry
-    }
-
-    private Geometry createWater(Node sceneNode) {
-// we create a water processor
-        SimpleWaterProcessor waterProcessor = new SimpleWaterProcessor(assetManager);
-        waterProcessor.setReflectionScene(sceneNode);
-
-// we set the water plane
-        Vector3f waterLocation = new Vector3f(0, 0, 0);
-        waterProcessor.setPlane(new Plane(Vector3f.UNIT_Y, waterLocation.dot(Vector3f.UNIT_Y)));
-        viewPort.addProcessor(waterProcessor);
-
-// we set wave properties
-        waterProcessor.setWaterDepth(4);         // transparency of water
-        waterProcessor.setDistortionScale(0.15f); // strength of waves
-        waterProcessor.setWaveSpeed(0.05f);       // speed of waves
-
-        // we define the wave size by setting the size of the texture coordinates
-        Quad quad = new Quad(2000, 2000);
-        quad.scaleTextureCoordinates(new Vector2f(6f, 6f));
-
-// we create the water geometry from the quad
-        Geometry water = new Geometry("water", quad);
-        water.setLocalRotation(new Quaternion().fromAngleAxis(-FastMath.HALF_PI, Vector3f.UNIT_X));
-        water.setLocalTranslation(-1000, 0, 1000);
-        water.setShadowMode(RenderQueue.ShadowMode.Receive);
-        water.setMaterial(waterProcessor.getMaterial());
-
-        water
-    }
 
     private IfzImageListener imageListener=null;
 
