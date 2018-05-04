@@ -1,6 +1,6 @@
-/* ------------------
-   Client
-   usage: java Client [Server hostname] [Server RTSP listening port] [Video file requested]
+package com.chuidiang.rtsp;/* ------------------
+   com.chuidiang.rtsp.Client
+   usage: java com.chuidiang.rtsp.Client [com.chuidiang.rtsp.Server hostname] [com.chuidiang.rtsp.Server RTSP listening port] [Video file requested]
    ---------------------- */
 
 import javax.swing.*;
@@ -19,7 +19,7 @@ import java.util.StringTokenizer;
 public class Client {
     //GUI
     //----
-    JFrame f = new JFrame("Client");
+    JFrame f = new JFrame("com.chuidiang.rtsp.Client");
     JButton setupButton = new JButton("Setup");
     JButton playButton = new JButton("Play");
     JButton pauseButton = new JButton("Pause");
@@ -57,7 +57,7 @@ public class Client {
     static BufferedWriter RTSPBufferedWriter;
     static String VideoFileName; //video file to request to the server
     int RTSPSeqNb = 0;           //Sequence number of RTSP messages within the session
-    String RTSPid;              // ID of the RTSP session (given by the RTSP Server)
+    String RTSPid;              // ID of the RTSP session (given by the RTSP com.chuidiang.rtsp.Server)
 
     final static String CRLF = "\r\n";
     final static String DES_FNAME = "session_info.txt";
@@ -159,7 +159,7 @@ public class Client {
     //main
     //------------------------------------
     public static void main(String argv[]) throws Exception {
-        //Create a Client object
+        //Create a com.chuidiang.rtsp.Client object
         Client theClient = new Client();
         
         //get server RTSP port and IP address from the command line
@@ -222,7 +222,7 @@ public class Client {
 
                 //Wait for the response 
                 if (parseServerResponse() != 200)
-                    System.out.println("Invalid Server Response");
+                    System.out.println("Invalid com.chuidiang.rtsp.Server Response");
                 else 
                 {
                     //change RTSP state and print new state 
@@ -254,7 +254,7 @@ public class Client {
 
                 //Wait for the response 
                 if (parseServerResponse() != 200) {
-                    System.out.println("Invalid Server Response");
+                    System.out.println("Invalid com.chuidiang.rtsp.Server Response");
                 }
                 else {
                     //change RTSP state and print out new state
@@ -288,7 +288,7 @@ public class Client {
 
                 //Wait for the response 
                 if (parseServerResponse() != 200)
-                    System.out.println("Invalid Server Response");
+                    System.out.println("Invalid com.chuidiang.rtsp.Server Response");
                 else 
                 {
                     //change RTSP state and print out new state
@@ -320,7 +320,7 @@ public class Client {
 
             //Wait for the response 
             if (parseServerResponse() != 200)
-                System.out.println("Invalid Server Response");
+                System.out.println("Invalid com.chuidiang.rtsp.Server Response");
             else {     
                 //change RTSP state and print out new state
                 state = INIT;
@@ -350,7 +350,7 @@ public class Client {
 
             //Wait for the response 
             if (parseServerResponse() != 200) {
-                System.out.println("Invalid Server Response");
+                System.out.println("Invalid com.chuidiang.rtsp.Server Response");
             }
             else {     
                 System.out.println("Received response for DESCRIBE");
@@ -376,7 +376,7 @@ public class Client {
                 statTotalPlayTime += curTime - statStartTime; 
                 statStartTime = curTime;
 
-                //create an RTPpacket object from the DP
+                //create an com.chuidiang.rtsp.RTPpacket object from the DP
                 RTPpacket rtp_packet = new RTPpacket(rcvdp.getData(), rcvdp.getLength());
                 int seqNb = rtp_packet.getsequencenumber();
 
@@ -390,7 +390,7 @@ public class Client {
                 //print header bitstream:
                 rtp_packet.printheader();
 
-                //get the payload bitstream from the RTPpacket object
+                //get the payload bitstream from the com.chuidiang.rtsp.RTPpacket object
                 int payload_length = rtp_packet.getpayload_length();
                 byte [] payload = new byte[payload_length];
                 rtp_packet.getpayload(payload);
@@ -533,7 +533,7 @@ public class Client {
     }
 
     //------------------------------------
-    //Parse Server Response
+    //Parse com.chuidiang.rtsp.Server Response
     //------------------------------------
     private int parseServerResponse() {
         int reply_code = 0;
@@ -541,7 +541,7 @@ public class Client {
         try {
             //parse status line and extract the reply_code:
             String StatusLine = RTSPBufferedReader.readLine();
-            System.out.println("RTSP Client - Received from Server:");
+            System.out.println("RTSP com.chuidiang.rtsp.Client - Received from com.chuidiang.rtsp.Server:");
             System.out.println(StatusLine);
           
             StringTokenizer tokens = new StringTokenizer(StatusLine);

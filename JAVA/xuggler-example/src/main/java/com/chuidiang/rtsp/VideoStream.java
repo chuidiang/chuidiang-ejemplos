@@ -1,4 +1,4 @@
-//VideoStream
+package com.chuidiang.rtsp;//com.chuidiang.rtsp.VideoStream
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
