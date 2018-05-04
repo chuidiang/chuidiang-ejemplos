@@ -21,8 +21,8 @@ public class VideoStream {
     public VideoStream(String filename) throws Exception{
 
         //init variables
-        fis = new FileInputStream(filename);
-        frame_nb = 0;
+//        fis = new FileInputStream(filename);
+//        frame_nb = 0;
     }
 
     //-----------------------------------
