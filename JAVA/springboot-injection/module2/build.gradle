@@ -1,0 +1,5 @@
+dependencies {
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.0.2.RELEASE'
+    compile project (':module1')
+}
