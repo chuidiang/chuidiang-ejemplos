@@ -1,4 +1,4 @@
-package com.chuidiang.examples2;
+package com.chuidiang.examples3;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -31,6 +31,8 @@ public class Client {
                     .handler(new ChannelInitializer<SocketChannel>() { // (4)
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
+                            ch.pipeline().addLast(new StringDecoder());
+                            ch.pipeline().addLast(new StringEncoder());
                             ch.pipeline().addLast(clientHandler);
 
                         }
