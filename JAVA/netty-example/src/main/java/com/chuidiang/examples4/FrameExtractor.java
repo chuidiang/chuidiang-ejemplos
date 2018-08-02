@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.ReferenceCountUtil;
 
 public class FrameExtractor extends ChannelInboundHandlerAdapter{
 
@@ -25,21 +26,24 @@ public class FrameExtractor extends ChannelInboundHandlerAdapter{
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        buf.writeBytes((ByteBuf)msg);
-        int indexOf=-1;
-        boolean somethingSent=false;
-        do {
-             indexOf = buf.indexOf(0, buf.readableBytes(), (byte) '\n');
-             if (-1!=indexOf){
-                 ByteBuf line = Unpooled.buffer();
-                 buf.readBytes(line,indexOf+1);
-                 ctx.fireChannelRead(line);
-                 somethingSent=true;
-                 buf.discardReadBytes();
-             }
-        } while (indexOf!=-1);
-        if (!somethingSent){
-            ctx.fireChannelRead(Unpooled.EMPTY_BUFFER);
+        try {
+            buf.writeBytes((ByteBuf) msg);
+            int indexOf = buf.indexOf(0, buf.readableBytes(), (byte) '\n');
+            boolean somethingSent = false;
+            while (-1!=indexOf) {
+                    ByteBuf line = ctx.alloc().directBuffer();
+                    buf.readBytes(line, indexOf);
+                    buf.readByte(); // Leemos el retorno de carro para eliminarlo.
+                    ctx.fireChannelRead(line);
+                    somethingSent = true;
+                    buf.discardReadBytes();
+
+            }
+            if (!somethingSent) {
+                ctx.fireChannelRead(Unpooled.EMPTY_BUFFER);
+            }
+        } finally {
+            ReferenceCountUtil.release(msg);
         }
     }
 }

@@ -22,10 +22,11 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf buf =(ByteBuf)msg;
         String text = buf.toString(Charset.defaultCharset());
         System.out.print(text);
-        byte[] textBytes = text.getBytes();
         for (Channel channel : clients){
             if (!ctx.channel().equals(channel)) {
-                channel.writeAndFlush(Unpooled.copiedBuffer(textBytes));
+                ByteBuf bufToSend = ctx.alloc().buffer();
+                bufToSend.writeCharSequence(text, Charset.defaultCharset());
+                channel.writeAndFlush(bufToSend);
             }
         };
         buf.release();
