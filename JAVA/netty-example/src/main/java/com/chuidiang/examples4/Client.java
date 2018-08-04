@@ -32,6 +32,7 @@ public class Client {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new FrameExtractor());
+                            ch.pipeline().addLast(new FrameMaker());
                             ch.pipeline().addLast(new StringDecoder());
                             ch.pipeline().addLast(new StringEncoder());
                             ch.pipeline().addLast(clientHandler);
@@ -58,7 +59,7 @@ public class Client {
                 try {
                     while(true) {
                         Thread.sleep(1000);
-                        clientHandler.sendMessage("Hola\n");
+                        clientHandler.sendMessage("Hola");
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

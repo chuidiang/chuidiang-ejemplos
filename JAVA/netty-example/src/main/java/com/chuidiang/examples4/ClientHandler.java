@@ -8,12 +8,12 @@ public class ClientHandler extends ChannelInboundHandlerAdapter{
     private ChannelHandlerContext ctx;
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         this.ctx=ctx;
     }
 
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         ctx=null;
     }
 

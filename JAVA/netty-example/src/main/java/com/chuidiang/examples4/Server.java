@@ -32,9 +32,11 @@ public class Server {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline().addLast(new FrameExtractor());
+                            ch.pipeline().addLast(new FrameMaker());
                             ch.pipeline().addLast(new StringDecoder());
-                            ch.pipeline().addLast(serverHandler);
                             ch.pipeline().addLast(new StringEncoder());
+                            ch.pipeline().addLast(serverHandler);
+
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)          // (5)
