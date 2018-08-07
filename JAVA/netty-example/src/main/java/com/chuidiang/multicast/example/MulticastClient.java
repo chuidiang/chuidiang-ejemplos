@@ -13,14 +13,14 @@ import java.net.*;
 
 public class MulticastClient {
 
-    public static void main(String[] args) throws InterruptedException, SocketException {
+    public static void main(String[] args) throws InterruptedException, SocketException, UnknownHostException {
         new MulticastClient().start();
     }
 
     private ClientHandler myHandler = new ClientHandler();
 
-    public void start() throws InterruptedException, SocketException {
-        NetworkInterface ni = NetworkInterface.getByName("lo");
+    public void start() throws InterruptedException, SocketException, UnknownHostException {
+        NetworkInterface ni = NetworkInterface.getByInetAddress(InetAddress.getByName("127.0.0.1"));
         EventLoopGroup group = new NioEventLoopGroup();
         Bootstrap b = new Bootstrap();
         b.group(group)
