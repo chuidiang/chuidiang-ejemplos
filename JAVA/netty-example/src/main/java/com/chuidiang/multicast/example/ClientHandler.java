@@ -9,16 +9,8 @@ import io.netty.util.ReferenceCountUtil;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 
-public class MyHandler extends ChannelInboundHandlerAdapter{
+public class ClientHandler extends ChannelInboundHandlerAdapter{
     private ChannelHandlerContext ctx;
-
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        DatagramPacket packet = (DatagramPacket)msg;
-
-        System.out.println(packet.content().toString(Charset.defaultCharset()));
-        ReferenceCountUtil.release(msg);
-    }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
