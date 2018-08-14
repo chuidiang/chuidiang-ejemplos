@@ -1,22 +1,35 @@
 apply plugin:'java'
 
+//apply plugin: 'org.springframework.boot'
+//apply plugin: 'io.spring.dependency-management'
+
 sourceSets {
     main {
         java.outputDir = file('src/main/webapp/WEB-INF/classes')
     }
 }
 
+//buildscript {
+//    repositories {
+//        mavenCentral()
+//    }
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE")
+//    }
+//}
+
 repositories {
     mavenCentral()
 }
+
 dependencies {
     //compile('org.springframework.boot:spring-boot-starter-thymeleaf:2.0.4.RELEASE')
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.4.RELEASE'
     compile ('org.apache.myfaces.core:myfaces-impl:2.2.12')
     compile('org.apache.myfaces.core:myfaces-api:2.2.12')
     compile('org.apache.tomcat.embed:tomcat-embed-jasper:9.0.10')
-    compile('org.ocpsoft.rewrite:rewrite-servlet:3.4.1.Final')
-    compile('org.ocpsoft.rewrite:rewrite-integration-faces:3.4.1.Final')
-    compile('org.ocpsoft.rewrite:rewrite-config-prettyfaces:3.4.1.Final')
+//    compile('org.ocpsoft.rewrite:rewrite-servlet:3.4.1.Final')
+//    compile('org.ocpsoft.rewrite:rewrite-integration-faces:3.4.1.Final')
+//    compile('org.ocpsoft.rewrite:rewrite-config-prettyfaces:3.4.1.Final')
     compile('org.primefaces:primefaces:6.2')
 }
