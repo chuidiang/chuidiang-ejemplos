@@ -20,7 +20,7 @@ public class Client {
 
     @PostConstruct
     public void useWebService (){
-        restTemplate= restTemplateBuilder.basicAuthentication("user", "user").build();
+        restTemplate= restTemplateBuilder.basicAuthentication("borrador", "borrador").build();
         new Thread(){
             public void run(){
                 try {

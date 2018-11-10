@@ -8,12 +8,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class WebService {
+
+    private static final String CAN_BORRAR="hasRole('" +
+            Roles.ROL_ADMIN +
+            "') or hasAuthority('" +
+            Permissions.PERMISSION_BORRAR +
+            "')";
+
     @RequestMapping("/crear")
     public double crear(){
         return Math.random();
     }
 
-    @PreAuthorize("hasRole('admin') or hasAuthority('borrar')")
+    @PreAuthorize(CAN_BORRAR)
     @RequestMapping("/borrar")
     public double borrar(){
         return Math.random();
