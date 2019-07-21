@@ -26,10 +26,17 @@ public class Client {
                 try {
                     Thread.sleep(1000);
 
-                    Double value = restTemplate.getForObject("http://localhost:8080/borrar", Double.class);
-                    System.out.println(value);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Double value = restTemplate.getForObject("http://localhost:8080/mi/double/borrar", Double.class);
+                    System.out.println("borrar = " +value);
+                } catch (Exception e) {
+                    System.out.println("No puedo borrar "+e.getMessage());
+                }
+
+                try {
+                    Double value = restTemplate.getForObject("http://localhost:8080/mi/double/crear", Double.class);
+                    System.out.println("crear = "+value);
+                } catch (Exception e){
+                    System.out.println("No puedo crear "+e.getMessage());
                 }
 
             }
