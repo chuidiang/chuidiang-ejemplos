@@ -21,6 +21,11 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.Collection;
 
+/**
+ * Mapa basico con una imagen del mundo de fondo y las fronteras en
+ * un shapefile.
+ * Botonera para cambiar 2D/3D y panel con checks para visualizar/ocultar capas
+ */
 public class BasicMap {
 
     public ILspAWTView getView() {
