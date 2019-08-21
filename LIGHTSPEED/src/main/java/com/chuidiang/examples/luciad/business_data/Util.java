@@ -1,11 +1,8 @@
 package com.chuidiang.examples.luciad.business_data;
 
-import com.chuidiang.examples.luciad.business_data.lsp.Vessel;
-import com.chuidiang.examples.luciad.business_data.lsp.VesselModel;
 import com.luciad.datamodel.ILcdDataObject;
 import com.luciad.datamodel.TLcdDataObject;
 import com.luciad.geodesy.TLcdEllipsoid;
-import com.luciad.internal.shape.TLinEditableOrientedPoint;
 import com.luciad.model.TLcd2DBoundsIndexedModel;
 import com.luciad.shape.shape2D.TLcdLonLatCircle;
 import com.luciad.shape.shape2D.TLcdLonLatPolygon;

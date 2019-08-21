@@ -1,4 +1,4 @@
-package com.chuidiang.examples.luciad.business_data.lsp;
+package com.chuidiang.examples.luciad.lsp.bussines_data_1;
 
 import com.luciad.datamodel.TLcdDataObject;
 import com.luciad.internal.shape.TLinOrientedPoint;

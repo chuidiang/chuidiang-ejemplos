@@ -1,4 +1,4 @@
-package com.chuidiang.examples.luciad.business_data.lsp;
+package com.chuidiang.examples.luciad.lsp.bussines_data_1;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.chuidiang.examples.luciad.business_data.lsp;
+package com.chuidiang.examples.luciad.lsp.bussines_dada_2;
 
 import com.luciad.model.ALcdModel;
 import com.luciad.model.TLcdModelDescriptor;
@@ -14,10 +14,10 @@ public class MyModel extends ALcdModel {
 
     public MyModel(){
         for (int i=0;i<10;i++){
-            data.add(new MyData(i,i));
+            data.add(new MyData(i,i,"name"+i));
         }
         setModelReference(new TLcdGeodeticReference());
-        setModelDescriptor(new TLcdModelDescriptor("vassels","vessels","vessels"));
+        setModelDescriptor(new TLcdModelDescriptor("my model","my model","my model"));
     }
     @Override
     public Enumeration elements() {

@@ -1,4 +1,4 @@
-package com.chuidiang.examples.luciad.business_data.lsp;
+package com.chuidiang.examples.luciad.lsp.bussines_data_1;
 
 import com.chuidiang.examples.luciad.business_data.VesselIcon;
 import com.luciad.model.ILcdDataModelDescriptor;
@@ -53,13 +53,9 @@ public class VesselLayerFactory extends ALspSingleLayerFactory {
 
     @Override
     public boolean canCreateLayers(ILcdModel iLcdModel) {
-//        ILcdModelDescriptor md = iLcdModel.getModelDescriptor();
-//        return md instanceof ILcdDataModelDescriptor &&
-//                ((ILcdDataModelDescriptor) md).getDataModel().equals(
-//                        VesselDataTypes.getDataModel());
-        if (iLcdModel instanceof MyModel){
-            return true;
-        }
-        return false;
+        ILcdModelDescriptor md = iLcdModel.getModelDescriptor();
+        return md instanceof ILcdDataModelDescriptor &&
+                ((ILcdDataModelDescriptor) md).getDataModel().equals(
+                        VesselDataTypes.getDataModel());
     }
 }
