@@ -11,6 +11,7 @@ import com.luciad.view.lightspeed.ILspAWTView;
 import com.luciad.view.lightspeed.ILspView;
 import com.luciad.view.lightspeed.TLspViewBuilder;
 import com.luciad.view.lightspeed.layer.ILspLayer;
+import com.luciad.view.lightspeed.layer.ILspLayerFactory;
 import com.luciad.view.lightspeed.util.TLspViewTransformationUtil;
 import com.luciad.view.swing.TLcdLayerTree;
 
@@ -31,18 +32,19 @@ public class BasicMap {
     }
 
     private final ILspAWTView view;
-    private final JFrame frame;
+    private JFrame frame;
 
-    public BasicMap() throws IOException {
+    public BasicMap(ILspLayerFactory layerFactory) throws IOException {
         view = TLspViewBuilder.newBuilder().buildAWTView();
 
         // Adds the background layer to the view and moves the grid layer to the top.
-        view.setLayerFactory(new BasicLayerFactory());
-
+        view.setLayerFactory(layerFactory);
 
         createShapefileModelAndAddLayers(view);
         createTileModelAndAddLayers(view);
+    }
 
+    public void createAndVisualize(){
         frame = new JFrame("LuciadLightspeed AWT Business Data");
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(view.getHostComponent(), BorderLayout.CENTER);

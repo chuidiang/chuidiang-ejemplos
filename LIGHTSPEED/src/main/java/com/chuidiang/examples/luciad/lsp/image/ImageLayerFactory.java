@@ -1,4 +1,4 @@
-package com.chuidiang.examples.luciad.business_data.lsp;
+package com.chuidiang.examples.luciad.lsp.image;
 
 import com.luciad.imaging.TLcdImageModelDescriptor;
 import com.luciad.model.ILcdModel;
