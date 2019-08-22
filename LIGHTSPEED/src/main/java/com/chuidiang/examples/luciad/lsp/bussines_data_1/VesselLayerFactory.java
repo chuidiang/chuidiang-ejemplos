@@ -9,6 +9,7 @@ import com.luciad.view.lightspeed.layer.ILspLayer;
 import com.luciad.view.lightspeed.layer.TLspPaintState;
 import com.luciad.view.lightspeed.layer.shape.TLspShapeLayerBuilder;
 import com.luciad.view.lightspeed.painter.label.style.TLspDataObjectLabelTextProviderStyle;
+import com.luciad.view.lightspeed.style.ILspWorldElevationStyle;
 import com.luciad.view.lightspeed.style.TLspIconStyle;
 import com.luciad.view.lightspeed.style.TLspTextStyle;
 
@@ -28,7 +29,9 @@ public class VesselLayerFactory extends ALspSingleLayerFactory {
         layerBuilder.bodyStyles(TLspPaintState.REGULAR,
                 TLspIconStyle.newBuilder()
                         .icon(new VesselIcon())
-                        .useOrientation(true).build()
+                        .useOrientation(true)
+                        .elevationMode(ILspWorldElevationStyle.ElevationMode.ABOVE_TERRAIN)
+                        .build()
         );
 
 
@@ -47,6 +50,7 @@ public class VesselLayerFactory extends ALspSingleLayerFactory {
         );
 
         layerBuilder.bodyEditable(true);
+        layerBuilder.labelEditable(true);
         return layerBuilder.build();
 
     }

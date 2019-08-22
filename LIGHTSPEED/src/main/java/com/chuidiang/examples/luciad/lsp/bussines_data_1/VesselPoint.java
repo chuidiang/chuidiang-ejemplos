@@ -16,7 +16,7 @@ public class VesselPoint extends TLcdDataObject {
         super(VesselDataTypes.VESSEL_DATA_TYPE);
         TLinOrientedPoint orientedPoint = new TLinOrientedPoint(
                 new TLcdLonLatHeightPoint(vessel.getLongitude(),
-                        vessel.getLatitude(),0),vessel.getHeading()
+                        vessel.getLatitude(),vessel.getHeight()),vessel.getHeading()
         );
         setValue(VesselDataTypes.NAME,vessel.getName());
         setValue(VesselDataTypes.THESHAPE,orientedPoint);
@@ -31,6 +31,6 @@ public class VesselPoint extends TLcdDataObject {
     public void setVessel(Vessel vessel){
         TLinOrientedPoint orientedPoint = (TLinOrientedPoint) getValue(VesselDataTypes.THESHAPE);
         TLcdLonLatHeightPoint point = (TLcdLonLatHeightPoint) orientedPoint.getFocusPoint();
-        point.move3D(vessel.getLongitude(),vessel.getLatitude(),0);
+        point.move3D(vessel.getLongitude(),vessel.getLatitude(),vessel.getHeight());
     }
 }

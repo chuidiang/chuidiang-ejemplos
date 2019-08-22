@@ -15,6 +15,8 @@ public class VesselEngine {
             vessel.setHeading(i*3);
             vessel.setLongitude(i);
             vessel.setLatitude(i);
+            vessel.setHeight(5000);
+
             vessels.add(vessel);
             model.addorUpdateVessel(vessel);
         }
@@ -27,7 +29,7 @@ public class VesselEngine {
             public void run() {
                 while(true){
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(100);
                         vessels.forEach( vessel ->{
                             double heading=Math.toRadians(vessel.getHeading());
                             vessel.setLatitude(vessel.getLatitude()+0.001*Math.cos(heading));

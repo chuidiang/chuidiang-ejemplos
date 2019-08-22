@@ -11,4 +11,5 @@ public class Vessel {
     private double longitude;
     private double latitude;
     private double heading;
+    private double height;
 }
