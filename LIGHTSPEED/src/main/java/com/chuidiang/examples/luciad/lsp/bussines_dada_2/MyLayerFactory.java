@@ -48,6 +48,10 @@ public class MyLayerFactory extends ALspSingleLayerFactory {
         );
 
         layerBuilder.bodyEditable(true);
+
+        // si se descomenta esta linea, las etiquetas se pueden arrastar con el ratón
+        // y ponerlas donde queramos.
+        // ayerBuilder.labelEditable(true);
         return layerBuilder.build();
 
     }
