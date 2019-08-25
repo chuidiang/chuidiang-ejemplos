@@ -1,5 +1,6 @@
 package com.chuidiang.examples.luciad.business_data;
 
+import com.chuidiang.examples.luciad.lsp.editable_zones.EditableZonesDataTypes;
 import com.luciad.datamodel.ILcdDataObject;
 import com.luciad.datamodel.TLcdDataObject;
 import com.luciad.geodesy.TLcdEllipsoid;
@@ -50,9 +51,9 @@ public class Util {
         TLcd3DEditablePointList pointList = new TLcd3DEditablePointList(
                 points.toArray(pointArray),false);
 
-        ILcdDataObject zone = new TLcdDataObject(FlightPlanDataTypes.FLIGHT_PLAN_DATA_TYPE);
-        zone.setValue(FlightPlanDataTypes.NAME,"the zone");
-        zone.setValue(FlightPlanDataTypes.THESHAPE,new TLcdLonLatPolygon(pointList));
+        ILcdDataObject zone = new TLcdDataObject(EditableZonesDataTypes.EDITABLE_ZONES_DATA_TYPE);
+        zone.setValue(EditableZonesDataTypes.NAME,"the zone");
+        zone.setValue(EditableZonesDataTypes.THE_ZONE,new TLcdLonLatPolygon(pointList));
         model.addElement(zone,ILcdFireEventMode.NO_EVENT);
     }
 
