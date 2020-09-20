@@ -1,0 +1,22 @@
+plugins {
+    id 'application'
+}
+application {
+    mainClassName = 'com.chuidiang.ejemplos.cxf.Main'
+}
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+// https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxws
+compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxws', version: '3.4.0'
+// https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-transports-http
+compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version: '3.4.0'
+// https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-transports-http-jetty
+compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http-jetty', version: '3.4.0'
+// https://mvnrepository.com/artifact/org.springframework/spring-context
+    compile group: 'org.springframework', name: 'spring-context', version: '5.2.9.RELEASE'
+
+}
