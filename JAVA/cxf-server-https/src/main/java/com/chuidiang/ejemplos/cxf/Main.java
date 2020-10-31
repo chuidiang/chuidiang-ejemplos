@@ -29,8 +29,6 @@ public class Main {
         svrFactory.setAddress("https://localhost:9443/Calculadora");
         svrFactory.setServiceBean(new CalculadoraImpl());
         svrFactory.create();
-
-
     }
 
     public static void coinfigureJettyTLs() throws Exception {
