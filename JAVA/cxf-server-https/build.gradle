@@ -14,5 +14,5 @@ dependencies {
     compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxws', version: '3.4.0'
     compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version: '3.4.0'
     compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http-jetty', version: '3.4.0'
-    compile group: 'org.springframework', name: 'spring-context', version: '5.2.9.RELEASE'
+
 }
