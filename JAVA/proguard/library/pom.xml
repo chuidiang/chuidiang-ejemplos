@@ -21,6 +21,7 @@
 	</dependencies>
 	<build>
         <plugins>
+            <!-- Plugin Proguard, para ofuscado de codigo -->
             <plugin>
                 <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
@@ -42,6 +43,8 @@
                     </libs>
                 </configuration>
             </plugin>
+
+            <!-- plugin para publicar varios artifacts, el jar normal y el jar ofuscado -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>

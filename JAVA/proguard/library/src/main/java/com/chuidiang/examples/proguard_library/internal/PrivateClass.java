@@ -3,6 +3,8 @@ package com.chuidiang.examples.proguard_library.internal;
 import com.chuidiang.examples.proguard_library.shared.IfzPublic;
 
 /**
+ * Clase privada que implementa interfaz publica.
+ * Proguard debe mantener el método publico.
  * @author fjabellan
  * @date 31/10/2020
  */
