@@ -1,0 +1,20 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.chuidiang.examples</groupId>
+        <artifactId>chuidiang-parent-example</artifactId>
+        <version>1.0-SNAPSHOT</version>
+	    <relativePath>../parent</relativePath>
+    </parent>
+    <groupId>com.chuidiang.examples</groupId>
+    <artifactId>chuidiang-libraries-example</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>chuidiang-libraries-example</name>
+    <url>http://chuwiki.chuidiang.org</url>
+    <modules>
+        <module>library1</module>
+        <module>library2</module>
+    </modules>
+</project>
