@@ -1,8 +1,10 @@
 package com.chuidiang.mockito_examples;
 
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -30,8 +32,8 @@ public class SomeComplexClassTest {
     OutputClass outputClass;
 
     @Test
-    public void someSimpleTest() throws SQLException, ClassNotFoundException, IOException {
-        System.out.println("Yabadabadoooo");
+    public void aSimpleTest() throws SQLException, ClassNotFoundException, IOException {
+
         Mockito.when(dataBaseClass.getStringFromDataBase()).thenReturn("Hello");
         Mockito.when(networkClass.getStringFromRemoteServer()).thenReturn("World");
 
@@ -40,4 +42,18 @@ public class SomeComplexClassTest {
         Mockito.verify(outputClass).printOutput("Hello - World");
 
     }
-}
+
+    @Test
+    public void aCaptorTest() throws SQLException, ClassNotFoundException, IOException {
+        Mockito.when(dataBaseClass.getStringFromDataBase()).thenReturn("Hello");
+        Mockito.when(networkClass.getStringFromRemoteServer()).thenReturn("World");
+
+        someComplexClass.concatStringsFromDataBaseAndNetworkAndOutputResult();
+
+        ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
+        Mockito.verify(outputClass).printOutput(argument.capture());
+
+        Assert.assertEquals("Hello - World",argument.getValue());
+
+    }
+ }
