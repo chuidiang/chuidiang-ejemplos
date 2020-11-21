@@ -1,0 +1,23 @@
+plugins {
+   id 'java-library'
+}
+
+repositories {
+   jcenter()
+}
+
+test {
+    useJUnitPlatform()
+    testLogging.showStandardStreams = true
+}
+
+dependencies {
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    api group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+
+    testImplementation platform('org.junit:junit-bom:5.7.0')
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+
+}
