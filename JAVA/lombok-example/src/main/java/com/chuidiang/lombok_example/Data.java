@@ -9,10 +9,16 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+//@ToString(of={"anInteger","anString"})
 @EqualsAndHashCode
+//@EqualsAndHashCode(of={"anInteger"})
 @AllArgsConstructor
 @NoArgsConstructor
+// @RequiredArgsConstructor  // Añade constructor con el atributo que está anotado @NonNull
+// @lombok.Data
 public class Data {
     private int anInteger;
+    // @Getter(value=AccessLevel.NONE)
+    // @NonNull
     private String anString;
 }
