@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://localhost:61616"/>
+    </bean>
+
+
+<!--    <bean id="messageConverter" class="com.chuidiang.examples.spring_jms.common.KryoMessageConverter"/>-->
+
+<!--    <bean id="messageConverter" class="com.chuidiang.examples.spring_jms.common.JacksonMessageConverter"/>-->
+
+    <bean id="oxmMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/>
+    <bean name="messageConverter"
+          class="org.springframework.jms.support.converter.MarshallingMessageConverter">
+        <property name="marshaller" ref="oxmMarshaller" />
+        <property name="unmarshaller" ref="oxmMarshaller" />
+    </bean>
+</beans>

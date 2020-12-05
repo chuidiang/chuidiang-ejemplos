@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/jms
+	http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+    <import resource="spring-common-context.xml"/>
+
+    <bean id="jmsTopicReceiver" class="com.chuidiang.examples.spring_jms.client.JmsTopicReceiver"/>
+    <bean id="jmsQueueReceiver" class="com.chuidiang.examples.spring_jms.client.JmsQueueReceiver"/>
+
+    <jms:listener-container connection-factory="jmsConnectionFactory"
+        destination-type="topic"
+        message-converter="messageConverter">
+        <jms:listener destination="theTopic" ref="jmsTopicReceiver" method="receiveMessage"/>
+    </jms:listener-container>
+
+    <jms:listener-container connection-factory="jmsConnectionFactory"
+                            message-converter="messageConverter">
+        <jms:listener destination="theQueue" ref="jmsQueueReceiver" method="receiveMessage"/>
+    </jms:listener-container>
+
+</beans>
