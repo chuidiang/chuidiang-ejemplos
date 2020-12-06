@@ -15,17 +15,20 @@
     <context:component-scan base-package="com.chuidiang.examples.spring_jms.server"/>
     <import resource="spring-common-context.xml"/>
 
-    <bean class="com.chuidiang.examples.spring_jms.server.JmsEmitter"/>
+    <bean class="com.chuidiang.examples.spring_jms.server.JmsEmitter">
+        <property name="topicTemplate" ref="jmsTopicTemplate"/>
+        <property name="queueTemplate" ref="jmsQueueTemplate"/>
+    </bean>
 
     <bean name="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="jmsConnectionFactory"/>
         <property name="pubSubDomain" value="true"/>
-        <property name="messageConverter" ref="messageConverter"/>
+<!--        <property name="messageConverter" ref="messageConverter"/>-->
     </bean>
 
     <bean name="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="jmsConnectionFactory"/>
-        <property name="messageConverter" ref="messageConverter"/>
+<!--        <property name="messageConverter" ref="messageConverter"/>-->
     </bean>
 
     <amq:broker useJmx="false" persistent="false">

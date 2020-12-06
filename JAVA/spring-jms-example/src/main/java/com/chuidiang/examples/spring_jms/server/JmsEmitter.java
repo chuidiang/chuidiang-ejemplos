@@ -3,10 +3,10 @@ package com.chuidiang.examples.spring_jms.server;
 import com.chuidiang.examples.spring_jms.common.Constants;
 import com.chuidiang.examples.spring_jms.common.Data;
 import com.chuidiang.examples.spring_jms.common.SonData;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 
 import javax.annotation.PostConstruct;
@@ -20,13 +20,12 @@ import javax.annotation.PostConstruct;
 @Slf4j
 public class JmsEmitter {
     private int counter=0;
-    @Autowired
-    @Qualifier("jmsTopicTemplate")
-    JmsTemplate topicTemplate;
 
-    @Autowired
-    @Qualifier("jmsQueueTemplate")
-    JmsTemplate queueTemplate;
+    @Getter @Setter
+    private JmsTemplate topicTemplate;
+
+    @Getter @Setter
+    private JmsTemplate queueTemplate;
 
     /** Tras arrancar todo se llama a este metodo para que empiece a enviar por JMS */
     @PostConstruct
@@ -44,8 +43,6 @@ public class JmsEmitter {
 
             }
         }).start();
-
-
     }
 
     private void sendData() {

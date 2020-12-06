@@ -1,6 +1,10 @@
 package com.chuidiang.examples.spring_jms.common;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * @author fjabellan
@@ -8,7 +12,7 @@ import lombok.*;
  */
 @Getter @Setter
 @ToString(callSuper = true)
-public class Data {
+public class Data implements Serializable {
     private Data(){
 
     }

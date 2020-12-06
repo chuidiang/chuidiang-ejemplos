@@ -10,7 +10,5 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class JmsGuiMain {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-gui-context.xml");
-        System.out.println("VA!");
     }
-
 }

@@ -12,10 +12,10 @@
 
 <!--    <bean id="messageConverter" class="com.chuidiang.examples.spring_jms.common.JacksonMessageConverter"/>-->
 
-    <bean id="oxmMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/>
-    <bean name="messageConverter"
-          class="org.springframework.jms.support.converter.MarshallingMessageConverter">
-        <property name="marshaller" ref="oxmMarshaller" />
-        <property name="unmarshaller" ref="oxmMarshaller" />
-    </bean>
+<!--    <bean id="oxmMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/>-->
+<!--    <bean name="messageConverter"-->
+<!--          class="org.springframework.jms.support.converter.MarshallingMessageConverter">-->
+<!--        <property name="marshaller" ref="oxmMarshaller" />-->
+<!--        <property name="unmarshaller" ref="oxmMarshaller" />-->
+<!--    </bean>-->
 </beans>
