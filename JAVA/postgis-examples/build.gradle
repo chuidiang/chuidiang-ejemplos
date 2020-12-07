@@ -1,0 +1,15 @@
+plugins {
+ id 'java'
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+    compile group: 'net.postgis', name: 'postgis-jdbc', version: '2.5.0'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+
+}
