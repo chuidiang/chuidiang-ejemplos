@@ -23,12 +23,10 @@
     <bean name="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="jmsConnectionFactory"/>
         <property name="pubSubDomain" value="true"/>
-<!--        <property name="messageConverter" ref="messageConverter"/>-->
     </bean>
 
     <bean name="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="jmsConnectionFactory"/>
-<!--        <property name="messageConverter" ref="messageConverter"/>-->
     </bean>
 
     <amq:broker useJmx="false" persistent="false">

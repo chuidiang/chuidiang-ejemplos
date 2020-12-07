@@ -11,17 +11,6 @@
     <bean id="jmsTopicReceiver" class="com.chuidiang.examples.spring_jms.client.JmsTopicReceiver"/>
     <bean id="jmsQueueReceiver" class="com.chuidiang.examples.spring_jms.client.JmsQueueReceiver"/>
 
-<!--    <jms:listener-container connection-factory="jmsConnectionFactory"-->
-<!--        destination-type="topic"-->
-<!--        message-converter="messageConverter">-->
-<!--        <jms:listener destination="theTopic" ref="jmsTopicReceiver" method="receiveMessage"/>-->
-<!--    </jms:listener-container>-->
-
-<!--    <jms:listener-container connection-factory="jmsConnectionFactory"-->
-<!--                            message-converter="messageConverter">-->
-<!--        <jms:listener destination="theQueue" ref="jmsQueueReceiver" method="receiveMessage"/>-->
-<!--    </jms:listener-container>-->
-
     <jms:listener-container connection-factory="jmsConnectionFactory"
                             destination-type="topic">
         <jms:listener destination="theTopic" ref="jmsTopicReceiver" method="receiveMessage"/>
