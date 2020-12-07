@@ -1,0 +1,35 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://activemq.apache.org/schema/core
+    http://activemq.apache.org/schema/core/activemq-core.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:component-scan base-package="com.chuidiang.examples.spring_jms.server"/>
+    <import resource="spring-common-context.xml"/>
+
+    <bean class="com.chuidiang.examples.spring_jms.server.JmsEmitter">
+        <property name="topicTemplate" ref="jmsTopicTemplate"/>
+        <property name="queueTemplate" ref="jmsQueueTemplate"/>
+    </bean>
+
+    <bean name="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="jmsConnectionFactory"/>
+        <property name="pubSubDomain" value="true"/>
+        <property name="messageConverter" ref="messageConverter"/>
+    </bean>
+
+    <bean name="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="jmsConnectionFactory"/>
+        <property name="messageConverter" ref="messageConverter"/>
+    </bean>
+
+    <bean id="EmbeddedJms" class="org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ" init-method="start"/>
+</beans>
