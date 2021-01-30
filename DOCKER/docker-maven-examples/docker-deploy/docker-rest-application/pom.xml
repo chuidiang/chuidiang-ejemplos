@@ -37,7 +37,7 @@
                                 <assembly>
 									<!-- name es tambien el directorio donde se colocaran las cosas -->
 									<name>rest-application</name>
-                                    <descriptor>rest-application-assembly.xml</descriptor>
+                                    <descriptor>rest-application/rest-application-assembly.xml</descriptor>
                                 </assembly>
                                 <cmd>
 									<!-- /rest-application por el name de assembly
@@ -46,20 +46,22 @@
                                 </cmd>
                             </build>
                             <run>
+                                <hostname>rest</hostname>
                                 <ports>
 									<!-- elige un puerto al azar para exponer el 8080 del docker
 									     y lo guarda en la variable tomcat.port -->
-                                    <port>tomcat.port:8080</port>
+                                    <port>8080:8080</port>
                                 </ports>
                                 <wait>
                                     <http>
-                                        <url>http://localhost:${tomcat.port}/</url>
+                                        <url>http://localhost:8080/</url>
                                     </http>
                                     <time>10000</time>
                                 </wait>
                                 <links>
                                     <link>database:db</link>
                                 </links>
+                                <workingDir>/rest-application/bin</workingDir>
                             </run>
                         </image>
 						<image>
@@ -69,15 +71,16 @@
                                 <contextDir>${project.basedir}/src/main/docker/database</contextDir>
 							</build>
 							<run>
+                                <hostname>database</hostname>
                                 <env>
                                     <POSTGRES_USER>postgres</POSTGRES_USER>
                                     <POSTGRES_PASSWORD>postgres</POSTGRES_PASSWORD>
-                                    <POSTGRES_DB>vts</POSTGRES_DB>
+                                    <POSTGRES_DB>docker_tests</POSTGRES_DB>
                                 </env>
 								<ports>
 									<!-- elige un puerto al azar para exponer el 5432 del docker
 									     y lo guarda en la variable database.port -->
-									<port>database.port:5432</port>
+									<port>5432:5432</port>
 								</ports>
                                 <wait>
                                     <time>30000</time> <!-- 30 seconds max -->

@@ -7,10 +7,17 @@
     </formats>
     <dependencySets>
         <dependencySet>
-            <!-- Queremos los jar dentro de un directorio Jar dentro del zip -->
-            <outputDirectory>/bin</outputDirectory>
-            <!-- Que añada todo lo necesario para la ejecución -->
+            <outputDirectory>bin</outputDirectory>
             <scope>runtime</scope>
         </dependencySet>
     </dependencySets>
+    <fileSets>
+        <fileSet>
+            <directory>rest-application</directory>
+            <includes>
+                <include>application.properties</include>
+            </includes>
+            <outputDirectory>bin</outputDirectory>
+        </fileSet>
+    </fileSets>
 </assembly>
