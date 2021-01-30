@@ -57,11 +57,35 @@
                                     </http>
                                     <time>10000</time>
                                 </wait>
-<!--                                <links>-->
-<!--                                    <link>database:db</link>-->
-<!--                                </links>-->
+                                <links>
+                                    <link>database:db</link>
+                                </links>
                             </run>
                         </image>
+						<image>
+							<alias>database</alias>
+							<name>chuidiang/database:${project.version}</name>
+							<build>
+                                <contextDir>${project.basedir}/src/main/docker/database</contextDir>
+							</build>
+							<run>
+                                <env>
+                                    <POSTGRES_USER>postgres</POSTGRES_USER>
+                                    <POSTGRES_PASSWORD>postgres</POSTGRES_PASSWORD>
+                                    <POSTGRES_DB>vts</POSTGRES_DB>
+                                </env>
+								<ports>
+									<!-- elige un puerto al azar para exponer el 5432 del docker
+									     y lo guarda en la variable database.port -->
+									<port>database.port:5432</port>
+								</ports>
+                                <wait>
+                                    <time>30000</time> <!-- 30 seconds max -->
+                                    <log>database system is ready to accept connections</log>
+                                </wait>
+							</run>
+
+						</image>
                     </images>
                 </configuration>
             </plugin>
