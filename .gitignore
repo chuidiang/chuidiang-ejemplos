@@ -15,6 +15,7 @@ target
 *.versionsBackup
 .gradle
 .idea
+.run
 build
 classes
 /NETBEANS/netbeans-platform-osgi/felixsample/nbproject/private/
