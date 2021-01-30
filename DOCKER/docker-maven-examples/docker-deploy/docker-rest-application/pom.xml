@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.chuidiang.ejemplos</groupId>
+        <artifactId>docker-deploy</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>docker-rest-application</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Java Examples with docker and maven</name>
+    <url>http://chuwiki.chuidiang.org</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.chuidiang.ejemplos</groupId>
+            <artifactId>rest-java-application</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.34.1</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <alias>rest-java-application</alias>
+                            <name>chuidiang/rest-java-application:${project.version}</name>
+                            <build>
+                                <from>java:8</from>
+                                <assembly>
+									<!-- name es tambien el directorio donde se colocaran las cosas -->
+									<name>rest-application</name>
+                                    <descriptor>rest-application-assembly.xml</descriptor>
+                                </assembly>
+                                <cmd>
+									<!-- /rest-application por el name de assembly
+									      bin porque dentro del xml assembly dice directorio bin -->
+                                    <shell>java -jar /rest-application/bin/rest-java-application-1.0-SNAPSHOT.jar</shell>
+                                </cmd>
+                            </build>
+                            <run>
+                                <ports>
+									<!-- elige un puerto al azar para exponer el 8080 del docker
+									     y lo guarda en la variable tomcat.port -->
+                                    <port>tomcat.port:8080</port>
+                                </ports>
+                                <wait>
+                                    <http>
+                                        <url>http://localhost:${tomcat.port}/</url>
+                                    </http>
+                                    <time>10000</time>
+                                </wait>
+<!--                                <links>-->
+<!--                                    <link>database:db</link>-->
+<!--                                </links>-->
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
