@@ -17,12 +17,18 @@
             <groupId>com.chuidiang.ejemplos</groupId>
             <artifactId>rest-java-application</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>2.4.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

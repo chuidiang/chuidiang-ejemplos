@@ -13,7 +13,7 @@
     </dependencySets>
     <fileSets>
         <fileSet>
-            <directory>rest-application</directory>
+            <directory>src/main/docker/rest-application</directory>
             <includes>
                 <include>application.properties</include>
             </includes>
