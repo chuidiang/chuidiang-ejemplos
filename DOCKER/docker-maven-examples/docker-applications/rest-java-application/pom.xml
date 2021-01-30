@@ -1,22 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.chuidiang.ejemplos</groupId>
-		<artifactId>docker-applications</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
-	<artifactId>rest-java-application</artifactId>
-	<packaging>jar</packaging>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.chuidiang.ejemplos</groupId>
+        <artifactId>docker-applications</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>rest-java-application</artifactId>
+    <packaging>jar</packaging>
 
-	<name>Rest Example with docker and maven</name>
-	<url>http://chuwiki.chuidiang.org</url>
+    <name>Rest Example with docker and maven</name>
+    <url>http://chuwiki.chuidiang.org</url>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.4.2</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.4.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+			<!-- Para convertir el jar en ejecutable con java -jar -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.chuidiang.examples.RestMain</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
