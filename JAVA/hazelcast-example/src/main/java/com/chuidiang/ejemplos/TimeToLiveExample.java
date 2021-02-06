@@ -33,5 +33,6 @@ public class TimeToLiveExample
           }
        }
        System.out.println("Data expired");
+       hazelcastInstance.shutdown();
     }
 }
