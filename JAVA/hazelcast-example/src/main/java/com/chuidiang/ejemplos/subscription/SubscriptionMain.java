@@ -2,20 +2,19 @@ package com.chuidiang.ejemplos.subscription;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.GlobalSerializerConfig;
-import com.hazelcast.config.SerializerConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IMap;
+import com.hazelcast.map.IMap;
 
 import java.util.Date;
 
 public class SubscriptionMain {
    public static void main(String[] args){
-       Config config = new Config();
-       GlobalSerializerConfig globalConfig = new GlobalSerializerConfig();
-       globalConfig.setOverrideJavaSerialization(true).setImplementation(new DataSerializer());
+      GlobalSerializerConfig myGlobalConfig = new GlobalSerializerConfig();
+      myGlobalConfig.setOverrideJavaSerialization(true).setImplementation(new MyDataSerializer());
 
-       config.getSerializationConfig().setGlobalSerializerConfig(globalConfig);
+      Config config = new Config();
+      config.getSerializationConfig().setGlobalSerializerConfig(myGlobalConfig);
 
       HazelcastInstance instance = Hazelcast.newHazelcastInstance(config);
 

@@ -8,12 +8,9 @@ import com.hazelcast.nio.ObjectDataOutput;
 import com.hazelcast.nio.serialization.StreamSerializer;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Date;
 
-public class DataSerializer implements StreamSerializer<Object>{
+public class MyDataSerializer implements StreamSerializer<Object>{
 
     @Override
     public void write(ObjectDataOutput objectDataOutput, Object data) throws IOException {

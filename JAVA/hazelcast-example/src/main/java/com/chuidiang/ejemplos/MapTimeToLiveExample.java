@@ -4,10 +4,10 @@ import com.hazelcast.config.Config;
 import com.hazelcast.config.MapConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IMap;
+import com.hazelcast.map.IMap;
 
 import java.io.FileNotFoundException;
-import java.util.concurrent.TimeUnit;
+
 
 /**
  * Hazelcast Time to Live example.
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class MapTimeToLiveExample
 {
-    public static void main( String[] args ) throws FileNotFoundException, InterruptedException
+    public static void main( String[] args ) throws InterruptedException
     {
        Config config = new Config();
        HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance(config);

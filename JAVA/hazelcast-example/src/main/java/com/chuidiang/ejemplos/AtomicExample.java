@@ -2,11 +2,11 @@ package com.chuidiang.ejemplos;
 
 import java.io.FileNotFoundException;
 
+import com.hazelcast.collection.IQueue;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IAtomicLong;
-import com.hazelcast.core.IQueue;
+import com.hazelcast.cp.IAtomicLong;
 
 /**
  * Hazelcast atomic integer example.
@@ -20,7 +20,7 @@ public class AtomicExample
        Config config = new Config();
        HazelcastInstance hazelcastInstance = Hazelcast.newHazelcastInstance(config);
        
-       IAtomicLong atomicLong = hazelcastInstance.getAtomicLong("soy productor");
+       IAtomicLong atomicLong = hazelcastInstance.getCPSubsystem().getAtomicLong("soy productor");
        
        boolean cambiado = atomicLong.compareAndSet(0, 1);
        

@@ -1,7 +1,7 @@
 package com.chuidiang.ejemplos.subscription;
 
 import com.hazelcast.core.EntryEvent;
-import com.hazelcast.core.MapEvent;
+import com.hazelcast.map.MapEvent;
 import com.hazelcast.map.impl.MapListenerAdapter;
 
 public class MyListener extends MapListenerAdapter<String, Object> {

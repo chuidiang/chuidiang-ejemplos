@@ -7,11 +7,11 @@ import java.util.Date;
 
 import javax.swing.*;
 
+import com.hazelcast.collection.IList;
+import com.hazelcast.collection.ItemEvent;
+import com.hazelcast.collection.ItemListener;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IList;
-import com.hazelcast.core.ItemEvent;
-import com.hazelcast.core.ItemListener;
 
 public class TheMainWindow {
    private static String name;

@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.IMap;
+import com.hazelcast.map.IMap;
 
 /**
  * Hazelcast Time to Live example.
