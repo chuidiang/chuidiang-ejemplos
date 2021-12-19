@@ -13,7 +13,7 @@ import org.jzy3d.plot3d.primitives.Shape;
 import org.jzy3d.plot3d.rendering.canvas.Quality;
 
 /**
- * @author fjabellan
+ * @author fjabellan AKA chuidiang
  * @date 18/12/2021
  */
 public class Jzy3DExample {
