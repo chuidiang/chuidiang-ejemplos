@@ -1,4 +1,4 @@
-package com.chuidiang.examples.boot_security.bootsecurity;
+package com.chuidiang.examples.boot_security.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -29,10 +29,4 @@ public class HelloWebSecurityConfiguration
             .and()
             .httpBasic();
     }    
-
-//    @SuppressWarnings("deprecation")
-//    @Bean
-//    public static NoOpPasswordEncoder passwordEncoder() {
-//        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-//    }
 }

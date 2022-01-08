@@ -1,4 +1,4 @@
-package com.chuidiang.examples.boot_security.bootsecurity;
+package com.chuidiang.examples.boot_security.server;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,9 +12,6 @@ import java.util.ArrayList;
 
 @Component
 public class MyUserDataBase implements AuthenticationProvider {
-    public boolean login(String user, String password) {
-        return (user.equals(password));
-    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -36,6 +33,9 @@ public class MyUserDataBase implements AuthenticationProvider {
             }
             if ("user".equals(name)){
                 permisos.add(rolUser);
+            }
+            if ("creador".equals(name)){
+                permisos.add(permisoCrear);
             }
             return new UsernamePasswordAuthenticationToken(name, password, permisos);
         }

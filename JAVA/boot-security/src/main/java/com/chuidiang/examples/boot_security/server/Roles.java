@@ -1,4 +1,4 @@
-package com.chuidiang.examples.boot_security.bootsecurity;
+package com.chuidiang.examples.boot_security.server;
 
 public class Roles {
     public static final String ROL_ADMIN="admin";

@@ -1,12 +1,12 @@
-package com.chuidiang.examples.boot_security.bootsecurity;
+package com.chuidiang.examples.boot_security.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BootSecurityApplication {
+public class ServerMain {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BootSecurityApplication.class, args);
+		SpringApplication.run(ServerMain.class, args);
 	}
 }

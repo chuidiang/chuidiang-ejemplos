@@ -1,14 +1,10 @@
-package com.chuidiang.examples.boot_security.ws;
+package com.chuidiang.examples.boot_security.client;
 
-import com.chuidiang.examples.boot_security.bootsecurity.Permissions;
-import com.chuidiang.examples.boot_security.bootsecurity.Roles;
+import com.chuidiang.examples.boot_security.server.Permissions;
+import com.chuidiang.examples.boot_security.server.Roles;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-//@RestController
 @RequestMapping("/double/")
 public class WebServiceTemplate {
 

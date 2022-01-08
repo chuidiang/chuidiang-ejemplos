@@ -1,4 +1,4 @@
-package com.chuidiang.examples.boot_security.bootsecurity;
+package com.chuidiang.examples.boot_security.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
