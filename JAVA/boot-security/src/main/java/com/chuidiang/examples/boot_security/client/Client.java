@@ -20,6 +20,7 @@ public class Client {
 
     @PostConstruct
     public void useWebService (){
+        // Este usuario puede borrar pero no crear.
         restTemplate= restTemplateBuilder.basicAuthentication("borrador", "borrador").build();
         new Thread(){
             public void run(){
