@@ -41,7 +41,8 @@ public class JMenuExample
 
         fileMenu.add(new JSeparator());
 
-        JMenuItem exitItem = new JMenuItem("Exit");fileMenu.add(exitItem);
+        JMenuItem exitItem = new JMenuItem("Exit");
+        fileMenu.add(exitItem);
         jMenuBar.add(fileMenu);
 
         JMenu aboutMenu = new JMenu("Help");
