@@ -1,0 +1,5 @@
+El icono Actions-document-save-icon.png se ha descargado de
+https://iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-document-save-icon.html
+y tiene una licencia GNU lesser General Public License https://www.gnu.org/licenses/lgpl-3.0.html
+
+se adjunta readme authors.txt de los autores.
