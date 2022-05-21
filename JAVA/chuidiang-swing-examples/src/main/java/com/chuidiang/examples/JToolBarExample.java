@@ -3,7 +3,6 @@ package com.chuidiang.examples;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 
 /**
  * @author fjabellan
@@ -28,11 +27,18 @@ public class JToolBarExample {
     }
 
     private static void addToolBar(JFrame frame) {
-        JToolBar toolBar = new JToolBar();
+        JToolBar toolBar = new JToolBar(JToolBar.HORIZONTAL);
+
         toolBar.add(createSaveAction());
-        toolBar.add(new JButton("2"));
-        toolBar.add(new JButton("3"));
-        toolBar.add(new JButton("4"));
+
+        JButton button2 = new JButton("2");
+        button2.addActionListener(e -> System.out.println("Button 2 clicked"));
+        toolBar.add(button2);
+
+        JButton button3 = new JButton("3");
+        button3.addActionListener(e -> System.out.println("Button 3 clicked"));
+        toolBar.add(button3);
+
         frame.getContentPane().add(toolBar,BorderLayout.NORTH);
     }
 
@@ -43,7 +49,6 @@ public class JToolBarExample {
                 System.out.println("Save clicked");
             }
         };
-        saveAction.putValue(Action.ACCELERATOR_KEY,KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.ALT_MASK));
         saveAction.putValue(Action.SHORT_DESCRIPTION,"Save the file");
         saveAction.putValue(Action.SMALL_ICON,new ImageIcon("src/main/files/Actions-document-save-icon.png"));
 
