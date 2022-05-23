@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>swagger-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Este plugin genera el fichero swagger.json que contiene el modelo openapi.
+         Es una alternativa a tener que levantar el servidor para buscar dicho openapi en una url.
+         Genera el openapi, pero hace cosas raras, en greeting no muestra el parametro string name. Igual falta algo
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.7</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>true</springmvc>
+                            <locations>
+                                <location>com.chuidiang.examples.swagger</location>
+                            </locations>
+                            <schemes>
+                                <scheme>http</scheme>
+                                <scheme>https</scheme>
+                            </schemes>
+                            <host>www.example.com:8080</host>
+                            <basePath>/api</basePath>
+                            <info>
+                                <title>Swagger Maven Plugin Sample</title>
+                                <version>v1</version>
+                                -->
+                                <!--use markdown here because I'm using markdown for output,
+                                if you need to use html or other markup language, you need to use your target language,
+                                and note escape your description for xml-->
+                                <!--
+                                <description>
+                                    This is a sample.
+                                </description>
+                            </info>
+                            <outputPath>${basedir}/generated/document.html</outputPath>
+                            <swaggerDirectory>${basedir}/generated/swagger-ui</swaggerDirectory>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    -->
+</project>

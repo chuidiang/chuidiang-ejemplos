@@ -2,8 +2,11 @@ package com.chuidiang.examples.swagger;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
 
 /**
  * @author fjabellan
@@ -11,15 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class WebService2 {
-    @GetMapping(path = "/greeting2")
+    @PostMapping(path = "/data")
     @Operation(
-            description = "Devuelve saludo 2"
+            method = "cambia data",
+            description = "Si me das una data, te lo devuelvo incrementado"
     )
-    public String greeting2(
+    public Data greeting2(
+            @RequestBody
             @Parameter(
-                    description = "A quien saludar 2"
+                    description = "un data"
             )
             Data data) {
-        return "Hello "+data;
+        data.setValue(data.getValue()+1);
+        data.setString(data.getString()+".....?");
+        data.setDate(new Date());
+        return data;
     }
 }

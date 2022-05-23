@@ -31,6 +31,7 @@ public class OpenAPIConfig {
             .info(new Info()
                 .title("Open API chuidiang example")
                 .description("El ejemplo maravilloso")
+                .version("1.0")
                 .contact(new Contact()
                         .name("Chuidiang")
                         .url("http://chuwiki.chuidiang.org")))

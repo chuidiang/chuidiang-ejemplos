@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 21/05/2022
  */
 @RestController
-@Tag(name="Web Service 1", description = "Metodos de saludo 1")
+@Tag(name="Saludos", description = "Metodos de saludo")
 public class WebService {
     @GetMapping(path = "/greeting")
     @Operation(
-            method = "devuelve saludo",
-            description = "Se le pasa un nombre y devuelve saludo"
+            method = "saluda a alguien",
+            description = "Se le pasa un nombre y devuelve saludo a ese nombre"
     )
     public String greeting(
             @Parameter(
