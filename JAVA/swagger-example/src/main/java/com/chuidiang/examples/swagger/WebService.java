@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WebService {
     @GetMapping(path = "/greeting")
     @Operation(
-            method = "saluda a alguien",
+            summary = "saluda a alguien",
             description = "Se le pasa un nombre y devuelve saludo a ese nombre"
     )
     public String greeting(
