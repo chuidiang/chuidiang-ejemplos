@@ -1,5 +1,7 @@
 package com.chuidiang.examples.jdb_example;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.sql.*;
 
 /**
@@ -24,6 +26,25 @@ public class Main {
 
         } catch (SQLException e) {
             System.err.println("Error en la ejecucion " + e.getMessage());
+        }
+
+        try (BasicDataSource dataSource = new BasicDataSource()){
+
+            dataSource.setUrl("jdbc:postgresql://localhost/chuidiang-examples?currentSchema=jdbc_example");
+            dataSource.setUsername("postgres");
+            dataSource.setPassword("postgres");
+            dataSource.setMaxTotal(10);
+            dataSource.setInitialSize(2);
+            dataSource.setMaxIdle(2);
+            dataSource.setValidationQuery("select 1");
+
+            try(Connection connection = dataSource.getConnection()){
+                createTAble(connection);
+                crudOperations(connection);
+                showMetadata(connection);
+            }
+        } catch (SQLException e){
+            System.err.println("Error en la ejecucion: "+e.getMessage());
         }
     }
 
