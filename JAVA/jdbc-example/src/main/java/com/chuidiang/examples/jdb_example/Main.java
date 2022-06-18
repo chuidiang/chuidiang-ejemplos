@@ -11,15 +11,16 @@ public class Main {
     private static final String SCHEMA_NAME = "jdbc_example";
     private static final String TABLE_NAME = "contacto";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
 
         try (Connection connection = DriverManager.getConnection(
-                "jdbc:postgresql://localhost/chuidiang-examples?currentSchema=jdbc_example",
+                "jdbc:postgresql://localhost:5432/chuidiang-examples?currentSchema=jdbc_example",
                 "postgres",
                 "postgres"))
         {
             createTAble(connection);
-            crudOperations(connection);
+            crudOperationsCreateStatement(connection);
+            crudOperationsPrepareStatement(connection);
             showMetadata(connection);
 
         } catch (SQLException e) {
@@ -56,14 +57,16 @@ public class Main {
      * Operaciones tipicas CRUD: Create, Read, Update y Delete
      * @param connection
      */
-    private static void crudOperations(Connection connection) throws SQLException {
+    private static void crudOperationsCreateStatement(Connection connection) throws SQLException {
         try(Statement st = connection.createStatement()) {
             int inserted = st.executeUpdate(
-                    "INSERT INTO contacto (nombre, apellidos, telefono) " +
-                            "VALUES ('juan','perez','22334455')");
+                    String.format("INSERT INTO contacto (nombre, apellidos, telefono) " +
+                            "VALUES ('%s','%s','%s')","Juan","Perez","22334455"));
             System.out.println("Registros insertados: " + inserted);
 
-            try (ResultSet resultSet = st.executeQuery("SELECT * FROM contacto")){
+            int contactId = 1;
+
+            try (ResultSet resultSet = st.executeQuery(String.format("SELECT * FROM contacto WHERE id=%d",contactId))){
                 while (resultSet.next()){
                     System.out.println("ID: " + resultSet.getObject(1));
                     System.out.println("NOMBRE " + resultSet.getObject(2));
@@ -75,7 +78,7 @@ public class Main {
             int updated = st.executeUpdate("UPDATE contacto SET telefono='11223344' WHERE id=1");
             System.out.println("Registros modificados: " + updated);
 
-            int deleted = st.executeUpdate("DELETE FROM contacto WHERE id=1");
+            int deleted = st.executeUpdate(String.format("DELETE FROM contacto WHERE id=%d",contactId));
             System.out.println("Registros borrados: " + deleted);
 
             System.out.println("--------------------------------");
@@ -115,6 +118,42 @@ public class Main {
 
     }
 
+    /**
+     * Operaciones CRUD usando preparedStatement.
+     * @param connection
+     */
+    private static void crudOperationsPrepareStatement(Connection connection) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO contacto (nombre, apellidos, telefono) " +
+                "VALUES (?,?,?)")){
+            preparedStatement.setString(1,"Juan");
+            preparedStatement.setString(2,"Perez");
+            preparedStatement.setString(3,"12345678");
 
+            int inserted = preparedStatement.executeUpdate();
+            System.out.println("PreparedStatement insertados: "+ inserted);
 
+        } catch (Exception e){
+            System.err.println("Error con prepared statement "+e.getMessage());
+        }
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT FROM * contacto WHERE id=?"))
+        {
+            int contactId=1;
+            preparedStatement.setInt(1,contactId);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                    System.out.println("ID: " + resultSet.getObject(1));
+                    System.out.println("NOMBRE " + resultSet.getObject(2));
+                    System.out.println("APELLIDOS: " + resultSet.getObject(3));
+                    System.out.println("TELEFOND: " + resultSet.getObject(4));
+                }
+            } catch (Exception e) {
+                System.out.println("Error query: " +e.getMessage());
+            }
+
+        } catch (Exception e){
+            System.err.println("Error con prepared statement "+e.getMessage());
+        }
+    }
 }
