@@ -2,6 +2,9 @@ package com.chuidiang.examples.jdb_example;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.*;
 
 /**
@@ -12,6 +15,7 @@ public class Main {
 
     private static final String SCHEMA_NAME = "jdbc_example";
     private static final String TABLE_NAME = "contacto";
+    private static final String DB_CONNECTION_URL = "jdbc:postgresql://localhost:5432/chuidiang-examples?currentSchema=jdbc_example&escapeSyntaxCallMode=callIfNoReturn";
 
     public static void main(String[] args) {
         // Ambas llamadas hacen lo mismo, la unica diferencia entre ellas es
@@ -22,7 +26,7 @@ public class Main {
 
     private static void connectionPoolSamples() {
         try (BasicDataSource dataSource = new BasicDataSource()){
-            dataSource.setUrl("jdbc:postgresql://localhost/chuidiang-examples?currentSchema=jdbc_example");
+            dataSource.setUrl(DB_CONNECTION_URL);
             dataSource.setUsername("postgres");
             dataSource.setPassword("postgres");
             dataSource.setMaxTotal(10);
@@ -42,7 +46,7 @@ public class Main {
 
     private static void driverManagerSamples() {
         try (Connection connection = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/chuidiang-examples?currentSchema=jdbc_example",
+                DB_CONNECTION_URL,
                 "postgres",
                 "postgres"))
         {
@@ -60,9 +64,51 @@ public class Main {
         showMetadata(connection);
         createProcedures(connection);
         createFunctions(connection);
+        binaryData(connection);
+    }
+
+    private static void binaryData(Connection connection) throws SQLException {
+        try(Statement statement = connection.createStatement()){
+            statement.executeUpdate("DROP TABLE IF EXISTS image");
+            statement.executeUpdate("CREATE TABLE image " +
+                    "(id SERIAL PRIMARY KEY, " +
+                    "name text," +
+                    "raster bytea)");
+        }
+
+        try(FileInputStream fis = new FileInputStream("src/main/files/jdbc-java.png")){
+            try(PreparedStatement preparedStatement =connection.prepareStatement("INSERT INTO image (name, raster) VALUES (?,?)")){
+                preparedStatement.setString(1,"jdbc-java.png");
+                preparedStatement.setBinaryStream(2, fis);
+                final int inserted = preparedStatement.executeUpdate();
+                System.out.println("Imagenes insertadas "+inserted);
+            }
+        } catch (Exception e){
+            System.err.println("Error abriendo fichero "+e.getMessage());
+        }
+
+        try(FileOutputStream fos = new FileOutputStream("target/jdbc-java.png")){
+            try(PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM image WHERE name=?")){
+                preparedStatement.setString(1,"jdbc-java.png");
+                try(ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        System.out.println("Id : " + resultSet.getString("id"));
+                        System.out.println("Nombre : " + resultSet.getString("name"));
+                        try(InputStream raster = resultSet.getBinaryStream("raster")){
+                            raster.transferTo(fos);
+                        }
+                        break;
+                    }
+                }
+            }
+        } catch(Exception e){
+            System.err.println("Error leyendo imagen "+e.getMessage());
+        }
+
     }
 
     private static void createFunctions(Connection connection) {
+        System.out.println("functions");
         String sqlFunction = "CREATE OR REPLACE FUNCTION add(integer, integer) RETURNS integer" +
                 "    AS 'select $1 + $2;'" +
                 "    LANGUAGE SQL" +
@@ -72,7 +118,7 @@ public class Main {
         try (Statement st = connection.createStatement()){
             st.executeUpdate(sqlFunction);
         } catch (SQLException e) {
-            System.err.println("Errro creando funcion "+e.getMessage());
+            System.err.println("Error creando funcion "+e.getMessage());
         }
 
         try (CallableStatement callableStatement = connection.prepareCall("{? = call add(?,?)}")){
@@ -91,6 +137,7 @@ public class Main {
      * para prueba.
      */
     private static void createProcedures(Connection connection) {
+        System.out.println("Procedures");
         try(Statement st = connection.createStatement()){
             st.executeUpdate("DROP PROCEDURE IF EXISTS insert_data");
             st.executeUpdate("CREATE PROCEDURE insert_data(" +
@@ -105,13 +152,14 @@ public class Main {
 
         }
 
-        try(CallableStatement cst = connection.prepareCall("{call insert_data(?,?,?)}")){
-            cst.setString(1,"Pedro");
-            cst.setString(2,"Lopez");
-            cst.setString(3,"99883344");
-            cst.execute();
+        try(CallableStatement callableStatement = connection.prepareCall("{call insert_data(?,?,?)}")){
+            callableStatement.setString(1,"Pedro");
+            callableStatement.setString(2,"Lopez");
+            callableStatement.setString(3,"99883344");
+            callableStatement.execute();
         } catch (SQLException e) {
             System.err.println("Error creando procedure " + e.getMessage());
+            e.printStackTrace();
         }
 
     }
