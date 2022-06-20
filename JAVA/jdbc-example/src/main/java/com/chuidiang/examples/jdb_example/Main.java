@@ -14,23 +14,13 @@ public class Main {
     private static final String TABLE_NAME = "contacto";
 
     public static void main(String[] args) {
+        // Ambas llamadas hacen lo mismo, la unica diferencia entre ellas es
+        // la forma de obtener la conexión de base de datos.
+        driverManagerSamples();
+        connectionPoolSamples();
+    }
 
-        try (Connection connection = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/chuidiang-examples?currentSchema=jdbc_example",
-                "postgres",
-                "postgres"))
-        {
-            createTAble(connection);
-            crudOperationsCreateStatement(connection);
-            crudOperationsPrepareStatement(connection);
-            showMetadata(connection);
-            createProcedures(connection);
-            createFunctions(connection);
-
-        } catch (SQLException e) {
-            System.err.println("Error en la ejecucion " + e.getMessage());
-        }
-
+    private static void connectionPoolSamples() {
         try (BasicDataSource dataSource = new BasicDataSource()){
             dataSource.setUrl("jdbc:postgresql://localhost/chuidiang-examples?currentSchema=jdbc_example");
             dataSource.setUsername("postgres");
@@ -41,16 +31,35 @@ public class Main {
             dataSource.setValidationQuery("select 1");
 
             try(Connection connection = dataSource.getConnection()){
-                createTAble(connection);
-                crudOperationsCreateStatement(connection);
-                crudOperationsPrepareStatement(connection);
-                showMetadata(connection);
+                executeSamples(connection);
             } catch (SQLException e){
                 System.err.println("Error en la ejecucion: "+e.getMessage());
             }
         } catch (SQLException e){
             System.err.println("Error en la ejecucion: "+e.getMessage());
         }
+    }
+
+    private static void driverManagerSamples() {
+        try (Connection connection = DriverManager.getConnection(
+                "jdbc:postgresql://localhost:5432/chuidiang-examples?currentSchema=jdbc_example",
+                "postgres",
+                "postgres"))
+        {
+            executeSamples(connection);
+
+        } catch (SQLException e) {
+            System.err.println("Error en la ejecucion " + e.getMessage());
+        }
+    }
+
+    private static void executeSamples(Connection connection) throws SQLException {
+        createTAble(connection);
+        crudOperationsCreateStatement(connection);
+        crudOperationsPrepareStatement(connection);
+        showMetadata(connection);
+        createProcedures(connection);
+        createFunctions(connection);
     }
 
     private static void createFunctions(Connection connection) {
@@ -100,7 +109,7 @@ public class Main {
             cst.setString(1,"Pedro");
             cst.setString(2,"Lopez");
             cst.setString(3,"99883344");
-            cst.clearParameters();
+            cst.execute();
         } catch (SQLException e) {
             System.err.println("Error creando procedure " + e.getMessage());
         }
