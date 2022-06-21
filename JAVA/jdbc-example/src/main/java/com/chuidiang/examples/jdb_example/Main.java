@@ -2,9 +2,7 @@ package com.chuidiang.examples.jdb_example;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
 
 /**
@@ -15,16 +13,16 @@ public class Main {
 
     private static final String SCHEMA_NAME = "jdbc_example";
     private static final String TABLE_NAME = "contacto";
-    private static final String DB_CONNECTION_URL = "jdbc:postgresql://localhost:5432/chuidiang-examples?currentSchema=jdbc_example&escapeSyntaxCallMode=callIfNoReturn";
+    public static final String DB_CONNECTION_URL = "jdbc:postgresql://localhost:5432/chuidiang-examples?currentSchema=jdbc_example&escapeSyntaxCallMode=callIfNoReturn";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, IOException {
         // Ambas llamadas hacen lo mismo, la unica diferencia entre ellas es
         // la forma de obtener la conexión de base de datos.
         driverManagerSamples();
         connectionPoolSamples();
     }
 
-    private static void connectionPoolSamples() {
+    private static void connectionPoolSamples() throws SQLException, IOException {
         try (BasicDataSource dataSource = new BasicDataSource()){
             dataSource.setUrl(DB_CONNECTION_URL);
             dataSource.setUsername("postgres");
@@ -36,28 +34,21 @@ public class Main {
 
             try(Connection connection = dataSource.getConnection()){
                 executeSamples(connection);
-            } catch (SQLException e){
-                System.err.println("Error en la ejecucion: "+e.getMessage());
             }
-        } catch (SQLException e){
-            System.err.println("Error en la ejecucion: "+e.getMessage());
         }
     }
 
-    private static void driverManagerSamples() {
+    private static void driverManagerSamples() throws SQLException, IOException {
         try (Connection connection = DriverManager.getConnection(
                 DB_CONNECTION_URL,
                 "postgres",
                 "postgres"))
         {
             executeSamples(connection);
-
-        } catch (SQLException e) {
-            System.err.println("Error en la ejecucion " + e.getMessage());
         }
     }
 
-    private static void executeSamples(Connection connection) throws SQLException {
+    private static void executeSamples(Connection connection) throws SQLException, IOException {
         createTAble(connection);
         crudOperationsCreateStatement(connection);
         crudOperationsPrepareStatement(connection);
@@ -67,7 +58,7 @@ public class Main {
         binaryData(connection);
     }
 
-    private static void binaryData(Connection connection) throws SQLException {
+    private static void binaryData(Connection connection) throws SQLException, IOException {
         try(Statement statement = connection.createStatement()){
             statement.executeUpdate("DROP TABLE IF EXISTS image");
             statement.executeUpdate("CREATE TABLE image " +
@@ -77,38 +68,34 @@ public class Main {
         }
 
         try(FileInputStream fis = new FileInputStream("src/main/files/jdbc-java.png")){
-            try(PreparedStatement preparedStatement =connection.prepareStatement("INSERT INTO image (name, raster) VALUES (?,?)")){
-                preparedStatement.setString(1,"jdbc-java.png");
+            try(PreparedStatement preparedStatement =connection.prepareStatement("INSERT INTO image (name, raster) VALUES (?,?)")) {
+                preparedStatement.setString(1, "jdbc-java.png");
                 preparedStatement.setBinaryStream(2, fis);
                 final int inserted = preparedStatement.executeUpdate();
-                System.out.println("Imagenes insertadas "+inserted);
+                System.out.println("Imagenes insertadas " + inserted);
             }
-        } catch (Exception e){
-            System.err.println("Error abriendo fichero "+e.getMessage());
         }
 
-        try(FileOutputStream fos = new FileOutputStream("target/jdbc-java.png")){
-            try(PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM image WHERE name=?")){
-                preparedStatement.setString(1,"jdbc-java.png");
-                try(ResultSet resultSet = preparedStatement.executeQuery()) {
-                    while (resultSet.next()) {
-                        System.out.println("Id : " + resultSet.getString("id"));
-                        System.out.println("Nombre : " + resultSet.getString("name"));
-                        try(InputStream raster = resultSet.getBinaryStream("raster")){
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM image WHERE name=?")) {
+            preparedStatement.clearParameters();
+            preparedStatement.setString(1, "jdbc-java.png");
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    System.out.println("Id : " + resultSet.getString("id"));
+                    String name = resultSet.getString("name");
+                    System.out.println("Nombre : " + name);
+                    try (FileOutputStream fos = new FileOutputStream("target/" + name)) {
+                        try (InputStream raster = resultSet.getBinaryStream("raster")) {
                             raster.transferTo(fos);
                         }
-                        break;
                     }
                 }
             }
-        } catch(Exception e){
-            System.err.println("Error leyendo imagen "+e.getMessage());
         }
-
     }
 
-    private static void createFunctions(Connection connection) {
-        System.out.println("functions");
+    private static void createFunctions(Connection connection) throws SQLException {
         String sqlFunction = "CREATE OR REPLACE FUNCTION add(integer, integer) RETURNS integer" +
                 "    AS 'select $1 + $2;'" +
                 "    LANGUAGE SQL" +
@@ -117,8 +104,6 @@ public class Main {
 
         try (Statement st = connection.createStatement()){
             st.executeUpdate(sqlFunction);
-        } catch (SQLException e) {
-            System.err.println("Error creando funcion "+e.getMessage());
         }
 
         try (CallableStatement callableStatement = connection.prepareCall("{? = call add(?,?)}")){
@@ -127,8 +112,6 @@ public class Main {
             callableStatement.setInt(3,2);
             callableStatement.execute();
             System.out.println("La suma 2+2 es "+callableStatement.getInt(1));
-        } catch (SQLException e) {
-            System.err.println("Errro llamando funcion "+e.getMessage());
         }
     }
 
@@ -136,7 +119,7 @@ public class Main {
      * Crea procedimientos y funciones en base de datos
      * para prueba.
      */
-    private static void createProcedures(Connection connection) {
+    private static void createProcedures(Connection connection) throws SQLException {
         System.out.println("Procedures");
         try(Statement st = connection.createStatement()){
             st.executeUpdate("DROP PROCEDURE IF EXISTS insert_data");
@@ -147,9 +130,6 @@ public class Main {
                     "  INSERT INTO contacto (nombre, apellidos, telefono) " +
                     "  VALUES (nombre, apellidos, telefono); " +
                     "$$");
-        } catch (SQLException e){
-            System.err.println("Error creando procedure " + e.getMessage());
-
         }
 
         try(CallableStatement callableStatement = connection.prepareCall("{call insert_data(?,?,?)}")){
@@ -157,11 +137,7 @@ public class Main {
             callableStatement.setString(2,"Lopez");
             callableStatement.setString(3,"99883344");
             callableStatement.execute();
-        } catch (SQLException e) {
-            System.err.println("Error creando procedure " + e.getMessage());
-            e.printStackTrace();
         }
-
     }
 
 
@@ -278,7 +254,7 @@ public class Main {
      * Operaciones CRUD usando preparedStatement.
      * @param connection
      */
-    private static void crudOperationsPrepareStatement(Connection connection) {
+    private static void crudOperationsPrepareStatement(Connection connection) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO contacto (nombre, apellidos, telefono) " +
                 "VALUES (?,?,?)")){
@@ -290,28 +266,20 @@ public class Main {
 
             int inserted = preparedStatement.executeUpdate();
             System.out.println("PreparedStatement insertados: "+ inserted);
-        } catch (Exception e){
-            System.err.println("Error con prepared statement "+e.getMessage());
         }
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT FROM * contacto WHERE id=?"))
-        {
-            int contactId=1;
-            preparedStatement.setInt(1,contactId);
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM contacto WHERE id=?")) {
+            int contactId = 1;
+            preparedStatement.setInt(1, contactId);
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                while(resultSet.next()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
                     System.out.println("ID: " + resultSet.getObject(1));
                     System.out.println("NOMBRE " + resultSet.getObject(2));
                     System.out.println("APELLIDOS: " + resultSet.getObject(3));
                     System.out.println("TELEFOND: " + resultSet.getObject(4));
                 }
-            } catch (Exception e) {
-                System.out.println("Error query: " +e.getMessage());
             }
-
-        } catch (Exception e){
-            System.err.println("Error con prepared statement "+e.getMessage());
         }
     }
 }
