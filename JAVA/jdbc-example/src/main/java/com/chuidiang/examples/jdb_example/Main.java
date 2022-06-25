@@ -52,10 +52,49 @@ public class Main {
         createTAble(connection);
         crudOperationsCreateStatement(connection);
         crudOperationsPrepareStatement(connection);
-        showMetadata(connection);
         createProcedures(connection);
         createFunctions(connection);
         binaryData(connection);
+        showMetadata(connection);
+        batchInsert(connection);
+        scrollableAndUpdatable(connection);
+    }
+
+    private static void batchInsert(Connection connection) throws SQLException {
+        String[] names = {"Ana","Cristina","Maria"};
+        String[] surnames = {"Gomez", "Perez", "Gonzalez"};
+        String[] phoneNumbers = {"11111111","22222222","33333333"};
+
+        try (PreparedStatement ps = connection.prepareStatement("INSERT INTO contacto (nombre, apellidos, telefono) VALUES (?,?,?)")){
+            for (int i = 0; i < names.length; i++) {
+                ps.setString(1,names[i]);
+                ps.setString(2,surnames[i]);
+                ps.setString(3,phoneNumbers[i]);
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }
+    }
+
+    private static void scrollableAndUpdatable(Connection connection) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM contacto", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)){
+            try (ResultSet rs = ps.executeQuery()){
+                while (rs.next()){
+                    if ("Cristina".equals(rs.getString("nombre"))){
+                        break;
+                    }
+                }
+
+                rs.updateString("telefono","21212121");
+                rs.updateRow();
+
+                rs.beforeFirst();
+
+                while (rs.next()){
+                    System.out.println("Telefono "+rs.getString("telefono"));
+                }
+            }
+        }
     }
 
     private static void binaryData(Connection connection) throws SQLException, IOException {
