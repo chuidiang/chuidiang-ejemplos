@@ -56,11 +56,22 @@ public class Main {
         createFunctions(connection);
         binaryData(connection);
         showMetadata(connection);
-        batchInsert(connection);
+        statementBatchInsert(connection);
+        preparedStatementBatchInsert(connection);
         scrollableAndUpdatable(connection);
     }
 
-    private static void batchInsert(Connection connection) throws SQLException {
+    /** Insercion de varias filas en un batch */
+    private static void statementBatchInsert(Connection connection) throws SQLException {
+        try(Statement st = connection.createStatement()){
+            st.addBatch("INSERT INTO contacto (nombre,apellidos,telefono) VALUES ('Ana','Gomez','11111111')");
+            st.addBatch("INSERT INTO contacto (nombre,apellidos,telefono) VALUES ('Cristina','Perez','22222222')");
+            st.addBatch("INSERT INTO contacto (nombre,apellidos,telefono) VALUES ('Maria','Gonzalez','33333333')");
+            st.executeBatch();
+        }
+    }
+
+    private static void preparedStatementBatchInsert(Connection connection) throws SQLException {
         String[] names = {"Ana","Cristina","Maria"};
         String[] surnames = {"Gomez", "Perez", "Gonzalez"};
         String[] phoneNumbers = {"11111111","22222222","33333333"};
@@ -247,9 +258,9 @@ public class Main {
 
             try (ResultSet resultSet = st.executeQuery("SELECT * FROM contacto LIMIT 1")){
                 while (resultSet.next()){
-                    System.out.println("ID: " + resultSet.getObject(1));
                     contactId = resultSet.getInt(1);
-                    System.out.println("NOMBRE " + resultSet.getObject(2));
+                    System.out.println("ID: " + resultSet.getObject(1));
+                    System.out.println("NOMBRE: " + resultSet.getObject(2));
                     System.out.println("APELLIDOS: " + resultSet.getObject(3));
                     System.out.println("TELEFOND: " + resultSet.getObject(4));
                 }
@@ -258,8 +269,8 @@ public class Main {
             if (null!=contactId) {
                 try (ResultSet resultSet = st.executeQuery(String.format("SELECT * FROM contacto WHERE id=%d", contactId))) {
                     while (resultSet.next()) {
-                        System.out.println("ID: " + resultSet.getInt("id"));
                         contactId = resultSet.getInt("id");
+                        System.out.println("ID: " + resultSet.getInt("id"));
                         System.out.println("NOMBRE " + resultSet.getString("nombre"));
                         System.out.println("APELLIDOS: " + resultSet.getString("apellidos"));
                         System.out.println("TELEFOND: " + resultSet.getString("telefono"));
@@ -340,7 +351,7 @@ public class Main {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     System.out.println("ID: " + resultSet.getObject(1));
-                    System.out.println("NOMBRE " + resultSet.getObject(2));
+                    System.out.println("NOMBRE: " + resultSet.getObject(2));
                     System.out.println("APELLIDOS: " + resultSet.getObject(3));
                     System.out.println("TELEFOND: " + resultSet.getObject(4));
                 }
