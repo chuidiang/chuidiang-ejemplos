@@ -77,21 +77,47 @@ public class Main {
     }
 
     private static void scrollableAndUpdatable(Connection connection) throws SQLException {
-        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM contacto", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)){
+        try (PreparedStatement ps = connection.prepareStatement(
+                "SELECT * FROM contacto",
+                ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE)){
             try (ResultSet rs = ps.executeQuery()){
+
+                // Buscamos a Cristina para cambiarle el número de telefono.
                 while (rs.next()){
                     if ("Cristina".equals(rs.getString("nombre"))){
                         break;
                     }
                 }
-
                 rs.updateString("telefono","21212121");
                 rs.updateRow();
 
                 rs.beforeFirst();
 
+                // Buscamos a Maria para borrarla
                 while (rs.next()){
-                    System.out.println("Telefono "+rs.getString("telefono"));
+                    if ("Maria".equals(rs.getString("nombre"))){
+                        rs.deleteRow();
+                        break;
+                    }
+                }
+
+                // Insertamos una persona nueva
+                rs.moveToInsertRow();
+                rs.updateString("nombre","Gloria");
+                rs.updateString("apellidos","Ramirez");
+                rs.updateString("telefono", "33334444");
+                rs.insertRow();
+            }
+
+            // Nueva consulta para ver que efectivamente se ha cambiado todo en bd.
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()){
+                    System.out.println("ID: " + rs.getObject(1));
+                    System.out.println("NOMBRE " + rs.getObject(2));
+                    System.out.println("APELLIDOS: " + rs.getObject(3));
+                    System.out.println("TELEFOND: " + rs.getObject(4));
+
                 }
             }
         }
