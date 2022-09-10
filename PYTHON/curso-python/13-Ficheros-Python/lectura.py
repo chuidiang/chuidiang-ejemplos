@@ -19,6 +19,13 @@ with open('fichero.txt') as f:
         print(linea, end='')
         linea = f.readline()
 
+# Lectura del fichero como binario
+with open('fichero.txt','rb') as f:
+    bytes = f.read(10)
+    print(type(bytes))
+    while bytes != b'':
+        print(bytes, end='')
+        bytes = f.read(10)
 
 
 
