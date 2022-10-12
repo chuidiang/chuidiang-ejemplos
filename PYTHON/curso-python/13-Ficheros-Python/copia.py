@@ -5,3 +5,8 @@ with open('fichero.txt') as origen:
             destino.write(linea)
             linea = origen.readline()
 
+
+with open('fichero.txt','rb') as origen:
+    with open('copia2.txt','wb') as destino:
+        for byte in origen: 
+            destino.write(byte)
