@@ -34,7 +34,11 @@ if __name__ == '__main__':
          # Espera por datos
          peticion = socket_cliente.recv(1000)
          print ('Recibido '+str(peticion))
-         
+
+         # Si recibmos cero bytes es que el cliente ha cerrado el socket
+         if not peticion:
+             seguir = False
+
          # Contestacion a "hola"
          if ("hola"==peticion.decode()):
              print (str(datos_cliente)+ " envia hola: contesto")
