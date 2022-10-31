@@ -1,4 +1,4 @@
-'''
+"""
 Created on 20/02/2009
 @author: Chuidiang
 
@@ -8,7 +8,7 @@ Si el cliente envia "hola", el servidor contesta "pues hola".
 Si el cliente envia "adios", el servidor contesta "pues adios" y
 cierra la conexion.
 El servidor no acepta multiples clientes simultaneamente.
-'''
+"""
 
 import socket
 
