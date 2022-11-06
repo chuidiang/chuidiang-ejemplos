@@ -2,7 +2,7 @@
 chuidiang 05 Nov 2022
 
 Servidor socket usando select.
-Arrancar cliente.py para probarlo.
+Para problarlo y conectar clientes, arrancar cliente.py.
 """
 
 
