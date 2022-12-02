@@ -1,19 +1,20 @@
 package com.chuidiang.ejemplos.random;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.Random;
 
 /**
- * Created by JAVIER on 18/04/2017.
+ * Genera string aleatorios.
+ *
+ * Created by Chuidiang on 18/04/2017.
  */
 public class RandomString {
     public static void main(String[] args) {
-        // One big random number printed in base 32
-        Random random = new Random();
-        System.out.println("Random String " + new BigInteger(50, random).toString(32));
+        randomStringWithBigInteger();
+        randomStringFromCharacterList();
+    }
 
-
+    private static void randomStringFromCharacterList() {
         // Choose random chars from an array.
         char [] chars = "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray();
         int charsLength = chars.length;
@@ -25,5 +26,11 @@ public class RandomString {
             buffer.append(chars[r.nextInt(charsLength)]);
         }
         System.out.println("Random String " + buffer.toString());
+    }
+
+    private static void randomStringWithBigInteger() {
+        // One big random number printed in base 36
+        Random random = new Random();
+        System.out.println("Random String " + new BigInteger(128, random).toString(Character.MAX_RADIX));
     }
 }
