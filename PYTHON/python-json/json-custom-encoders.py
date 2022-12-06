@@ -11,8 +11,8 @@ class MyEncoder(json.JSONEncoder):
 
 
 class MyDecoder(json.JSONDecoder):
-    def __init__(self, *args, **kwargs):
-        json.JSONDecoder.__init__(self, object_hook=self.object_hook, *args, **kwargs)
+    def __init__(self):
+        json.JSONDecoder.__init__(self, object_hook=self.object_hook)
 
     def object_hook(self, dct):
         if "complex" in dct:
