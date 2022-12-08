@@ -1,6 +1,6 @@
-# Conversión de json a dict en python
+# Lectura y escritura de ficheros XML en phton
 
-Estos ejemplos convierten leen y escriben ficheros XML en phton.
+Estos ejemplos, como el propio título indica, leen y escriben ficheros XML en phton.
 
 La explicación completa de estos ejemplos está en [Leer y escribir ficheros XML con python](https://chuwiki.chuidiang.org/index.php?title=Leer_y_escribir_ficheros_XML_con_python)
 
