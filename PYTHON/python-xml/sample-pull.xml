@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <data name="country-list" xmlns:c="http://chuidiang.org/examples/">
-    <!-- comment -->
+    <!-- Some comment -->
     <c:country name="Liechtenstein">
         Text
         <rank>1</rank>
