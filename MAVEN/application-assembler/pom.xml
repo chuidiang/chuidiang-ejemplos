@@ -20,7 +20,7 @@
                     <repositoryLayout>flat</repositoryLayout>
                     <repositoryName>lib</repositoryName>
                     <useAllProjectDependencies>true</useAllProjectDependencies>
-                    <!--<generateRepository>false</generateRepository>-->
+<!--                    <generateRepository>false</generateRepository>-->
                     <programs>
                         <program>
                             <mainClass>com.chuidiang.examples.application_assembler_example.App</mainClass>
