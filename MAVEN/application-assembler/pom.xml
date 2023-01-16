@@ -21,6 +21,7 @@
                     <repositoryName>lib</repositoryName>
                     <useAllProjectDependencies>true</useAllProjectDependencies>
 <!--                    <generateRepository>false</generateRepository>-->
+                    <copyConfigurationDirectory>true</copyConfigurationDirectory>
                     <programs>
                         <program>
                             <mainClass>com.chuidiang.examples.application_assembler_example.App</mainClass>
