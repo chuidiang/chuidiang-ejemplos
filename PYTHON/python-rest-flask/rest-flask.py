@@ -70,11 +70,11 @@ def add_user():
         new_user_dict = decoder.decode(request.data.decode())
         new_user = UserData(new_user_dict["name"], int(new_user_dict["age"]))
         users.append(new_user)
-        return encoder.encode(new_user), 201
+        return encoder.encode(new_user.__dict__), 201
     except json.JSONDecodeError:
         abort(400)
     except Exception as error:
-        print(error.__class__)
+        print(error.__traceback__)
         abort(500)
 
 
