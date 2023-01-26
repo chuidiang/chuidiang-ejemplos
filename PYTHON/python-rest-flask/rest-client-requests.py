@@ -9,24 +9,30 @@ import requests, json
 def do_get():
     print("--GET--")
     result = requests.get("http://127.0.0.1:5000/users")
-    print(result.content)
 
-    decoder = json.JSONDecoder()
-    user = decoder.decode(result.content.decode())
-
-    print(user)
+    if 200 == result.status_code:
+        print(result.status_code)
+        print(result.content)
+        decoder = json.JSONDecoder()
+        user = decoder.decode(result.content.decode())
+        print(user)
+        print(user[1]['name'])
+    else:
+        print("Ha habido algun error en la llamada")
+        print(result.status_code)
 
 
 # Saca por pantalla el usuario de índice 1 (Pedro)
 def do_get_idx():
     print("--GET IDX--")
     result = requests.get("http://127.0.0.1:5000/users/1")
-    print(result.status_code)
-
-    decoder = json.JSONDecoder()
-    user = decoder.decode(result.content.decode())
-
-    print(user)
+    if 200 == result.status_code:
+        decoder = json.JSONDecoder()
+        user = decoder.decode(result.content.decode())
+        print(user)
+    else:
+        print("Ha habido algun error en la llamada")
+        print(result.status_code)
 
 
 # Crea un usuario nuevo (Ana)
@@ -34,13 +40,15 @@ def do_post():
     print("-- POST --")
     new_user = '{"name": "Ana", "age": 44}'
     result = requests.post("http://127.0.0.1:5000/users", data=new_user)
-    print (result.status_code)
 
-    decoder = json.JSONDecoder()
-    user = decoder.decode(result.content.decode())
-
-    print(user)
-    do_get()
+    if 201 == result.status_code:
+        decoder = json.JSONDecoder()
+        user = decoder.decode(result.content.decode())
+        print(user)
+        do_get()
+    else:
+        print("Ha habido algun error en la llamada")
+        print(result.status_code)
 
 
 # Modifica la edad del usuario 1 (Pedro)
@@ -48,22 +56,27 @@ def do_put():
     print("-- PUT --")
     new_user = '{"name": "Pedro", "age": 23}'
     result = requests.put("http://127.0.0.1:5000/users/1", data=new_user)
-    print (result.status_code)
 
-    decoder = json.JSONDecoder()
-    user = decoder.decode(result.content.decode())
-
-    print(user)
-    do_get()
+    if 200 == result.status_code:
+        decoder = json.JSONDecoder()
+        user = decoder.decode(result.content.decode())
+        print(user)
+        do_get()
+    else:
+        print("Ha habido algun error en la llamada")
+        print(result.status_code)
 
 
 # Borra el usuario 3 (Ana)
 def do_delete():
     print("-- DELETE --")
     result = requests.delete("http://127.0.0.1:5000/users/3")
-    print(result.status_code)
-
-    do_get()
+    if 204 == result.status_code:
+        print("Usuario borrado con exito")
+        do_get()
+    else:
+        print("Ha habido algun error en la llamada")
+        print(result.status_code)
 
 
 # Main que llama a todas las funciones anteriores en orden.
