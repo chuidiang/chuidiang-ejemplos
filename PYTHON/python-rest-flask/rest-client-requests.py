@@ -2,7 +2,8 @@
 # Ejemplo de cliente que llama a web service REST. Para probar este programa
 # debe estar arrancado rest-flask.py
 
-import requests, json
+import json
+import requests
 
 
 # Saca por pantalla el listado de todos los usuarios
@@ -13,8 +14,7 @@ def do_get():
     if 200 == result.status_code:
         print(result.status_code)
         print(result.content)
-        decoder = json.JSONDecoder()
-        user = decoder.decode(result.content.decode())
+        user = result.json()
         print(user)
         print(user[1]['name'])
     else:
@@ -27,8 +27,7 @@ def do_get_idx():
     print("--GET IDX--")
     result = requests.get("http://127.0.0.1:5000/users/1")
     if 200 == result.status_code:
-        decoder = json.JSONDecoder()
-        user = decoder.decode(result.content.decode())
+        user = result.json()
         print(user)
     else:
         print("Ha habido algun error en la llamada")
@@ -39,11 +38,11 @@ def do_get_idx():
 def do_post():
     print("-- POST --")
     new_user = '{"name": "Ana", "age": 44}'
-    result = requests.post("http://127.0.0.1:5000/users", data=new_user)
+    headers = {"Content-Type": "application/json"}
+    result = requests.post("http://127.0.0.1:5000/users", data=new_user, headers=headers)
 
     if 201 == result.status_code:
-        decoder = json.JSONDecoder()
-        user = decoder.decode(result.content.decode())
+        user = result.json()
         print(user)
         do_get()
     else:
@@ -55,11 +54,11 @@ def do_post():
 def do_put():
     print("-- PUT --")
     new_user = '{"name": "Pedro", "age": 23}'
-    result = requests.put("http://127.0.0.1:5000/users/1", data=new_user)
+    headers = {"Content-Type": "application/json"}
+    result = requests.put("http://127.0.0.1:5000/users/1", data=new_user, headers=headers)
 
     if 200 == result.status_code:
-        decoder = json.JSONDecoder()
-        user = decoder.decode(result.content.decode())
+        user = result.json()
         print(user)
         do_get()
     else:
