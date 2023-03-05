@@ -1,8 +1,14 @@
 package com.chuidiang.ejemplos.encoding;
 
-import java.io.UnsupportedEncodingException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.SortedMap;
 
@@ -12,7 +18,12 @@ import java.util.SortedMap;
  * @date 04/03/2023
  */
 public class CharEncoding {
-    public static void main(String[] args) throws UnsupportedEncodingException {
+    public static void main(String[] args) throws IOException {
+        inMemorySamples();
+        inFileSamples();
+    }
+
+    private static void inMemorySamples() {
         // Forma de obtener el CharSet por defecto.
         // El CharSet por defecto depende del sistema operativo, habitualmente suele ser UTF-8
         // Se puede cambiar, al arrancar la máquina virtual, con -Dfile.encoding=UTF16 o el que se deseé
@@ -42,6 +53,29 @@ public class CharEncoding {
         System.out.println("UTF-16 con decodificación ISO-8859-1: " + new String(bytes, StandardCharsets.ISO_8859_1));
         // y hay que decodificar correctamente
         System.out.println("UTF-16 con decodificación UTF-16: " + new String(bytes, StandardCharsets.UTF_16));
+    }
+
+    private static void inFileSamples() throws IOException {
+        // Escribimos un fichero de texto, usando una codificación UTF-16
+        final Path path = Paths.get("file.txt");
+        try(BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_16)){
+            writer.write("ñÑa");
+        }
+
+        // Leemos con la opción defecto de encoding de java, que en mi caso es UTF-8
+        try(BufferedReader reader = Files.newBufferedReader(path)){
+            System.out.print("Fichero UTF-16 leido con encondingo por defecto: ");
+            try {
+                System.out.println(reader.readLine());
+            } catch (MalformedInputException exc) {
+                System.out.println("Salta una excepción: "+exc.getMessage());
+            }
+        }
+
+        // Leemos con la opción correcta, UTF-16
+        try(BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_16)){
+            System.out.println("Fichero UTF-16 leido con enconding UTF-16: " + reader.readLine());
+        }
 
     }
 }
