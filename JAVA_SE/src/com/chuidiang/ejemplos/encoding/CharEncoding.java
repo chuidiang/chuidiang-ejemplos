@@ -19,8 +19,29 @@ import java.util.SortedMap;
  */
 public class CharEncoding {
     public static void main(String[] args) throws IOException {
+        windows1512Samples();
         inMemorySamples();
         inFileSamples();
+//        allAvailableCharSets();
+    }
+
+    private static void allAvailableCharSets() {
+        // Forma de obtener todos los CharSet disponibles
+        final SortedMap<String, Charset> stringCharsetSortedMap = Charset.availableCharsets();
+        stringCharsetSortedMap.forEach((name,charset)->{
+            System.out.println(name);
+        });
+    }
+
+    private static void windows1512Samples() {
+        // Para casting directo, java usa el juego de caracteres Windows-1252 / CP-1252
+        // https://es.wikipedia.org/wiki/Windows-1252
+        // corresponiente a un popurri de caracteres latinos
+        // No usa el CharSet defecto (UTF-8 en mi caso) ni otro que se configure.
+        int value = 'a';
+        System.out.println(value);
+        value = 'ñ';
+        System.out.println(value);
     }
 
     private static void inMemorySamples() {
@@ -28,12 +49,6 @@ public class CharEncoding {
         // El CharSet por defecto depende del sistema operativo, habitualmente suele ser UTF-8
         // Se puede cambiar, al arrancar la máquina virtual, con -Dfile.encoding=UTF16 o el que se deseé
         System.out.println("Default CharSet = " + Charset.defaultCharset().name() );
-
-        // Forma de obtener todos los CharSet disponibles
-        final SortedMap<String, Charset> stringCharsetSortedMap = Charset.availableCharsets();
-        stringCharsetSortedMap.forEach((name,charset)->{
-            System.out.println(name);
-        });
 
         // La máquina virtual java, en mi caso, por defecto es UTF_8
         // Si el texto está pasado a bytes usando la tabla UTF_8
