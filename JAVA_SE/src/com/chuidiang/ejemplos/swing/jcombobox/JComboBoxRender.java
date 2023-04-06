@@ -15,13 +15,16 @@ public class JComboBoxRender {
     public static void main(String[] args) {
         // Construyendo ventana
         JFrame window = new JFrame("Main Window");
-        JComboBox combo = new JComboBox();
+        JComboBox<String> combo = new JComboBox<>();
 
         // Cambiamos la flecha
         combo.setUI(new MyArrow());
 
-        // Cambiamos el render
+        // Cambiamos el render y los colores por defecto.
         combo.setRenderer(new MyComboBoxRender());
+        combo.setBackground(Color.RED);
+        combo.setForeground(Color.YELLOW);
+
 
         // Seguimos contruyendo ventana
         combo.addItem("Item 1");
@@ -68,7 +71,7 @@ public class JComboBoxRender {
         protected JButton createArrowButton() {
             // Usamos BasicArrowButton que es el de defecto, poniéndole los colores que nos apetezcan.
             // Pero puedes crear aquí tu propio botón con el estilo que quieras.
-            return new BasicArrowButton(BasicArrowButton.SOUTH, Color.WHITE, Color.RED, Color.BLACK, Color.LIGHT_GRAY);
+            return new BasicArrowButton(SwingConstants.SOUTH, Color.WHITE, Color.RED, Color.BLACK, Color.LIGHT_GRAY);
         }
     }
 }
