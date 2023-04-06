@@ -13,48 +13,62 @@ import java.awt.*;
  */
 public class JComboBoxRender {
     public static void main(String[] args) {
+        // Construyendo ventana
         JFrame window = new JFrame("Main Window");
         JComboBox combo = new JComboBox();
 
-        // Definimos como crear
-//        combo.setUI(new MyArrow());
-        combo.setForeground(Color.RED);
-        combo.setBackground(Color.WHITE);
-//        combo.setRenderer(new MyComboBoxRender());
+        // Cambiamos la flecha
+        combo.setUI(new MyArrow());
+
+        // Cambiamos el render
+        combo.setRenderer(new MyComboBoxRender());
+
+        // Seguimos contruyendo ventana
         combo.addItem("Item 1");
         combo.addItem("Item 2");
         combo.addItem("Item 3");
         window.getContentPane().add(combo);
-
-
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
 
-    public static class MyComboBoxRender extends BasicComboBoxRenderer.UIResource {
+    /**
+     * Render del Combo. Decide los colores a mostrar.
+     */
+    public static class MyComboBoxRender extends BasicComboBoxRenderer {
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            System.out.println(""+isSelected+" - "+cellHasFocus);
+            // La llamada a super hace que coja los colores defecto según esté seleccionado, tenga foco, etc.
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            this.setOpaque(true);
-            this.setBackground(Color.WHITE);
-            this.setForeground(Color.BLUE);
+
+            // Cambiamos color de fondo y letra del item del combo desplegado.
+            if (isSelected) {
+                this.setForeground(Color.BLUE);
+                this.setBackground(Color.WHITE);
+            } else {
+                this.setBackground(Color.YELLOW);
+                this.setForeground(Color.RED);
+            }
+
+            // list dibuja el elemento visible del combo cuando no está desplegado.
             list.setSelectionBackground(Color.RED);
+            list.setSelectionForeground(Color.YELLOW);
+
             return this;
         }
     }
 
+    /**
+     * Crea el botón para el combo.
+     */
     public static class MyArrow extends BasicComboBoxUI {
         @Override
         protected JButton createArrowButton() {
+            // Usamos BasicArrowButton que es el de defecto, poniéndole los colores que nos apetezcan.
+            // Pero puedes crear aquí tu propio botón con el estilo que quieras.
             return new BasicArrowButton(BasicArrowButton.SOUTH, Color.WHITE, Color.RED, Color.BLACK, Color.LIGHT_GRAY);
         }
-
-//        @Override
-//        protected ListCellRenderer<Object> createRenderer() {
-//            return new MyComboBoxRender();
-//        }
     }
 }
