@@ -42,6 +42,9 @@ public class JComboBoxRender {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
+        // Cuando deshabilitemos el combo, debemos hacerlo editable para que coja los
+        // colores del editor. Y cuando lo habilitemos, debemos recordar volver a ponerlo
+        // no editable, para que el usuario no pueda modificar el valor escribiendo a mano.
         checkCombo.addActionListener(event->{
             if (checkCombo.isSelected()){
                 combo.setEnabled(false);
