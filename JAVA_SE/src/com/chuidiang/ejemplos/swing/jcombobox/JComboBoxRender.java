@@ -71,7 +71,7 @@ public class JComboBoxRender {
         protected JButton createArrowButton() {
             // Usamos BasicArrowButton que es el de defecto, poniéndole los colores que nos apetezcan.
             // Pero puedes crear aquí tu propio botón con el estilo que quieras.
-            return new BasicArrowButton(SwingConstants.SOUTH, Color.WHITE, Color.RED, Color.BLACK, Color.LIGHT_GRAY);
+            return new BasicArrowButton(SwingConstants.SOUTH, Color.YELLOW, Color.ORANGE, Color.RED, Color.WHITE);
         }
     }
 }
