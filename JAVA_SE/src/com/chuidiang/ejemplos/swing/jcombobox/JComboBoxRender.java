@@ -15,9 +15,10 @@ public class JComboBoxRender {
     public static void main(String[] args) {
         // Construyendo ventana
         JFrame window = new JFrame("Main Window");
+        JCheckBox checkCombo = new JCheckBox("Disable Combo");
         JComboBox<String> combo = new JComboBox<>();
 
-        // Cambiamos la flecha
+        // Cambiamos la flecha del combo
         combo.setUI(new MyArrow());
 
         // Cambiamos el render y los colores por defecto.
@@ -25,16 +26,31 @@ public class JComboBoxRender {
         combo.setBackground(Color.RED);
         combo.setForeground(Color.YELLOW);
 
+        // Colores para cuando está deshabilitado
+        combo.getEditor().getEditorComponent().setBackground(Color.RED);
+        ((JTextField)combo.getEditor().getEditorComponent()).setDisabledTextColor(Color.YELLOW);
 
         // Seguimos contruyendo ventana
         combo.addItem("Item 1");
         combo.addItem("Item 2");
         combo.addItem("Item 3");
+        window.getContentPane().setLayout(new FlowLayout());
+        window.getContentPane().add(checkCombo);
         window.getContentPane().add(combo);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        checkCombo.addActionListener(event->{
+            if (checkCombo.isSelected()){
+                combo.setEnabled(false);
+                combo.setEditable(true);
+            } else {
+                combo.setEditable(false);
+                combo.setEnabled(true);
+            }
+        });
     }
 
     /**
