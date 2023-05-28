@@ -16,4 +16,9 @@
         <property name="fechaNacimiento" value="1/1/1999"/>
     </bean>
 
+    <bean id="Antonio" class="com.chuidiang.pruebas.spring.Persona">
+        <constructor-arg name="fechaNacimiento" value="3/13/2001"/>
+        <constructor-arg name="nombre" value="Antonio"/>
+        <constructor-arg name="id" value="3"/>
+    </bean>
 </beans>

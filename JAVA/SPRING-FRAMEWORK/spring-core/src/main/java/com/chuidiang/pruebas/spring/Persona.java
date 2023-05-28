@@ -10,6 +10,17 @@ public class Persona {
     int id;
     String nombre;
     Date fechaNacimiento;
+
+    public Persona(){
+        // Constructor sin parametros.
+    }
+
+    public Persona(int id, String nombre, Date fechaNacimiento){
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     public int getId() {
         return id;
     }
