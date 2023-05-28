@@ -6,13 +6,13 @@
 
     <bean id="Juan" class="com.chuidiang.pruebas.spring.Persona">
         <property name="id" value="1"/>
-        <property name="nombre" value="Juan"/>
+        <property name="nombre" value="Juan Resources"/>
         <property name="fechaNacimiento" value="11/23/1943"/>
     </bean>
 
     <bean id="Pedro" class="com.chuidiang.pruebas.spring.Persona">
         <property name="id" value="2"/>
-        <property name="nombre" value="Pedro"/>
+        <property name="nombre" value="Pedro Resources"/>
         <property name="fechaNacimiento" value="1/1/1999"/>
     </bean>
 
