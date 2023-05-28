@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="Juan" class="com.chuidiang.pruebas.spring.Persona">
+        <property name="id" value="1"/>
+        <property name="nombre" value="Juan"/>
+        <property name="fechaNacimiento" value="11/12/1943"/>
+    </bean>
+
+    <bean id="Pedro" class="com.chuidiang.pruebas.spring.Persona">
+        <property name="id" value="2"/>
+        <property name="nombre" value="Pedro"/>
+        <property name="fechaNacimiento" value="1/1/1999"/>
+    </bean>
+
+</beans>
