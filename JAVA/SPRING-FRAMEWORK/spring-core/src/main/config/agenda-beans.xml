@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="Juan" class="com.chuidiang.pruebas.spring.Persona">
+        <property name="id" value="1"/>
+        <property name="nombre" value="Juan"/>
+        <property name="fechaNacimiento" value="11/23/1943"/>
+    </bean>
+
+    <bean id="Pedro" class="com.chuidiang.pruebas.spring.Persona">
+        <property name="id" value="2"/>
+        <property name="nombre" value="Pedro"/>
+        <property name="fechaNacimiento" value="1/1/1999"/>
+    </bean>
+
+    <bean id="Antonio" class="com.chuidiang.pruebas.spring.Persona">
+        <constructor-arg name="fechaNacimiento" value="3/13/2001"/>
+        <constructor-arg name="nombre" value="Antonio"/>
+        <constructor-arg name="id" value="3"/>
+    </bean>
+
+    <bean id="agenda" class="com.chuidiang.pruebas.spring.Agenda">
+        <property name="propietarioAgenda" ref="Pedro"/>
+        <property name="contactos">
+            <list value-type="com.chuidiang.pruebas.spring.Persona">
+                <ref bean="Juan"/>
+                <ref bean="Antonio"/>
+            </list>
+        </property>
+    </bean>
+</beans>
