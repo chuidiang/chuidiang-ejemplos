@@ -2,6 +2,7 @@ package com.chuidiang.pruebas.spring;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.cglib.core.Local;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.format.datetime.DateFormatter;
 
@@ -19,5 +20,9 @@ public class PruebaBeanContainer {
         BeanFactory factory = new FileSystemXmlApplicationContext("src/main/config/beans.xml");
         System.out.println(factory.getBean("Juan"));
         System.out.println(factory.getBean("Pedro"));
+
+        BeanFactory factory2 = new ClassPathXmlApplicationContext("beans.xml");
+        System.out.println(factory2.getBean("Juan"));
+        System.out.println(factory2.getBean("Pedro"));
     }
 }
