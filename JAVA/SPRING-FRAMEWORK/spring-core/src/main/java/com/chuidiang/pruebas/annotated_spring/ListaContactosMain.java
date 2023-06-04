@@ -11,5 +11,9 @@ public class ListaContactosMain {
         BeanFactory factory = new FileSystemXmlApplicationContext("src/main/config/agenda-anotaciones-beans.xml");
         System.out.println(factory.getBean(ListaContactos.class));
 
+        // Si ponemos nombre a ListaPepeContactos, podemos pedirlo por nombre. Ver anotacion
+        // comentada en la clase ListaContactos.java
+        // System.out.println(factory.getBean("ListaDePepe"));
+
     }
 }
