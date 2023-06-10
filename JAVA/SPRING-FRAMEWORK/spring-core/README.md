@@ -10,5 +10,5 @@ contiene el main del ejemplo básico en el que se instancian varias clases java 
 que puedan llamarse entre ellas. También usando un fichero de configuración XML de Spring
 * [ListaContqctosMain.java](https://github.com/chuidiang/chuidiang-ejemplos/blob/master/JAVA/SPRING-FRAMEWORK/spring-core/src/main/java/com/chuidiang/pruebas/annotated_spring/ListaContactosMain.java) repite el ejemplo anterior, pero esta vez usando una mezcla de anotaciones de Spring sobre
 las clases y el fichero XML de configuración de Spring
-* [PostConstructMain.java](src%2Fmain%2Fjava%2Fcom%2Fchuidiang%2Fpruebas%2Fpostconstruct_scheduled%2FPostConstructMain.java) tiene un ejemplo de uso de init-method (fichero Spring XML) o @PostConstruct (anotaciones)
+* [PostConstructMain.java](https://github.com/chuidiang/chuidiang-ejemplos/blob/master/JAVA/SPRING-FRAMEWORK/spring-core/src/main/java/com/chuidiang/pruebas/postconstruct/PostConstructMain.java) tiene un ejemplo de uso de init-method (fichero Spring XML) o @PostConstruct (anotaciones)
 * [ScheduledMain.java](https://github.com/chuidiang/chuidiang-ejemplos/blob/master/JAVA/SPRING-FRAMEWORK/spring-core/src/main/java/com/chuidiang/pruebas/scheduled/ScheduledMain.java) tiene un ejemplo de tarea periódica con Spring usando task:scheduled (fichero Spring XML) o @Scheduled (anotacion)
