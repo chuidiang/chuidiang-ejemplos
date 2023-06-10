@@ -8,6 +8,6 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  */
 public class ScheduledMain {
     public static void main(String[] args) throws InterruptedException {
-        BeanFactory factory = new FileSystemXmlApplicationContext("src/main/config/post-construct-beans.xml");
+        BeanFactory factory = new FileSystemXmlApplicationContext("src/main/config/scheduled-beans.xml");
     }
 }

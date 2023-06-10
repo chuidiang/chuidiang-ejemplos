@@ -11,18 +11,6 @@
            http://www.springframework.org/schema/task/spring-task-4.2.xsd">
 
     <context:component-scan base-package="com.chuidiang.pruebas.scheduled"/>
-
-    <bean id="Juan" class="com.chuidiang.pruebas.spring.Persona">
-        <property name="id" value="1"/>
-        <property name="nombre" value="Juan"/>
-        <property name="fechaNacimiento" value="11/23/1943"/>
-    </bean>
-
-    <bean class="com.chuidiang.pruebas.postconstruct.PostConstructXMLSample"
-        init-method="init">
-        <property name="persona" ref="Juan"/>
-    </bean>
-
     <task:annotation-driven/>
 
     <bean id="scheduledXMLSample" class="com.chuidiang.pruebas.scheduled.ScheduledXMLSample"/>
