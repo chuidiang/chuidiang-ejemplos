@@ -1,16 +1,20 @@
-package com.chuidiang.pruebas.postconstruct_scheduled;
+package com.chuidiang.pruebas.postconstruct;
 
 import com.chuidiang.pruebas.spring.Persona;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
 /**
  * @author fjabellan 04/06/2023
  */
-public class PostConstructXMLSample {
+@Component
+public class PostConstructAnnotatedSample {
 
+    @Autowired
     Persona persona;
-    public PostConstructXMLSample(){
+    public PostConstructAnnotatedSample(){
         System.out.println("Instancian "+getClass() +" persona = "+persona);
     }
     @PostConstruct

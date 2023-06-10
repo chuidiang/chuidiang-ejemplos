@@ -1,4 +1,4 @@
-package com.chuidiang.pruebas.postconstruct_scheduled;
+package com.chuidiang.pruebas.scheduled;
 
 /**
  * @author fjabellan 04/06/2023

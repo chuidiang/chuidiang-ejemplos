@@ -10,7 +10,7 @@
            http://www.springframework.org/schema/task
            http://www.springframework.org/schema/task/spring-task-4.2.xsd">
 
-    <context:component-scan base-package="com.chuidiang.pruebas.postconstruct_scheduled"/>
+    <context:component-scan base-package="com.chuidiang.pruebas.postconstruct"/>
 
     <bean id="Juan" class="com.chuidiang.pruebas.spring.Persona">
         <property name="id" value="1"/>
@@ -18,13 +18,14 @@
         <property name="fechaNacimiento" value="11/23/1943"/>
     </bean>
 
-    <bean class="com.chuidiang.pruebas.postconstruct_scheduled.PostConstructXMLSample">
+    <bean class="com.chuidiang.pruebas.postconstruct.PostConstructXMLSample"
+        init-method="init">
         <property name="persona" ref="Juan"/>
     </bean>
 
     <task:annotation-driven/>
 
-    <bean id="scheduledXMLSample" class="com.chuidiang.pruebas.postconstruct_scheduled.ScheduledXMLSample"/>
+    <bean id="scheduledXMLSample" class="com.chuidiang.pruebas.scheduled.ScheduledXMLSample"/>
     <task:scheduled-tasks>
         <task:scheduled ref="scheduledXMLSample" method="repeat" fixed-rate="2000"/>
     </task:scheduled-tasks>

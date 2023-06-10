@@ -1,4 +1,4 @@
-package com.chuidiang.pruebas.postconstruct_scheduled;
+package com.chuidiang.pruebas.scheduled;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

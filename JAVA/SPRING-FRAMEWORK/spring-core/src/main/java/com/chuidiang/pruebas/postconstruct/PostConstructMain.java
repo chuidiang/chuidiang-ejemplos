@@ -1,4 +1,4 @@
-package com.chuidiang.pruebas.postconstruct_scheduled;
+package com.chuidiang.pruebas.postconstruct;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -6,9 +6,8 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 /**
  * @author fjabellan 04/06/2023
  */
-public class PostConstructScheduledMain {
+public class PostConstructMain {
     public static void main(String[] args) throws InterruptedException {
-        BeanFactory factory = new FileSystemXmlApplicationContext("src/main/config/post-construct-scheduled-beans.xml");
-//        Thread.sleep(10000);
+        BeanFactory factory = new FileSystemXmlApplicationContext("src/main/config/post-construct-beans.xml");
     }
 }
