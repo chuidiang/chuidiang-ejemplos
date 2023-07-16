@@ -9,8 +9,8 @@ import java.util.Random;
  */
 public class JavaUtilRandom {
     public static void main(String[] args) {
-        basicRandom();
-        seedRandom();
+//        basicRandom();
+//        seedRandom();
         rangeRandom();
     }
 

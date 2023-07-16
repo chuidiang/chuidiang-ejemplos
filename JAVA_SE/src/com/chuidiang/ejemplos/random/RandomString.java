@@ -11,7 +11,7 @@ import java.util.Random;
 public class RandomString {
     public static void main(String[] args) {
         randomStringWithBigInteger();
-        randomStringFromCharacterList();
+//        randomStringFromCharacterList();
     }
 
     private static void randomStringFromCharacterList() {
@@ -31,6 +31,6 @@ public class RandomString {
     private static void randomStringWithBigInteger() {
         // One big random number printed in base 36
         Random random = new Random();
-        System.out.println("Random String " + new BigInteger(128, random).toString(Character.MAX_RADIX));
+        System.out.println("Random String " + new BigInteger(128, random).toString(32));
     }
 }

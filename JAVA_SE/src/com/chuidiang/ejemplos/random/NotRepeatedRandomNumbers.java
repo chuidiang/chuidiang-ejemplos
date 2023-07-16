@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class NotRepeatedRandomNumbers {
     public static void main(String[] args) {
-        choose10RandomElements();
+//        choose10RandomElements();
         generate10NonRepeatedRandomNumbers();
     }
 

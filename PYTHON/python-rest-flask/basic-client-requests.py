@@ -12,3 +12,4 @@ if __name__ == '__main__':
     params = {"par1": "value1", "par2": "value2"}
     response = requests.post("http://127.0.0.1:5000/sample", headers=headers, data=data, params=params)
     print(response.content)
+    print(response.status_code)
