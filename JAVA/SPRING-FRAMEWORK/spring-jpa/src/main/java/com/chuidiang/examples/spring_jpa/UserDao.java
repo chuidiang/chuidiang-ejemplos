@@ -1,5 +1,6 @@
 package com.chuidiang.examples.spring_jpa;
 
+
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
