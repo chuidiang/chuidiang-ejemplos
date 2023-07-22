@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Getter @Setter
 @Entity
 @Table(name="user_table")
+@NamedQuery(name = "User.findByNameIgnoreCase", query = "SELECT u FROM User u WHERE LOWER(u.name) = LOWER(?1)")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

@@ -1,0 +1,1 @@
+Este proyecto es el ejemplo completo del tutorial [Ejemplo con spring data jpa](https://chuidiang.org/index.php?title=Spring_Framework_006_-_Ejemplo_con_spring_data_jpa)

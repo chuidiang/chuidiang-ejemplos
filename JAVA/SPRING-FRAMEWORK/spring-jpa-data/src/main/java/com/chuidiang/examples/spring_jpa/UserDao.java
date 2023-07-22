@@ -8,7 +8,8 @@ import java.util.List;
  * @author Chuidiang
  * @date 15/07/2023
  */
-public interface UserDao extends CrudRepository<User, Long> {
+public interface UserDao extends CrudRepository<User, Integer> {
     User findByEmail(String email);
     List<User> findByEmailOrName(String email, String name);
+    User findByNameIgnoreCase(String name);
 }

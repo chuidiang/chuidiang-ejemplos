@@ -37,5 +37,8 @@ public class SpringJpaMain {
             System.out.println(user.getId() + ", "+ user.getName() + ", "+ user.getEmail());
         });
 
+        System.out.println("Find by Name Ignore Case:");
+        User pedro = userDao.findByNameIgnoreCase("pEDRo");
+        System.out.println(pedro.getId() + ", "+ pedro.getName() + ", "+ pedro.getEmail());
     }
 }
