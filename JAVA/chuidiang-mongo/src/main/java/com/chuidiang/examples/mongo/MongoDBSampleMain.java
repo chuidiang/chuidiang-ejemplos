@@ -83,23 +83,4 @@ public class MongoDBSampleMain {
             database.drop();
         }
     }
-
-    private static void printCollections(MongoDatabase database, String title) {
-        System.out.println(MessageFormat.format("--- {0} ---", title));
-        database.listCollectionNames().forEach(collectionName -> System.out.println(collectionName));
-    }
-
-    private static void printDatabaseNames(MongoClient mongoClient, String title) {
-        MongoIterable<String> listDatabaseNames = mongoClient.listDatabaseNames();
-        System.out.println(MessageFormat.format("--- {0} ---", title));
-        listDatabaseNames.forEach(databaseName -> {
-            System.out.println(databaseName);
-        });
-    }
-
-    private static void printCollection(MongoCollection<Document> collection, String title) {
-        FindIterable<Document> documents = collection.find();
-        System.out.println(MessageFormat.format("--- {0} ---", title));
-        documents.forEach(document -> System.out.println(document));
-    }
 }
