@@ -1,20 +1,18 @@
 package com.chuidiang.examples.mongo;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.slf4j.helpers.MessageFormatter;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoIterable;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertManyResult;
 import com.mongodb.client.result.InsertOneResult;
@@ -64,6 +62,14 @@ public class MongoDBSampleMain {
             FindIterable<Document> elementsFound = collection.find(filter);
             System.out.println("\n--- find(filter) result ---");
             elementsFound.forEach(document -> System.out.println(document));
+
+            // Modificar un elemento de la colección
+            Bson newAge = Updates.set("age", 23);
+            collection.updateOne(filter, newAge);
+            elementsFound = collection.find(filter);
+            System.out.println("\n--- updateOne() result ---");
+            elementsFound.forEach(document -> System.out.println(document));
+
 
             // Borrar por key
             DeleteResult deleteResult = collection.deleteMany(filter);
