@@ -16,6 +16,7 @@ import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertManyResult;
 import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.result.UpdateResult;
 
 /**
  * Ejemplo base de datos mongo desde java
@@ -65,9 +66,10 @@ public class MongoDBSampleMain {
 
             // Modificar un elemento de la colección
             Bson newAge = Updates.set("age", 23);
-            collection.updateOne(filter, newAge);
+            UpdateResult updateOne = collection.updateOne(filter, newAge);
             elementsFound = collection.find(filter);
             System.out.println("\n--- updateOne() result ---");
+            System.out.println(updateOne.getMatchedCount());
             elementsFound.forEach(document -> System.out.println(document));
 
 
