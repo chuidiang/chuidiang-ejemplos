@@ -1,25 +1,22 @@
 package com.chuidiang.examples.mongo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bson.Document;
-import org.bson.conversions.Bson;
-
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertManyResult;
 import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.result.UpdateResult;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Ejemplo base de datos mongo desde java
+ * En este ejemplo se usan org.bson.Document como datos.
+ *
  * @author Chuidiang 
  * Sept 2023
  */
@@ -27,7 +24,7 @@ public class MongoDBSampleMain {
 
     public static void main(String[] args) {
         // Cadena de conexion con la base de datos mongo
-        String uri = "mongodb://172.17.0.2:27017";
+        String uri = "mongodb://127.0.0.1:27017";
 
         // Se abre la conexión
         try (MongoClient mongoClient = MongoClients.create(uri)) {

@@ -1,30 +1,24 @@
 package com.chuidiang.examples.mongo;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.bson.Document;
-import org.bson.codecs.configuration.CodecRegistries;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
-import org.bson.conversions.Bson;
-
 import com.mongodb.MongoClientSettings;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertManyResult;
 import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.result.UpdateResult;
+import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.conversions.Bson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Ejemplo base de datos mongo desde java
+ * En este ejemplo se usan POJO (Plain Old Java Object) como datos.
  * 
  * @author Chuidiang
  *         Sept 2023
@@ -32,11 +26,11 @@ import com.mongodb.client.result.UpdateResult;
 public class MongoDBPojosSampleMain {
     public static void main(String[] args) {
         // Cadena de conexion con la base de datos mongo
-        String uri = "mongodb://172.17.0.2:27017";
+        String uri = "mongodb://127.0.0.1:27017";
         PojoCodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
         CodecRegistry pojoCodecRegistry = CodecRegistries.fromRegistries(
                 MongoClientSettings.getDefaultCodecRegistry(), CodecRegistries.fromProviders(pojoCodecProvider));
-
+        
         // Se abre la conexión
         try (MongoClient mongoClient = MongoClients.create(uri)) {
 
@@ -78,6 +72,13 @@ public class MongoDBPojosSampleMain {
             System.out.println("\n--- updateOne() result ---");
             System.out.println(updateOne.getMatchedCount());
             elementsFound.forEach(person -> System.out.println(person));
+
+            // Reemplazar el POJO
+            Person newPedro = new Person("Pedro", 14);
+            collection.replaceOne(filter, newPedro);
+            allCollection = collection.find();
+            System.out.println("\n--- find() new pedro result ---");
+            allCollection.forEach(person -> System.out.println(person));
 
             // Borrar por key
             DeleteResult deleteResult = collection.deleteMany(filter);
