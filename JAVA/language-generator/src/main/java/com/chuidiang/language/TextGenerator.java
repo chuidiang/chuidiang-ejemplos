@@ -7,7 +7,7 @@ import java.util.Map;
 public class TextGenerator {
     public static void main(String[] args) {
         TextGenerator textGenerator = new TextGenerator();
-        textGenerator.generate("./spanish-sample.txt");
+        textGenerator.generate("./src/spanish-sample.txt");
     }
 
     private void generate(String sampleFile) {
