@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ABean {
     @Autowired
-    @Qualifier("my_other_data_base")
     MongoTemplate mongoTemplate;
 
     @Autowired
