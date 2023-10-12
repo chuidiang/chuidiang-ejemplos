@@ -38,7 +38,8 @@ public class QueryExample {
             });
 
             System.out.println("Obtener resultado por ObjectId");
-            Bson filter = Filters.eq("_id", insertedIds.get(0));
+            ObjectId objectId = new ObjectId("65259662f632644780cb614b");
+            Bson filter = Filters.eq("_id", objectId);
             documents = collection.find(filter);
             documents.forEach(document -> System.out.println(document));
 
