@@ -16,10 +16,29 @@ public class JOptionPaneExamples {
         addNumber(frame);
         addRadioButton(frame);
         addLogin(frame);
+        addPersonalization(frame);
 
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+
+    private static void addPersonalization(JFrame frame) {
+        JButton buttonBoolean = new JButton("Custom");
+        frame.getContentPane().add(buttonBoolean);
+        buttonBoolean.addActionListener(action -> {
+            JOptionPane optionPane = new JOptionPane("¿Quieres guardar el fichero?", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION, new ImageIcon("src/main/files/Actions-document-save-icon.png"));
+            JDialog dialog = optionPane.createDialog(buttonBoolean, "Salvar fichero");
+            Util.setBackgroundColor(dialog, Color.LIGHT_GRAY);
+            dialog.setVisible(true);
+            if (null!=optionPane.getValue() &&JOptionPane.OK_OPTION == (Integer)optionPane.getValue()){
+                System.out.println("El usuario quiere salvar fichero");
+            } else {
+                System.out.println("El usuario ha cancelado");
+            }
+            dialog.dispose();
+        });
+
     }
 
     private static void addLogin(JFrame frame) {
