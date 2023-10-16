@@ -1,6 +1,7 @@
 package com.chuidiang.examples.joptionpane;
 
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
 
 /**
  * @author fjabellan 16/10/2023
@@ -8,7 +9,7 @@ import javax.swing.*;
 public class NumberJTextField extends JTextField {
     public NumberJTextField () {
         super(20);
-        setDocument(new OnlyNumbersDocument());
+        ((AbstractDocument)getDocument()).setDocumentFilter(new OnlyNumbersDocumentFilter());
     }
 
     public Integer getValue (){
