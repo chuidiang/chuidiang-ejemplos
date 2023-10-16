@@ -19,6 +19,7 @@ public class JOptionPaneExamples {
         addLogin(frame);
         addPersonalization(frame);
         addBreakLine(frame);
+        addCustomButtons(frame);
 
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -26,14 +27,27 @@ public class JOptionPaneExamples {
         frame.setVisible(true);
     }
 
+    private static void addCustomButtons(JFrame frame) {
+        JButton customButtonsButton = new JButton("CustomButtons");
+        frame.getContentPane().add(customButtonsButton);
+        customButtonsButton.addActionListener(action -> {
+            int buttonPressed = JOptionPane.showOptionDialog(customButtonsButton, new JTextField(30), "The title",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                    new String[]{"Button 0", "Button 1", "Button 2", "Button 3", "Button 4"}, "Button 3");
+            System.out.println("Boton Pulsado "+buttonPressed);
+        });
+    }
+
     private static void addBreakLine(JFrame frame) {
         JButton breakButton = new JButton("Break");
         frame.getContentPane().add(breakButton);
         breakButton.addActionListener(action -> {
             JOptionPane.showMessageDialog(breakButton, "Esta linea\nesta partida\nen tres");
-            JOptionPane.showMessageDialog(breakButton, "<html>Todo esta en negrita<br>Pero podemos poner <i>cursiva</i>");
+            JOptionPane.showMessageDialog(breakButton, "<html>Todo esta en <b>negrita</b><br>Pero podemos poner <i>cursiva</i></html>");
             final JLabel label = new JLabel("<html>Esta tiene <b>negrita</b><br>y <i>cursiva</i><br>y hemos personalizado la fuente</html>");
             label.setFont(new Font("Arial", Font.PLAIN, 12));
+            label.setOpaque(true);
+            label.setForeground(Color.RED);
             JOptionPane.showMessageDialog(breakButton, label);
         });
 
@@ -43,6 +57,10 @@ public class JOptionPaneExamples {
         JButton customButton = new JButton("Custom");
         frame.getContentPane().add(customButton);
         customButton.addActionListener(action -> {
+            JOptionPane.showConfirmDialog(customButton, "¿Quieres guardar el fichero?", "Salvar Fichero",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    new ImageIcon("src/main/files/Actions-document-save-icon.png"));
+
             JOptionPane optionPane = new JOptionPane("¿Quieres guardar el fichero?",
                     JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION,
                     new ImageIcon("src/main/files/Actions-document-save-icon.png"));
