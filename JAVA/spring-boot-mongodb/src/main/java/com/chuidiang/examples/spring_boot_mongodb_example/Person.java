@@ -9,18 +9,18 @@ import org.springframework.data.annotation.Id;
 public class Person {
     @Id
     private String name;
-    private Double heigh;
+    private Double height;
 
-    public Person(String name, Double heigh) {
+    public Person(String name, Double height) {
         this.name = name;
-        this.heigh = heigh;
+        this.height = height;
     }
 
     @Override
     public String toString() {
         return "Person{" +
-                "name='" + name + '\'' +
-                ", heigh=" + heigh +
+                " name='" + name + '\'' +
+                ", height=" + height +
                 '}';
     }
 
@@ -32,11 +32,11 @@ public class Person {
         this.name = name;
     }
 
-    public Double getHeigh() {
-        return heigh;
+    public Double getHeight() {
+        return height;
     }
 
-    public void setHeigh(Double heigh) {
-        this.heigh = heigh;
+    public void setHeight(Double height) {
+        this.height = height;
     }
 }

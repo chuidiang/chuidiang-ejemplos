@@ -51,8 +51,8 @@ public class BeanWithMongoRepository {
         System.out.println(Arrays.toString(persons.toArray()));
 
         // Update de un POJO
-        Person tallPerson = personRepository.findFirstByHeighGreaterThan(1.80);
-        tallPerson.setHeigh(2.0);
+        Person tallPerson = personRepository.findFirstByHeightGreaterThan(1.80);
+        tallPerson.setHeight(2.0);
         personRepository.save(tallPerson);
 
         Optional<Person> monica = personRepository.findById("Monica");
@@ -60,7 +60,7 @@ public class BeanWithMongoRepository {
 
         // Borrado de un POJO
         personRepository.deleteById("Pedro");
-        people.forEach(person -> System.out.println("Insertado : "+ person));
+        people.forEach(person -> System.out.println("Despues de borrar : "+ person));
 
         // Borrado de la base de datos MongoDB completa
         personRepository.deleteAll();

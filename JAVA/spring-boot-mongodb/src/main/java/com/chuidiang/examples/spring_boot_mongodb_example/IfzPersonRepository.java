@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface IfzPersonRepository extends CrudRepository<Person, String> {
     List<Person> findByName(String name);
-    Person findFirstByHeighGreaterThan(double heigh);
+    Person findFirstByHeightGreaterThan(double height);
 }
