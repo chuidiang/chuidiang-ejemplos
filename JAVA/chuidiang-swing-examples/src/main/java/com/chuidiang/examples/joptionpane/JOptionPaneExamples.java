@@ -18,11 +18,25 @@ public class JOptionPaneExamples {
         addRadioButton(frame);
         addLogin(frame);
         addPersonalization(frame);
+        addBreakLine(frame);
 
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private static void addBreakLine(JFrame frame) {
+        JButton breakButton = new JButton("Break");
+        frame.getContentPane().add(breakButton);
+        breakButton.addActionListener(action -> {
+            JOptionPane.showMessageDialog(breakButton, "Esta linea\nesta partida\nen tres");
+            JOptionPane.showMessageDialog(breakButton, "<html>Todo esta en negrita<br>Pero podemos poner <i>cursiva</i>");
+            final JLabel label = new JLabel("<html>Esta tiene <b>negrita</b><br>y <i>cursiva</i><br>y hemos personalizado la fuente</html>");
+            label.setFont(new Font("Arial", Font.PLAIN, 12));
+            JOptionPane.showMessageDialog(breakButton, label);
+        });
+
     }
 
     private static void addPersonalization(JFrame frame) {
