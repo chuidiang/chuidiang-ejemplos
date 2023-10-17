@@ -1,5 +1,7 @@
 package com.chuidiang.examples.joptionpane;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 
 /**
@@ -13,5 +15,22 @@ public class Util {
                 setBackgroundColor(component1, color);
             }
         }
+    }
+
+    public static TableModel getTableModel (Object [] array){
+        DefaultTableModel tableModel = new DefaultTableModel(1, array.length);
+        for (int i = 0; i < array.length; i++) {
+            tableModel.setValueAt(array[i], 0, i);
+        }
+        return tableModel;
+    }
+
+    public static Object[] getArray(TableModel tableModel){
+        Object[] array = new Object[tableModel.getColumnCount()];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = tableModel.getValueAt(0, i);
+        }
+
+        return array;
     }
 }

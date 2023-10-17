@@ -21,11 +21,30 @@ public class JOptionPaneExamples {
         addIcon(frame);
         addBreakLine(frame);
         addCustomButtons(frame);
+        addArray(frame);
 
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private static void addArray(JFrame frame) {
+        JButton arrayButton = new JButton("Array");
+        frame.getContentPane().add(arrayButton);
+
+        arrayButton.addActionListener(event -> {
+            JTable table = new JTable(Util.getTableModel(new Integer[]{5,3,8,9}));
+            int returnedValue = JOptionPane.showOptionDialog(arrayButton, table, "Array", JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (JOptionPane.OK_OPTION==returnedValue){
+                System.out.println(Arrays.toString(Util.getArray(table.getModel())));
+            } else {
+                System.out.println("cancelado");
+            }
+        });
+
+
     }
 
     private static void addCustomButtons(JFrame frame) {
