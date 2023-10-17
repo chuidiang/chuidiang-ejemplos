@@ -6,6 +6,8 @@ import javax.swing.text.DocumentFilter;
 import java.util.regex.Pattern;
 
 /**
+ * Para usar en un JTextField. Verifica que lo que se escribe cumple uno de los patrones REGEX, el que
+ * se le haya pasado en el constructor.
  * @author fjabellan 16/10/2023
  */
 public class OnlyNumbersDocumentFilter extends DocumentFilter {

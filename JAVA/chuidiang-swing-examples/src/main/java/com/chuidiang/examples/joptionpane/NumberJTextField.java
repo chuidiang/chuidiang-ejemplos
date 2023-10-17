@@ -4,6 +4,9 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 
 /**
+ * Editor que obliga a que lo que se escriba en él cumpla una expresión regular.
+ * Esta pensado para enteros y doubles, por lo que el metodo getValue() es muy
+ * especifico para eso.
  * @author fjabellan 16/10/2023
  */
 public class NumberJTextField extends JTextField {

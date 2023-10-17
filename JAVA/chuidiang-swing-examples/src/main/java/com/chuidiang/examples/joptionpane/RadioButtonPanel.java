@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Panel con tres radio button, uno para cada color básico.
  * @author fjabellan 16/10/2023
  */
 public class RadioButtonPanel extends JPanel {
