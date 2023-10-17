@@ -29,6 +29,11 @@ public class JOptionPaneExamples {
         frame.setVisible(true);
     }
 
+    /**
+     * Mete un array de Object[] en un JOptionPane con un JTable editable.
+     * Permite mostrar y modificar un array en un JOptionPane
+     * @param frame
+     */
     private static void addArray(JFrame frame) {
         JButton arrayButton = new JButton("Array");
         frame.getContentPane().add(arrayButton);
@@ -43,10 +48,12 @@ public class JOptionPaneExamples {
                 System.out.println("cancelado");
             }
         });
-
-
     }
 
+    /**
+     * JOptionPane con botones totalmente definidos por código. No usa los botones de defecto de OK, Cancel, etc.
+     * @param frame
+     */
     private static void addCustomButtons(JFrame frame) {
         JButton customButtonsButton = new JButton("CustomButtons");
         frame.getContentPane().add(customButtonsButton);
@@ -61,6 +68,10 @@ public class JOptionPaneExamples {
         });
     }
 
+    /**
+     * Tres formas de dar formato (estilo) al texto mostrado en el JOptionPane
+     * @param frame
+     */
     private static void addBreakLine(JFrame frame) {
         JButton breakButton = new JButton("Break");
         frame.getContentPane().add(breakButton);
@@ -78,6 +89,10 @@ public class JOptionPaneExamples {
 
     }
 
+    /**
+     * Cambio de color de fondo de JOptionPane.
+     * @param frame
+     */
     private static void addBackground(JFrame frame) {
         JButton backgroundButton = new JButton("Background");
         frame.getContentPane().add(backgroundButton);
@@ -97,9 +112,12 @@ public class JOptionPaneExamples {
             }
             dialog.dispose();
         });
-
     }
 
+    /**
+     * Poner un icono propio en JOptionPane
+     * @param frame
+     */
     private static void addIcon(JFrame frame) {
         JButton backgroundButton = new JButton("Background");
         frame.getContentPane().add(backgroundButton);
@@ -108,9 +126,12 @@ public class JOptionPaneExamples {
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
                     new ImageIcon("src/main/files/Actions-document-save-icon.png"))
         );
-
     }
 
+    /**
+     * JOptionPane con un formulario de Login
+     * @param frame
+     */
     private static void addLogin(JFrame frame) {
         JButton loginButton = new JButton("Login");
         frame.getContentPane().add(loginButton);
@@ -128,10 +149,12 @@ public class JOptionPaneExamples {
                 System.out.println("El usuario ha cancelado");
             }
         });
-
-
     }
 
+    /**
+     * JOptionPane con tres radio button.
+     * @param frame
+     */
     private static void addRadioButton(JFrame frame) {
         JButton radioButton = new JButton("Radio");
         frame.getContentPane().add(radioButton);
@@ -148,9 +171,12 @@ public class JOptionPaneExamples {
                 System.out.println("El usuario ha cancelado");
             }
         });
-
     }
 
+    /**
+     * JOptionPane para pedir un entero
+     * @param frame
+     */
     private static void addInteger(JFrame frame) {
         JButton numberButton = new JButton("Integer");
         frame.getContentPane().add(numberButton);
@@ -167,6 +193,10 @@ public class JOptionPaneExamples {
         });
     }
 
+    /**
+     * JOptionPane para pedir un double
+     * @param frame
+     */
     private static void addDouble(JFrame frame) {
         JButton numberButton = new JButton("Double");
         frame.getContentPane().add(numberButton);
@@ -183,6 +213,10 @@ public class JOptionPaneExamples {
         });
     }
 
+    /**
+     * JOptionPane para seleccionar un boolean (true o false)
+     * @param frame
+     */
     private static void addBoolean(JFrame frame) {
         JButton booleanButton = new JButton("Boolean");
         frame.getContentPane().add(booleanButton);
