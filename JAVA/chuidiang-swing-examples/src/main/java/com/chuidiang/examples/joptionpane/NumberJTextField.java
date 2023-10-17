@@ -16,8 +16,15 @@ public class NumberJTextField extends JTextField {
     }
 
     public Number getValue (){
-        if ("".equals(getText())){
+        String text = getText();
+        if ("".equals(text)){
             return null;
+        }
+        if (".".equals(text) || "+.".equals(text) || "-.".equals(text)){
+            return 0.0;
+        }
+        if ("+".equals(text) || "-".equals(text)){
+            return 0;
         }
         if (OnlyNumbersDocumentFilter.REGEX_INT.equals(regex)) {
             return Integer.parseInt(getText());
