@@ -225,7 +225,7 @@ public class JOptionPaneExamples {
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
             if (JOptionPane.OK_OPTION == returnedValue) {
-                System.out.println("El usuario ha introducido " + booleanRadioButtonPanel.getSelectedColor());
+                System.out.println("El usuario ha introducido " + booleanRadioButtonPanel.getBooleanValue());
             } else {
                 System.out.println("El usuario ha cancelado");
             }

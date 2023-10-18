@@ -25,7 +25,7 @@ public class BooleanRadioButtonPanel extends JPanel {
         add(radio2);
     }
 
-    public Boolean getSelectedColor(){
+    public Boolean getBooleanValue(){
         switch (group.getSelection().getActionCommand()){
             case "TRUE":
                 return Boolean.TRUE;
