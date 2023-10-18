@@ -20,15 +20,26 @@ public class NumberJTextField extends JTextField {
 
     public Number getValue (){
         String text = getText();
+
+        // Si el usuario deja la entrada en blanco, devolvemos null.
         if ("".equals(text)){
             return null;
         }
+
+        // La expresion regular permite que el usuario deje estos valores
+        // suponemos que son double 0.0
         if (".".equals(text) || "+.".equals(text) || "-.".equals(text)){
             return 0.0;
         }
+
+        // La expresion regular permite que el usuario deje estos valores
+        // suponemos que son enteros 0
         if ("+".equals(text) || "-".equals(text)){
             return 0;
         }
+
+        // El resto de posibles entradas que haga se validan con la expresión regular
+        // que corresponda.
         if (OnlyNumbersDocumentFilter.REGEX_INT.equals(regex)) {
             return Integer.parseInt(getText());
         } else {

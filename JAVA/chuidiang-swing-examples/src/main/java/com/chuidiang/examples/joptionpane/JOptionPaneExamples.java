@@ -13,8 +13,10 @@ public class JOptionPaneExamples {
         frame.getContentPane().setLayout(new FlowLayout());
 
         addBoolean(frame);
+        addBooleanRadio(frame);
         addInteger(frame);
         addDouble(frame);
+        addDoubleText(frame);
         addRadioButton(frame);
         addLogin(frame);
         addBackground(frame);
@@ -28,6 +30,20 @@ public class JOptionPaneExamples {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private static void addDoubleText(JFrame frame) {
+        JButton doubleTextButton = new JButton("DoubleText");
+        frame.getContentPane().add(doubleTextButton);
+
+        doubleTextButton.addActionListener(event -> {
+            String enteredValue = JOptionPane.showInputDialog(doubleTextButton, "Introduce un Double", 32.4);
+            if (null==enteredValue){
+                System.out.println("El usuario ha cancelado la operacion");
+            } else {
+                System.out.println("El usuario ha introducido "+Double.parseDouble(enteredValue));
+            }
+        });
     }
 
     private static void addArrayAsString(JFrame frame) {
@@ -198,6 +214,24 @@ public class JOptionPaneExamples {
         });
     }
 
+    private static void addBooleanRadio(JFrame frame) {
+        JButton booleanRadioButton = new JButton("BooleanRadio");
+        frame.getContentPane().add(booleanRadioButton);
+
+        booleanRadioButton.addActionListener(action -> {
+            BooleanRadioButtonPanel booleanRadioButtonPanel = new BooleanRadioButtonPanel();
+
+            int returnedValue = JOptionPane.showOptionDialog(booleanRadioButton, booleanRadioButtonPanel, "Elige Boolean",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            if (JOptionPane.OK_OPTION == returnedValue) {
+                System.out.println("El usuario ha introducido " + booleanRadioButtonPanel.getSelectedColor());
+            } else {
+                System.out.println("El usuario ha cancelado");
+            }
+        });
+    }
+
     /**
      * JOptionPane para pedir un entero
      * @param frame
@@ -248,7 +282,7 @@ public class JOptionPaneExamples {
         booleanButton.addActionListener(action -> {
             Boolean selectedValue = (Boolean) JOptionPane.showInputDialog(booleanButton, "Boolean", "Selecciona Boolean",
                     JOptionPane.QUESTION_MESSAGE, null, new Boolean[]{Boolean.TRUE, Boolean.FALSE},
-                    Boolean.TRUE);
+                    Boolean.FALSE);
             if (null == selectedValue) {
                 System.out.println("Se ha cancelado");
             } else {
