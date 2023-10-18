@@ -20,8 +20,9 @@ public class JOptionPaneExamples {
         addBackground(frame);
         addIcon(frame);
         addBreakLine(frame);
-        addCustomButtons(frame);
-        addArray(frame);
+        addCustomButtonsAsText(frame);
+        addArrayAsJtable(frame);
+        addArrayAsString(frame);
 
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -29,13 +30,37 @@ public class JOptionPaneExamples {
         frame.setVisible(true);
     }
 
+    private static void addArrayAsString(JFrame frame) {
+        JButton arrayButton = new JButton("ArrayString");
+        frame.getContentPane().add(arrayButton);
+
+        arrayButton.addActionListener(event -> {
+            int [] array = {4,5,2,3,1};
+            String arrayAsString= Integer.toString(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                arrayAsString += ","+array[i];
+            }
+            final String returnedArray = JOptionPane.showInputDialog(arrayButton, "Introduce Array de int", arrayAsString);
+            if (null==returnedArray){
+                System.out.println("Usuario ha cancelado la entrada");
+            } else {
+                final String[] tokens = returnedArray.split(",");
+                int [] newArray = new int[tokens.length];
+                for (int i = 0; i < tokens.length; i++) {
+                    newArray[i] = Integer.parseInt(tokens[i]);
+                }
+                System.out.println("El usuario ha introducido "+Arrays.toString(newArray));
+            }
+        });
+    }
+
     /**
      * Mete un array de Object[] en un JOptionPane con un JTable editable.
      * Permite mostrar y modificar un array en un JOptionPane
      * @param frame
      */
-    private static void addArray(JFrame frame) {
-        JButton arrayButton = new JButton("Array");
+    private static void addArrayAsJtable(JFrame frame) {
+        JButton arrayButton = new JButton("ArrayJTable");
         frame.getContentPane().add(arrayButton);
 
         arrayButton.addActionListener(event -> {
@@ -54,7 +79,7 @@ public class JOptionPaneExamples {
      * JOptionPane con botones totalmente definidos por código. No usa los botones de defecto de OK, Cancel, etc.
      * @param frame
      */
-    private static void addCustomButtons(JFrame frame) {
+    private static void addCustomButtonsAsText(JFrame frame) {
         JButton customButtonsButton = new JButton("CustomButtons");
         frame.getContentPane().add(customButtonsButton);
 
