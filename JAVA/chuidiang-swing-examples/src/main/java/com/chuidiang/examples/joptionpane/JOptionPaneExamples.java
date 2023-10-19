@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class JOptionPaneExamples {
     public static void main(String[] args) {
         JFrame frame = new JFrame("JOptionPane Examples");
-        frame.getContentPane().setLayout(new FlowLayout());
+        frame.getContentPane().setLayout(new GridLayout(5,4));
 
         addBoolean(frame);
         addBooleanRadio(frame);
@@ -25,11 +25,101 @@ public class JOptionPaneExamples {
         addCustomButtonsAsText(frame);
         addArrayAsJtable(frame);
         addArrayAsString(frame);
+        addTimeoutMessage(frame);
+        addTimeoutInput(frame);
 
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    /**
+     * Se muestra un JOptionPane con mensaje que se cierra solo, pasados 5 segundos, si
+     * el usuario no lo cierra antes.
+     * Necesitamos el JDialog del JOptionPane para poder cerrarlo, por ello no podemos
+     * llamar directamente a los métodos estáticos de JOptionPane. En su lugar, instanciamos
+     * JOPtionPane y le pedimos que cree y nos devuelva el JDialog.
+     * @param frame
+     */
+    private static void addTimeoutInput(JFrame frame) {
+        JButton timeoutInputButton = new JButton("TimeInput");
+        frame.getContentPane().add(timeoutInputButton);
+        timeoutInputButton.addActionListener(event ->{
+
+            // Se instancia y configura JOptionPane
+            JOptionPane optionPane = new JOptionPane("5 segundos para meter un dato",
+                    JOptionPane.QUESTION_MESSAGE);
+            optionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
+            optionPane.setInitialValue("Soy el dato");
+            optionPane.setWantsInput(true);
+
+            // Se obtiene el JDialog
+            JDialog dialog = optionPane.createDialog(timeoutInputButton, "Cierrame!");
+
+            // Se lanza un hilo que cierre el JDialog pasados 5 segundos.
+            // Es importante lanzarlo antes de hacer visible el dialogo, puesto que al ser un
+            // dialogo modal, setVisible(true) bloquea el codigo hasta que se cierre el dialogo.
+            new Thread( () -> {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                dialog.setVisible(false);
+            }).start();
+
+            // Se visualiza el dialogo. Nos quedamos bloqueados en esta llamada hasta que alguien
+            // cierre el dialogo.
+            dialog.setVisible(true);
+
+            // Cerrado el dialogo, liberamos memoria
+            dialog.dispose();
+
+            // Analizamos lo que ha pasado
+            //
+            // getValue() es el botón que ha pulsado el usuario. Si no ha tenido tiempo de pulsar ninguno
+            // getValue() es UNINITIALIZED_VALUE, así que es el hilo el que ha cerrado el dialogo
+            if (JOptionPane.UNINITIALIZED_VALUE.equals(optionPane.getValue())) {
+                System.out.println("La ventana se ha cerrado por timeout");
+                return;
+            }
+
+            // Si es el usuario el que ha cerrado el dialogo, el valor que ha introducido getInputValue()
+            // vale UNINITIALIZED_VALUE si ha cancelado la operación, no ha introducido dato.
+            if (JOptionPane.UNINITIALIZED_VALUE.equals(optionPane.getInputValue())){
+                System.out.println("El usuario ha cancelado la operacion");
+                return;
+            }
+
+            // Si no se cumple ninguna de las condiciones anteriores, es que ha pulsado OK/Aceptar, así
+            // que getInputValue() devuelve lo que ha introducido.
+            System.out.println("El usuario ha introducido " + optionPane.getInputValue());
+        });
+
+    }
+
+    private static void addTimeoutMessage(JFrame frame) {
+        JButton timeoutMessageButton = new JButton("TimeMessage");
+        frame.getContentPane().add(timeoutMessageButton);
+        timeoutMessageButton.addActionListener(event ->{
+
+            JOptionPane optionPane = new JOptionPane("Si no me cierras,\n me cierro yo solo",
+                    JOptionPane.OK_CANCEL_OPTION);
+
+            JDialog dialog = optionPane.createDialog(timeoutMessageButton, "Cierrame!");
+            new Thread( () -> {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                dialog.setVisible(false);
+            }).start();
+
+            dialog.setVisible(true);
+            dialog.dispose();
+        });
     }
 
     private static void addDoubleText(JFrame frame) {
