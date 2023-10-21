@@ -25,7 +25,7 @@ public class JasperMain {
         JasperPrint print = JasperFillManager.fillReport(report, parameters, conn);
 
         JasperExportManager.exportReportToPdfFile(print,
-                "build/Blank_A4.pdf");
+                "target/Blank_A4.pdf");
 
         //Para visualizar el pdf directamente desde java
         JasperViewer.viewReport(print, false);
