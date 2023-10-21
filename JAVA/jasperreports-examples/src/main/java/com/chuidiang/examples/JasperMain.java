@@ -15,13 +15,13 @@ public class JasperMain {
                 "src/main/files/Blank_A4.jrxml");
 
         Map<String,Object> parameters = new HashMap<>();
-        parameters.put("the_code","pepe2");
+        parameters.put("the_code","UA502");
         parameters.put("the_image","src/main/files/the_image.png");
 
         Class.forName("org.postgresql.Driver");
         Connection conn = null;
         conn = DriverManager.getConnection(
-                "jdbc:postgresql://localhost/prueba","postgres", "postgres");
+                "jdbc:postgresql://localhost/chuidiang-examples","postgres", "postgres");
         JasperPrint print = JasperFillManager.fillReport(report, parameters, conn);
 
         JasperExportManager.exportReportToPdfFile(print,

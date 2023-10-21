@@ -1,13 +1,14 @@
-apply plugin: 'java'
+apply plugin: 'java-library'
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://jaspersoft.jfrog.io/jaspersoft/jaspersoft-repo'
+    }
 }
 
 dependencies {
-    compile('net.sf.jasperreports:jasperreports:6.7.0') {
-        exclude group:'com.lowagie'
-    }
-    compile group: 'com.lowagie', name: 'itext', version: '2.1.7'
-    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.4'
+
+    implementation group: 'net.sf.jasperreports', name: 'jasperreports', version: '6.20.6'
+    api group: 'org.postgresql', name: 'postgresql', version: '42.2.4'
 }
