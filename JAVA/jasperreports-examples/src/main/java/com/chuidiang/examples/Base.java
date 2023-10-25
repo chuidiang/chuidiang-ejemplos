@@ -1,8 +1,6 @@
 package com.chuidiang.examples;
 
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.export.JRXlsExporter;
-import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.view.JasperViewer;
 
 import java.sql.Connection;
@@ -27,7 +25,10 @@ public class Base {
      * @param parameters
      * @throws JRException
      */
-    public static void doStuffing(String jrxmlFile, Map<String, Object> parameters) throws JRException {
+    public static JasperPrint doStuffing(String jrxmlFile, Map<String, Object> parameters) throws JRException {
+
+        JasperPrint print=null;
+
         JasperReport report = JasperCompileManager.compileReport(
                 jrxmlFile);
 
@@ -43,7 +44,7 @@ public class Base {
 
         try (Connection conn = DriverManager.getConnection(
                 "jdbc:postgresql://localhost/chuidiang-examples","postgres", "postgres")) {
-            JasperPrint print = JasperFillManager.fillReport(report, parameters, conn);
+            print = JasperFillManager.fillReport(report, parameters, conn);
 
             JasperExportManager.exportReportToPdfFile(print,
                     "target/report.pdf");
@@ -51,19 +52,10 @@ public class Base {
             //Para visualizar el pdf directamente desde java
             JasperViewer.viewReport(print, false);
 
-            // Lo exporta a excel
-            JRXlsExporter exporter = new JRXlsExporter();
-            exporter.setParameter(JRXlsExporterParameter.JASPER_PRINT, print);
-            exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "fichero.xls");
-            exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
-            exporter.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
-            exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
-            exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
-            exporter.exportReport();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        return print;
     }
 }
