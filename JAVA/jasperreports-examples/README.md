@@ -29,6 +29,8 @@ fivhero CSV desde Java](https://chuidiang.org/index.php?title=Generar_informe_Ja
 [Usar Java Bean cooo Data Source en Jaser Studio](https://chuidiang.org/index.php?title=Informe_Jasper_Report_desde_Java_Bean) y [Generar informe 
 Jasper con Java Beans desde Java](https://chuidiang.org/index.php?title=Generar_informe_Jasper_Report_con_Beans_desde_Java)
 
-
+**JasperExcelMain.java** corresponde a [Generar un informe Excel con Jasper 
+Reports](https://chuidiang.org/index.php?
+title=Generar_informe_Excel_con_Jasper_Report)
 
 
