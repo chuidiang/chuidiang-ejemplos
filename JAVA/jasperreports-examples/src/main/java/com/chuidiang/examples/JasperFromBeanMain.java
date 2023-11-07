@@ -2,7 +2,6 @@ package com.chuidiang.examples;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.data.JRCsvDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.UnsupportedEncodingException;
@@ -31,5 +30,8 @@ public class JasperFromBeanMain {
 
         // Mostrar el informe en una ventana
         JasperViewer.viewReport(jasperPrint);
+
+        // Salvarlo en fichero
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "target/report.pdf");
     }
 }
