@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset name="Custom Rules"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+    <description>
+        Custom Rules
+    </description>
+
+    <exclude-pattern>.*/BackupMySQL\.java</exclude-pattern>
+    <exclude-pattern>.*/arrays/.*</exclude-pattern>
+
+    <!-- Now we'll customize a rule's property value -->
+    <rule ref="category/java/design.xml/CyclomaticComplexity">
+        <properties>
+            <property name="classReportLevel" value="80" />
+            <property name="methodReportLevel" value="10" />
+            <property name="cycloOptions" value="" />
+        </properties>
+    </rule>
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="UnusedPrivateMethod"/>
+    </rule>
+</ruleset>
