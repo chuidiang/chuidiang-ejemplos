@@ -3,13 +3,12 @@ package com.chuidiang.examples;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * Unit test for simple App.
+ * @author Chuidiang
+ * @date 11/11/2023
  */
-@Ignore
 public class CalculatorVintageTest
 {
     private Calculator calculator;

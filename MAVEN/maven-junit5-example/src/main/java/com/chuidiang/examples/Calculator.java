@@ -1,8 +1,8 @@
 package com.chuidiang.examples;
 
 /**
- * Hello world!
- *
+ * @author Chuidiang
+ * @date 11/11/2023
  */
 public class Calculator
 {
