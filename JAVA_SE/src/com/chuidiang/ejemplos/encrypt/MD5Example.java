@@ -1,14 +1,14 @@
 package com.chuidiang.ejemplos.encrypt;
 
-import java.security.MessageDigest;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.MessageDigestAlgorithms;
+
+import java.security.MessageDigest;
 
 /**
  * Ejemplo para extraer MD5 de una cadena de texto. Como los bytes obtenidos no
  * son legibles, los escribimos en hexadecimal y codificado base 64
- * con ayuda de la librería apache commons-codec.
+ * con ayuda de la librerÃ­a apache commons-codec.
  * 
  * @author Chuidiang
  * 
@@ -27,7 +27,7 @@ public class MD5Example {
       }
       System.out.println();
 
-      // Se escribe codificado base 64. Se necesita la librería
+      // Se escribe codificado base 64. Se necesita la librerÃ­a
       // commons-codec-x.x.x.jar de Apache
       byte[] encoded = Base64.encodeBase64(digest);
       System.out.println(new String(encoded));

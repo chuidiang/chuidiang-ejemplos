@@ -7,7 +7,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Ejemplo de extracion de los enlaces de una pagina usando HTMLUnit.
- * Necesitas las librerías de HTMLUnit
+ * Necesitas las librerÃ­as de HTMLUnit
  *  
  * @author Chuidiang
  *

@@ -24,7 +24,7 @@ public class JdbcBatchInsertUpdate {
                { "juan", "alvarez", "sanchez" },
                { "antonio", "rodriquez", "lopez" } };
 
-         // La conexión a la base de datos
+         // La conexiÃ³n a la base de datos
          Class.forName("com.mysql.jdbc.Driver");
          Connection conexion = DriverManager.getConnection(
                "jdbc:mysql://localhost:3306/pruebas", "root", "");
@@ -35,7 +35,7 @@ public class JdbcBatchInsertUpdate {
                      "insert into persona (nombre,apellido1,apellido2) values (?,?,?)",
                      Statement.RETURN_GENERATED_KEYS);
 
-         // Vamos añadiendo datos y añadiendolos al batch.
+         // Vamos aÃ±adiendo datos y aÃ±adiendolos al batch.
          for (String[] dato : datos) {
             ps.setString(1, dato[0]);
             ps.setString(2, dato[1]);

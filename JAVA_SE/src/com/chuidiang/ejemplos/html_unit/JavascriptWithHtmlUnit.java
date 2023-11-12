@@ -4,10 +4,10 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Ejemplo tonto con HTML Unit para ver c髆o se ejecuta el c骴igo javascript de la p醙ina
- * y c髆o puede ejecutarse a posteriori m醩 c骴igo javascript sobre la p醙ina.
+ * Ejemplo tonto con HTML Unit para ver c贸mo se ejecuta el c贸贸igo javascript de la p谩gina
+ * y c贸mo puede ejecutarse a posteriori m谩s c贸digo javascript sobre la p谩gina.
  * 
- * Necesitas todas las librer韆s que vienen con HTMLUnit.
+ * Necesitas todas las librer铆as que vienen con HTMLUnit.
  * 
  * @author Chuidiang
  */
@@ -20,7 +20,7 @@ public class JavascriptWithHtmlUnit {
       // Sale "hola", puesto que se ha ejecutado el codigo javascript de la pagina
       System.out.println(page.getElementById("unDiv").getTextContent());
       
-      // Cambiamos el contenido usando funciones est醤dar de javascript en navegador
+      // Cambiamos el contenido usando funciones est锟絥dar de javascript en navegador
       page.executeJavaScript("document.getElementById(\"unDiv\").innerHTML=\"que tal?\"");
       System.out.println(page.getElementById("unDiv").getTextContent());
       

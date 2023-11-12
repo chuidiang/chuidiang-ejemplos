@@ -22,7 +22,7 @@ public class RemoveSpacesFromString {
       System.out.println("--"+text.replaceAll("^\\s*","")+"--");
       System.out.println();
       
-      // Elimina espacios, tabuladores y retornos detr·s.
+      // Elimina espacios, tabuladores y retornos detr√°s.
       System.out.println("--"+text.replaceAll("\\s*$","")+"--");
       System.out.println();
    }

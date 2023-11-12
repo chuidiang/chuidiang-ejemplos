@@ -1,15 +1,14 @@
 package com.chuidiang.ejemplos.encrypt;
 
-import java.security.Key;
-
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
 
 /**
  * Ejemplo de encriptado y desencriptado con algoritmo AES.
  * Se apoya en RSAAsymetricCrypto.java para salvar en fichero
- * o recuperar la clave de encriptación.
+ * o recuperar la clave de encriptaciÃ³n.
  * 
  * @author Chuidiang
  *
