@@ -9,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * Ejemplo de encriptado y desencriptado con algoritmo AES.
  * Se apoya en RSAAsymetricCrypto.java para salvar en fichero
- * o recuperar la clave de encriptación.
+ * o recuperar la clave de encriptaciÃ³n.
  * 
  * @author Chuidiang
  *

@@ -16,7 +16,7 @@ import javax.crypto.Cipher;
 
 /**
  * Ejemplo sencillo de encriptado/desencriptado con algoritmo RSA. Se comenta
- * tambien como guardar las claves en fichero y recuperarlas después.
+ * tambien como guardar las claves en fichero y recuperarlas despuÃ©s.
  * 
  * @author Chuidiang
  */
