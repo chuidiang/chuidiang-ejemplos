@@ -6,7 +6,11 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
+/**
+ * Comentario para javadoc
+ */
 public class ServerSocket {
+   /** Çomentario para javadoc */
    public static void main(String[] args) throws IOException {
       ServerSocketChannel server = ServerSocketChannel.open();
       server.bind(new InetSocketAddress("127.0.0.1", 5557));

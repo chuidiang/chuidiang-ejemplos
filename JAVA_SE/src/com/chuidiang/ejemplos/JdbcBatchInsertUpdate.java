@@ -34,7 +34,7 @@ public class JdbcBatchInsertUpdate {
                             "insert into persona (nombre,apellido1,apellido2) values (?,?,?)",
                             Statement.RETURN_GENERATED_KEYS)) {
 
-               // Vamos a�adiendo datos y a�adiendolos al batch.
+               // Vamos añadiendo datos y añadiendolos al batch.
                for (String[] dato : datos) {
                   ps.setString(1, dato[0]);
                   ps.setString(2, dato[1]);

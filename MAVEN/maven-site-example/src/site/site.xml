@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Libreria Grafica en Java">
+
+    <bannerLeft>
+        <name>Chuwiki</name>
+        <src>images/serpi.gif</src>
+        <href>https://chuidiang.org/</href>
+    </bannerLeft>
+
+    <bannerRight>
+        <src>
+            http://i.creativecommons.org/l/by-nc-sa/2.5/es/88x31.png
+        </src>
+        <href>
+            https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es
+        </href>
+    </bannerRight>
+
+    <body>
+        <links>
+            <item name="Chuwiki"
+                  href="https://chuidiang.org" />
+            <item name="Foro" href="https://foro.chuidiang.org/" />
+            <item name="Blog" href="https://blog.chuidiang.org/" />
+        </links>
+
+        <menu name="Ejemplo de maven-site-plugin">
+            <item name="Introducciónn" href="indice.html" />
+            <item name="Descarga" href="download.html" />
+            <item name="Ejemplos" href="ejemplos.html" />
+        </menu>
+
+        <menu name="Información">
+            <item name="Licencia" href="licencia.html" />
+            <item name="Desarrolladores" href="desarrolladores.html" />
+        </menu>
+
+        <menu name="Informes">
+            <item name="Tests" href="surefire-report.html" />
+            <item name="Cobertura" href="jacoco/index.html" />
+            <item name="Javadoc" href="apidocs/index.html" />
+            <item name="Fuentes" href="xref/index.html" />
+            <item name="Métricas" href="pmd.html" />
+        </menu>
+    </body>
+</project>

@@ -1,9 +1,9 @@
 package com.chuidiang.ejemplos.encrypt;
 
-import java.security.MessageDigest;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.MessageDigestAlgorithms;
+
+import java.security.MessageDigest;
 
 /**
  * Ejemplo para extraer MD5 de una cadena de texto. Como los bytes obtenidos no
