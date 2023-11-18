@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>maven-site-example</name>
+    <description>Ejemplo de maven-site-plugin</description>
     <url>https://chuidiang.org</url>
 
     <properties>
