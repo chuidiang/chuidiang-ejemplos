@@ -118,9 +118,6 @@
                     </execution>
                 </executions>
             </plugin>
-=======
-
->>>>>>> bc5a0a466aab4fffbb2411fe1f41676b29f7892c
         </plugins>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
@@ -141,9 +138,6 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.6.0</version>
                 </plugin>
-<<<<<<< HEAD
-            </plugins>
-=======
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
@@ -163,7 +157,6 @@
                     </executions>
 				</plugin>
 			</plugins>
->>>>>>> bc5a0a466aab4fffbb2411fe1f41676b29f7892c
         </pluginManagement>
     </build>
     <reporting>
