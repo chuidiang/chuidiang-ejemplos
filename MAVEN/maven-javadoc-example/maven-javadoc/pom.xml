@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>maven-javadoc-example</artifactId>
+    <groupId>com.chuidiang</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>maven-javadoc</artifactId>
+
+  <name>maven-javadoc</name>
+
+  <!-- Colocando el plugin javadoc en el apartado reporting, se generará automáticamente
+       la documentación javadoc con el comando mvn site -->
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <id>custom</id>
+            <configuration>
+              <doclet>com.chuidiang.doclet.DocletExample</doclet>
+              <docletArtifact>
+                <groupId>com.chuidiang</groupId>
+                <artifactId>maven-doclet</artifactId>
+                <version>1.0-SNAPSHOT</version>
+              </docletArtifact>
+            </configuration>
+          </reportSet>
+        </reportSets>
+<!--        <configuration>-->
+<!--          <excludePackageNames>com.chuidiang.exclude</excludePackageNames>-->
+<!--        </configuration>-->
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <!-- Colocando el plugin javadoc en el apartado build, se puede generar sólo la documentación
+       javadoc con mvn javadoc:javadoc -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+<!--        <configuration>-->
+<!--          <excludePackageNames>com.chuidiang.exclude</excludePackageNames>-->
+<!--        </configuration>-->
+        <configuration>
+          <doclet>com.chuidiang.doclet.DocletExample</doclet>
+          <docletArtifact>
+            <groupId>com.chuidiang</groupId>
+            <artifactId>maven-doclet</artifactId>
+            <version>1.0-SNAPSHOT</version>
+          </docletArtifact>
+          <useStandardDocletOptions>false</useStandardDocletOptions>
+          <additionalOptions>
+            <additionalOption>-myCustomOption</additionalOption>
+            <additionalOption>MyOption</additionalOption>
+          </additionalOptions>
+        </configuration>
+
+      </plugin>
+    </plugins>
+  </build>
+</project>
