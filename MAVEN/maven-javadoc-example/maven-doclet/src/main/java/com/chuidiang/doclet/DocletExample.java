@@ -43,7 +43,6 @@ public class DocletExample implements Doclet {
         enclosedElements.forEach(element -> {
             printEnclosedElements(tree, element);
         });
-
     }
 
     public void printComments(DocTrees trees, Element e) {
@@ -66,43 +65,80 @@ public class DocletExample implements Doclet {
     @Override
     public Set<? extends Option> getSupportedOptions() {
         Option[] options = {
-                new Option() {
-                    private final List<String> someOption = Arrays.asList(
-                            "-myCustomOption"
-                    );
+new Option() {
+    /**
+     * Una descripción de para qué sirve nuestra opción para enseñársela al usuario.
+     * @return
+     */
+    @Override
+    public String getDescription() {
+        return "my custom option";
+    }
 
-                    @Override
-                    public int getArgumentCount() {
-                        return 1;
-                    }
+    /**
+     * Qué tipo de opcion. Hay STANDARD, EXTENDED y OTHER. Habitualmente usaremos
+     * STANDARD
+     * @return
+     */
+    @Override
+    public Option.Kind getKind() {
+        return Option.Kind.STANDARD;
+    }
 
-                    @Override
-                    public String getDescription() {
-                        return "my custom option";
-                    }
+    /**
+     * Debemos devolver todos los pasibles alias para nuestra opción. Por ejemplo
+     * puede ser -myCustomOption o su forma abreviada "-co" o su forma expandida
+     * "-my-custom-option"
+     */
+    @Override
+    public List<String> getNames() {
+        return Arrays.asList(
+                "-myCustomOption", "-co", "-my-custom-option");
+    }
 
-                    @Override
-                    public Option.Kind getKind() {
-                        return Option.Kind.STANDARD;
-                    }
+    /**
+     * Indicamos cuantos valores lleva detrás nuestra opción. Por ejemplo, si en
+     * línea de comandos ponemos
+     * javadoc -co valor1 valor2 valor3
+     * y en este método devolvermos 1, solo nos pasarán valor1 como parte de nuestra opción.
+     * Si ponemos 2, nos pasaraán valor1 y valor2, etc.
+     * @return
+     */
+    @Override
+    public int getArgumentCount() {
+        return 1;
+    }
 
-                    @Override
-                    public List<String> getNames() {
-                        return someOption;
-                    }
+    /**
+     * Una descripción de qué tipo de valor esperamos para nuestra opción. Algo com "path de los
+     * fuentes", "autor", "comentario". Es para mostrarle al usuario y que sepa qué tipo de dato
+     * espera nuestra opción.
+     * @return
+     */
+    @Override
+    public String getParameters() {
+        return "any text";
+    }
 
-                    @Override
-                    public String getParameters() {
-                        return "text";
-                    }
-
-                    @Override
-                    public boolean process(String opt, List<String> arguments) {
-                        myCustomOption = arguments.get(0);
-                        System.out.println("My Custom Option : "+myCustomOption);
-                        return true;
-                    }
-                }
+    /**
+     * Cuando se ejecuta el comando javadoc, nos pasarán aquí para cada una de nuestras
+     * opciones los valores que el usuario ha escrito.
+     * Debemos guardarlos para tenerlos disponibles y usarlos como hayamos previsto y
+     * devolver true si está todo bien.
+     * @param opt
+     * @param arguments
+     * @return
+     */
+    @Override
+    public boolean process(String opt, List<String> arguments) {
+        if (Arrays.asList(
+                "-myCustomOption", "-co", "-my-custom-option").contains(opt)){
+            myCustomOption = arguments.get(0);
+            System.out.println("My Custom Option : "+myCustomOption);
+        }
+        return true;
+    }
+}
         };
         return new HashSet<>(Arrays.asList(options));
     }
