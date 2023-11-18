@@ -62,6 +62,11 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>3.21.2</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -94,7 +99,28 @@
             </resource>
         </resources>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.21.2</version>
+                <configuration>
+                    <targetJdk>${maven.compiler.target}</targetJdk>
+                    <rulesets>
+                        <ruleset>files/ciclomatica.xml</ruleset>
+                    </rulesets>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+=======
 
+>>>>>>> bc5a0a466aab4fffbb2411fe1f41676b29f7892c
         </plugins>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
@@ -115,6 +141,9 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.6.0</version>
                 </plugin>
+<<<<<<< HEAD
+            </plugins>
+=======
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
@@ -134,6 +163,7 @@
                     </executions>
 				</plugin>
 			</plugins>
+>>>>>>> bc5a0a466aab4fffbb2411fe1f41676b29f7892c
         </pluginManagement>
     </build>
     <reporting>
