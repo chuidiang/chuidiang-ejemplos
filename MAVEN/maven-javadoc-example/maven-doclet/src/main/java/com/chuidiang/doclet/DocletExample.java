@@ -8,7 +8,6 @@ import jdk.javadoc.doclet.Reporter;
 
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.tools.Diagnostic;
 import java.util.*;
 
@@ -29,11 +28,9 @@ public class DocletExample implements Doclet {
         reporter.print(Diagnostic.Kind.NOTE, "myCustomOption: " + myCustomOption);
         // get the DocTrees utility class to access document comments
         DocTrees docTrees = docEnv.getDocTrees();
-        final Set<? extends Element> specifiedElements = docEnv.getIncludedElements();
+        final Set<? extends Element> specifiedElements = docEnv.getSpecifiedElements();
         specifiedElements.forEach(element -> {
-            if (element.getKind().equals(ElementKind.MODULE)) {
-                printEnclosedElements(docTrees, element);
-            }
+            printEnclosedElements(docTrees, element);
         });
 
         return true;
