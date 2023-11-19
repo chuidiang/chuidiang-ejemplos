@@ -18,13 +18,14 @@ public class WriteFile {
       writeWithFileChannel();
       writeWithFiles();
       writeWithFilesAndStream();
+      writeWithFileChannelMultiple();
    }
 
    private static void writeWithFiles() {
       String[] lines = new String[] { "line 1", "line 2", "line 2" };
       Path path = Paths.get("outputfile.txt");
       try (BufferedWriter br = Files.newBufferedWriter(path,
-            Charset.defaultCharset(), StandardOpenOption.CREATE)) {
+            Charset.defaultCharset(), StandardOpenOption.WRITE)) {
          for (String line : lines) {
             br.write(line);
             br.newLine();
@@ -37,12 +38,12 @@ public class WriteFile {
    private static void writeWithFilesAndStream() {
       String[] lines = new String[] { "line 1", "line 2", "line 2" };
       Path path = Paths.get("outputfile.txt");
-      try (BufferedWriter br = Files.newBufferedWriter(path,
-            Charset.defaultCharset(), StandardOpenOption.CREATE)) {
+      try (BufferedWriter bw = Files.newBufferedWriter(path,
+            Charset.defaultCharset(), StandardOpenOption.WRITE)) {
          Arrays.stream(lines).forEach((s) -> {
             try {
-               br.write(s);
-               br.newLine();
+               bw.write(s);
+               bw.newLine();
             } catch (IOException e) {
                throw new UncheckedIOException(e);
             }
@@ -65,6 +66,19 @@ public class WriteFile {
          e.printStackTrace();
       } finally {
          channel.close();
+      }
+   }
+
+   private static void writeWithFileChannelMultiple() throws IOException {
+      Path path = Paths.get("target/outputfile.txt");
+      try (FileChannel channel = FileChannel.open(path, StandardOpenOption.WRITE,
+              StandardOpenOption.CREATE)){
+         ByteBuffer [] buffers = {ByteBuffer.wrap("Hello World 1".getBytes()),
+            ByteBuffer.wrap("Hello 2".getBytes()), ByteBuffer.wrap("HW 3".getBytes())};
+
+         channel.write(buffers);
+      } catch (Exception e) {
+         e.printStackTrace();
       }
    }
 

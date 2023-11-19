@@ -21,8 +21,10 @@ public class ReadFile {
    }
 
    private static void readAsLines() {
+      final Path path = Paths.get(fileName);
+
       // Standard println
-      try (Stream<String> stream = Files.lines(Paths.get(fileName),Charset.defaultCharset())) {
+      try (Stream<String> stream = Files.lines(path,Charset.defaultCharset())) {
          stream.forEach(System.out::println);
       } catch (IOException e) {
          e.printStackTrace();
@@ -30,18 +32,22 @@ public class ReadFile {
 
       // My own method of my own class
       LinePrinter printer = new LinePrinter();
-      try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+      try (Stream<String> stream = Files.lines(path)) {
          stream.forEach(printer::println);
       } catch (IOException e) {
          e.printStackTrace();
       }
 
       // This works also
-      // stream.forEach((s)->System.out.println(s));
+      try (Stream<String> stream = Files.lines(path)) {
+         stream.forEach(line ->
+                 System.out.println(line));
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
 
       // With BufferedReader
-      try (BufferedReader reader = Files
-            .newBufferedReader(Paths.get(fileName))) {
+      try (BufferedReader reader = Files.newBufferedReader(path)) {
          reader.lines().forEach(System.out::println);
       } catch (IOException e) {
          e.printStackTrace();
