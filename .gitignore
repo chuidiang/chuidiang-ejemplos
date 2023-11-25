@@ -24,3 +24,6 @@ classes
 /NETBEANS/netbeans-platform-osgi/application-con-osgi/nbproject/private/
 out
 *.log
+
+#python
+venv
