@@ -6,18 +6,22 @@ import tkinter as tk
 
 
 def set_text():
-    v.set("Hola")
+    campoTexto.delete(0, tk.END)
+    campoTexto.insert(0, "Hola")
+    # v.set("Hola")
 
 
 def get_text():
-    print(v.get())
+    print(campoTexto.get())
+    #print(v.get())
 
 
 if __name__ == '__main__':
     rootWindow = tk.Tk()
+    rootWindow.title("Main Window")
 
     v = tk.StringVar()
-    campoTexto = tk.Entry(rootWindow, textvariable=v)
+    campoTexto = tk.Entry(rootWindow)
     campoTexto.pack(side=tk.LEFT)
 
     buttonSet = tk.Button(rootWindow, text="hola", command=set_text)

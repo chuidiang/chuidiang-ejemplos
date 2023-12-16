@@ -1,5 +1,7 @@
 package com.chuidiang.ejemplos.socket;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.Socket;
 
@@ -8,6 +10,7 @@ import java.net.Socket;
  * @author Chuidiang
  * date 24/11/2023
  */
+@Slf4j
 public class ClientRunnable implements Runnable {
     // Instancia de socket del cliente concreto.
     private final Socket client;
@@ -23,6 +26,10 @@ public class ClientRunnable implements Runnable {
         // Un buffer para guardar los bytes que recibamos.
         byte[] readBuffer = new byte[100];
         try {
+            String nombre = "Juan";
+            if (log.isDebugEnabled()) {
+                log.info("Hola, {} ", nombre);
+            }
             // Lectura de datos. Se queda bloqueado hasta que haya datos disponibles o cierren
             // la conexión en el otro lado.
             final int read = client.getInputStream().read(readBuffer);
