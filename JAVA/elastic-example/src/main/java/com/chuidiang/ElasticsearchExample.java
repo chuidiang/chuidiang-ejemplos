@@ -4,6 +4,7 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
+import co.elastic.clients.transport.TransportUtils;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
@@ -11,6 +12,8 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.elasticsearch.client.RestClient;
 
+import javax.net.ssl.SSLContext;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,21 +32,33 @@ public class ElasticsearchExample
         connect();
 
         try {
-            elasticsearchClient.indices().delete(b -> b.index(PRODUCTS));
-            Thread.sleep(1000);
-        } catch (IOException | InterruptedException e) {
+            elasticsearchClient.indices().create(b -> b.index(PRODUCTS));
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
+        flush();
         insertSingle();
-
+        flush();
         insertMultiple();
+        flush();
         selectAll();
+        flush();
         update();
+        flush();
         selectById();
+        flush();
         selectByQuery();
+        flush();
         deleteById();
+        flush();
         selectAll();
+        flush();
+
+        try {
+            elasticsearchClient.indices().delete(b -> b.index(PRODUCTS));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try {
             transport.close();
@@ -53,6 +68,7 @@ public class ElasticsearchExample
     }
 
     private static void deleteById() {
+        System.out.println("Deleting");
         try {
             DeleteResponse delete = elasticsearchClient.delete(d ->
                     d.index(PRODUCTS)
@@ -60,6 +76,7 @@ public class ElasticsearchExample
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Borrado!!");
     }
 
     private static void insertMultiple() {
@@ -88,21 +105,36 @@ public class ElasticsearchExample
     }
 
     private static void connect() {
-        String elasticsearchUrl = "http://localhost:9200";
+        System.out.println("Estableciendo conexión");
+        String elasticsearchUrl = "https://localhost:9200";
 
-        BasicCredentialsProvider credentialsProvider =  new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(AuthScope.ANY,
-                new UsernamePasswordCredentials("javier","javier"));
+        try {
+            File certFile = new File("src/main/files/http_ca.crt");
+            SSLContext sslContext = TransportUtils
+                    .sslContextFromHttpCaCrt(certFile);
 
-        RestClient restClient = RestClient.builder(HttpHost.create(elasticsearchUrl))
-                .setHttpClientConfigCallback(hc -> hc.setDefaultCredentialsProvider(credentialsProvider))
-                .build();
+            BasicCredentialsProvider credentialsProvider =  new BasicCredentialsProvider();
+            credentialsProvider.setCredentials(AuthScope.ANY,
+                    new UsernamePasswordCredentials("elastic","*Kg1ejic8ZNrncsyKi_G"));
 
-        transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
-        elasticsearchClient = new ElasticsearchClient(transport);
+            RestClient restClient = RestClient.builder(HttpHost.create(elasticsearchUrl))
+                    .setHttpClientConfigCallback(hc ->
+                            hc.setDefaultCredentialsProvider(credentialsProvider)
+                                    .setSSLContext(sslContext))
+                    .build();
+
+            transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
+            elasticsearchClient = new ElasticsearchClient(transport);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        System.out.println("Conexión establecida");
+
     }
 
     private static void insertSingle() {
+        System.out.println("Insertando un elemento");
         Product product = new Product("bk-1", "City bike", 123.0);
 
         IndexResponse response = null;
@@ -164,5 +196,17 @@ public class ElasticsearchExample
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void flush(){
+        try {
+            elasticsearchClient.indices().flush();
+            Thread.sleep(1000);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 }
