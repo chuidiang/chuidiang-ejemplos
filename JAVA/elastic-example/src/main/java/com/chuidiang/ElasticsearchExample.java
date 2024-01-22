@@ -8,6 +8,7 @@ import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
 import co.elastic.clients.elasticsearch.core.bulk.IndexOperation;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
+import co.elastic.clients.elasticsearch.indices.DeleteIndexRequest;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.TransportUtils;
@@ -68,7 +69,9 @@ public class ElasticsearchExample
 
     private static void removeIndex() {
         try {
-            elasticsearchClient.indices().delete(b -> b.index(PRODUCTS));
+            DeleteIndexRequest dir = new DeleteIndexRequest.Builder().index(PRODUCTS).build();
+
+            elasticsearchClient.indices().delete(dir);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -210,7 +213,7 @@ public class ElasticsearchExample
                     .doc(updatedProduct)
                     .build();
 
-            UpdateResponse<Product> update = elasticsearchClient.update(ur, Product.class);
+            UpdateResponse<Product> response = elasticsearchClient.update(ur, Product.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -259,12 +262,12 @@ public class ElasticsearchExample
     private static void flush(){
         try {
             elasticsearchClient.indices().flush();
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }
