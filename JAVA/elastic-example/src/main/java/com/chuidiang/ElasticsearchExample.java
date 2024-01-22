@@ -1,7 +1,14 @@
 package com.chuidiang;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.ElasticsearchException;
+import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import co.elastic.clients.elasticsearch.core.*;
+import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
+import co.elastic.clients.elasticsearch.core.bulk.IndexOperation;
+import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
+import co.elastic.clients.elasticsearch.indices.Queries;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.TransportUtils;
@@ -30,12 +37,7 @@ public class ElasticsearchExample
     public static void main( String[] args )
     {
         connect();
-
-        try {
-            elasticsearchClient.indices().create(b -> b.index(PRODUCTS));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        createIndex();
         flush();
         insertSingle();
         flush();
@@ -53,13 +55,11 @@ public class ElasticsearchExample
         flush();
         selectAll();
         flush();
+        removeIndex();
+        closeConnection();
+    }
 
-        try {
-            elasticsearchClient.indices().delete(b -> b.index(PRODUCTS));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    private static void closeConnection() {
         try {
             transport.close();
         } catch (IOException e) {
@@ -67,12 +67,37 @@ public class ElasticsearchExample
         }
     }
 
+    private static void removeIndex() {
+        try {
+            elasticsearchClient.indices().delete(b -> b.index(PRODUCTS));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void createIndex() {
+        try {
+            CreateIndexRequest cir = new CreateIndexRequest.Builder()
+                    .index(PRODUCTS)
+                    .build();
+
+            elasticsearchClient.indices().create(cir);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ElasticsearchException e){
+            e.printStackTrace();
+        }
+    }
+
     private static void deleteById() {
         System.out.println("Deleting");
         try {
-            DeleteResponse delete = elasticsearchClient.delete(d ->
-                    d.index(PRODUCTS)
-                            .id("1"));
+            DeleteRequest dr = new DeleteRequest.Builder()
+                    .index(PRODUCTS)
+                    .id("1")
+                    .build();
+
+            DeleteResponse delete = elasticsearchClient.delete(dr);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,6 +105,7 @@ public class ElasticsearchExample
     }
 
     private static void insertMultiple() {
+        System.out.println("Insert multiple");
         List<Product> productList = new ArrayList<>();
         productList.add(new Product("1","Uno", 1));
         productList.add(new Product("2","Dos", 2));
@@ -88,11 +114,11 @@ public class ElasticsearchExample
 
         BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
 
-        productList.forEach(product ->
-                bulkRequest.operations(op -> op.index(idx ->
-                        idx.index(PRODUCTS)
-                                .document(product)
-                                .id(product.id()))));
+        productList.forEach(product -> {
+            IndexOperation io = new IndexOperation.Builder<Product>().index(PRODUCTS).document(product).id(product.id()).build();
+            BulkOperation bo = (BulkOperation) new BulkOperation.Builder().index(io).build();
+            bulkRequest.operations(bo);
+        });
 
         try {
             BulkResponse bulkResponse = elasticsearchClient.bulk(bulkRequest.build());
@@ -102,28 +128,36 @@ public class ElasticsearchExample
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Inserted Multiple");
     }
 
     private static void connect() {
         System.out.println("Estableciendo conexión");
+
+        // URL de Elasticsearch
         String elasticsearchUrl = "https://localhost:9200";
 
         try {
+            // Copia del certificado que usa Elasticsearch para crear sus certificados. Está en
+            // la instalación de Elasticsearch, carpeta /usr/share/elasticsearch/config/certs/http_ca.crt
             File certFile = new File("src/main/files/http_ca.crt");
             SSLContext sslContext = TransportUtils
                     .sslContextFromHttpCaCrt(certFile);
 
+            // Credenciales para acceso a Elasticsearch. Usuario y Password.
             BasicCredentialsProvider credentialsProvider =  new BasicCredentialsProvider();
             credentialsProvider.setCredentials(AuthScope.ANY,
-                    new UsernamePasswordCredentials("elastic","*Kg1ejic8ZNrncsyKi_G"));
+                    new UsernamePasswordCredentials("elastic","prWv9i_2iKn193lA0gS2"));
 
+            // Creación del cliente REST necesario para uso de la API de Elasticsearch
             RestClient restClient = RestClient.builder(HttpHost.create(elasticsearchUrl))
                     .setHttpClientConfigCallback(hc ->
                             hc.setDefaultCredentialsProvider(credentialsProvider)
                                     .setSSLContext(sslContext))
                     .build();
-
             transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
+
+            // Elasticsearch Cliente. Es la instancia que usaremos para hablar con Elasticsearch.
             elasticsearchClient = new ElasticsearchClient(transport);
         } catch (IOException e) {
             e.printStackTrace();
@@ -139,11 +173,12 @@ public class ElasticsearchExample
 
         IndexResponse response = null;
         try {
-            response = elasticsearchClient.index(i -> i
+            IndexRequest ir = new IndexRequest.Builder<Product>()
                     .index(PRODUCTS)
                     .id(product.id())
                     .document(product)
-            );
+                    .build();
+            response = elasticsearchClient.index(ir);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -154,7 +189,12 @@ public class ElasticsearchExample
     private static void selectAll(){
         System.out.println("Select All");
         try {
-            SearchResponse<Product> products = elasticsearchClient.search(s -> s.index(PRODUCTS), Product.class);
+            SearchRequest sr = new SearchRequest.Builder()
+                    .index(PRODUCTS)
+                    .build();
+
+            SearchResponse<Product> products = elasticsearchClient.search(sr, Product.class);
+
             products.hits().hits().forEach(product -> System.out.println(product));
         } catch (IOException e) {
             e.printStackTrace();
@@ -162,24 +202,32 @@ public class ElasticsearchExample
     }
 
     private static void update(){
+        System.out.println("Update element");
         Product updatedProduct = new Product("1", "One", 1);
         try {
-            UpdateResponse<Product> update = elasticsearchClient.update(u -> u.index(PRODUCTS)
-                            .id(updatedProduct.id())
-                            .doc(updatedProduct),
-                    Product.class);
+            UpdateRequest ur = new UpdateRequest.Builder<Product, Product>()
+                    .index(PRODUCTS)
+                    .id(updatedProduct.id())
+                    .doc(updatedProduct)
+                    .build();
+
+            UpdateResponse<Product> update = elasticsearchClient.update(ur, Product.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Updated!!");
     }
 
     private static void selectById (){
         System.out.println("Find by id");
         try {
-            GetResponse<Product> productGetResponse = elasticsearchClient.get(r ->
-                            r.index(PRODUCTS)
-                                    .id("1"),
-                    Product.class);
+            GetRequest gr = new GetRequest.Builder()
+                    .index(PRODUCTS)
+                    .id("1")
+                    .build();
+
+            GetResponse<Product> productGetResponse = elasticsearchClient.get(gr, Product.class);
+
             System.out.println(productGetResponse.source());
         } catch (IOException e) {
             e.printStackTrace();
@@ -189,9 +237,20 @@ public class ElasticsearchExample
     private static void selectByQuery (){
         System.out.println("Find by Query");
         try {
-            SearchResponse<Product> search = elasticsearchClient.search(r -> r.index(PRODUCTS)
-                            .query(q -> q.match( m -> m.field("value").query(1))),
-                    Product.class);
+            Query q = QueryBuilders
+                    .match()
+                    .field("value")
+                    .query(1)
+                    .build()
+                    ._toQuery();
+
+            SearchRequest sr = new SearchRequest.Builder()
+                    .index(PRODUCTS)
+                    .query(q)
+                    .build();
+
+            SearchResponse<Product> search = elasticsearchClient.search(sr, Product.class);
+
             search.hits().hits().forEach(product -> System.out.println(product.source()));
         } catch (IOException e) {
             e.printStackTrace();
