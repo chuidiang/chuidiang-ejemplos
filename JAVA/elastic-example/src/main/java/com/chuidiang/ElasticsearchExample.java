@@ -171,7 +171,7 @@ public class ElasticsearchExample
 
     private static void insertSingle() {
         System.out.println("Insertando un elemento");
-        Product product = new Product("bk-1", "City bike", 123.0);
+        Product product = new Product("bk-1", "City bike", 123);
 
         IndexResponse response = null;
         try {
@@ -205,11 +205,11 @@ public class ElasticsearchExample
 
     private static void update(){
         System.out.println("Update element");
-        Product updatedProduct = new Product("1", "One", 1);
+        Product updatedProduct = new Product(null, "One", null);
         try {
             UpdateRequest ur = new UpdateRequest.Builder<Product, Product>()
                     .index(PRODUCTS)
-                    .id(updatedProduct.id())
+                    .id("1")
                     .doc(updatedProduct)
                     .build();
 
