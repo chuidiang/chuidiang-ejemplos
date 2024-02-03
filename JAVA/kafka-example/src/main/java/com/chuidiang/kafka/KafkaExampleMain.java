@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class KafkaExampleMain {
 
-    public static final String KAFKA_URL = "localhost:9092";
+    public static final String KAFKA_URL = "localhost:29092";
     public static final String TOPIC = "quickstart-events";
 
     public static void main(String[] args) {
