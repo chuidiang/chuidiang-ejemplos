@@ -10,7 +10,6 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.KafkaFuture;
-import org.apache.kafka.common.config.TopicConfig;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -95,8 +94,7 @@ public class KafkaExampleMain {
 
             // Create a compacted topic
             CreateTopicsResult result = admin.createTopics(Collections.singleton(
-                    new NewTopic(topicName, partitions, replicationFactor)
-                            .configs(Collections.singletonMap(TopicConfig.CLEANUP_POLICY_CONFIG, TopicConfig.CLEANUP_POLICY_COMPACT))));
+                    new NewTopic(topicName, partitions, replicationFactor)));
 
             // Call values() to get the result for a specific topic
             KafkaFuture<Void> future = result.values().get(topicName);
