@@ -21,15 +21,20 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author fjabellan 24/01/2024
  */
-public class KafkaExampleMain {
+public class KafkaComplexExampleMain {
 
     public static final String KAFKA_URL = "localhost:29092";
     public static final String TOPIC = "quickstart-events";
 
     public static void main(String[] args) {
         createTopic();
-        consumer("1");
-        consumer("2");
+        consumer("Consumer Group 1", 1);
+        consumer("Consumer Group 1", 2);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         producer();
     }
 
@@ -37,40 +42,49 @@ public class KafkaExampleMain {
         new Thread(()->{
             Properties props = new Properties();
             props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_URL);
-            props.put(ProducerConfig.LINGER_MS_CONFIG, 1);
             props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
 
-            Producer<String, String> producer = new KafkaProducer<>(props);
-            for (int i = 0; i < 100; i++) {
-                producer.send(new ProducerRecord<String, String>(TOPIC, Integer.toString(i), Integer.toString(i)));
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+            try(Producer<String, String> producer = new KafkaProducer<>(props)) {
+                for (int i = 0; i < 100; i++) {
+                    String key = Integer.toString(i%2);
+                    String message = Integer.toString(i);
+                    producer.send(new ProducerRecord<String, String>(TOPIC, key, message));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        break;
+                    }
                 }
             }
 
-            producer.close();
+            System.out.println("Productor terminado");
         }).start();
     }
 
-    private static void consumer(String id) {
+    private static void consumer(String consumerName, int consumerId) {
         new Thread(()->{
             Properties props = new Properties();
             props.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_URL);
-            props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "test3");
+            props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, consumerName);
             props.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
             props.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
-            props.setProperty(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
+            props.setProperty(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "100");
             props.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
             props.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-            KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-            consumer.subscribe(Arrays.asList(TOPIC));
-            while (true) {
-                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-                for (ConsumerRecord<String, String> record : records)
-                    System.out.printf("%s: offset = %d, key = %s, value = %s%n", id, record.offset(), record.key(), record.value());
+            try(KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props)) {
+                consumer.subscribe(Arrays.asList(TOPIC));
+                while (true) {
+                    try {
+                        Thread.sleep((long) (Math.random() * 1000));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+                    for (ConsumerRecord<String, String> record : records)
+                        System.out.printf("%s: offset = %d, key = %s, value = %s%n", consumerId, record.offset(), record.key(), record.value());
+                }
             }
         }).start();
     }
@@ -81,15 +95,18 @@ public class KafkaExampleMain {
 
         try (Admin admin = Admin.create(props)) {
             String topicName = TOPIC;
-            int partitions = 12;
+            int partitions = 2;
             short replicationFactor = 1;
 
             ListTopicsResult listTopicsResult = admin.listTopics();
             KafkaFuture<Set<String>> names = listTopicsResult.names();
             Set<String> strings = names.get();
             strings.forEach(System.out::println);
+
+            // Se borra el topic si existe, para recrearlo desde cero.
             if (strings.contains(TOPIC)){
-                return;
+                final DeleteTopicsResult deleteTopicsResult = admin.deleteTopics(Collections.singleton(TOPIC));
+                deleteTopicsResult.all().get();
             }
 
             // Create a compacted topic
