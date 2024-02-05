@@ -1,0 +1,27 @@
+<assembly>
+    <id>my-ref-id</id>
+    <formats>
+        <!-- Formatos en el que queremos el zip -->
+        <format>tar.gz</format>
+        <format>tar.bz2</format>
+        <format>zip</format>
+    </formats>
+    <!-- Ahora que cosas queremos -->
+    <files>
+        <file>
+            <!-- El jar generado por nuestro proyecto -->
+            <source>target/${project.build.finalName}.jar</source>
+            <!-- lo queremos en el subdirectorio bin -->
+            <outputDirectory>/bin</outputDirectory>
+        </file>
+    </files>
+    <!-- Queremos incluir los jar de los que dependemos -->
+    <dependencySets>
+        <dependencySet>
+            <!-- Queremos los jar dentro de un directorio lib dentro del zip -->
+            <outputDirectory>/lib</outputDirectory>
+            <!-- No queremos que meta aqui tambien el jar de nuestro proyecto -->
+            <useProjectArtifact>false</useProjectArtifact>
+        </dependencySet>
+    </dependencySets>
+</assembly>
