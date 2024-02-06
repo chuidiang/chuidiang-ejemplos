@@ -3,5 +3,4 @@
  */
 module module.impl1 {
      requires module.core;
-     exports com.chuidiang.examples.modules.impl1;
 }
