@@ -3,4 +3,5 @@
  */
 module module.core {
     exports com.chuidiang.examples.modules.interfaces;
+    provides com.chuidiang.examples.modules.interfaces.IfzModule with com.chuidiang.examples.modules.implementation.CoreImplementation;
 }
