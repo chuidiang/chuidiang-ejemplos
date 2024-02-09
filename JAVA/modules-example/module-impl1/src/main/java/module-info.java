@@ -3,4 +3,5 @@
  */
 module module.impl1 {
      requires module.core;
+     provides com.chuidiang.examples.modules.interfaces.IfzModule with com.chuidiang.examples.modules.impl1.Impl1;
 }

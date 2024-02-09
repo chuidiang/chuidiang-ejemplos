@@ -5,8 +5,8 @@ import com.chuidiang.examples.modules.interfaces.IfzModule;
 import java.util.ServiceLoader;
 
 /**
- * Hello world!
- *
+ * fjabellan 09/02/2024
+ * Ejemplo java 9 modules. Obtencion de los servicios implementados
  */
 public class App 
 {
