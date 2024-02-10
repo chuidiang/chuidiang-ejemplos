@@ -1,9 +1,5 @@
 package com.chuidiang.ejemplos.threads;
 
-import lombok.Getter;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.stream.IntStream;
@@ -19,24 +15,22 @@ import java.util.stream.IntStream;
 public class StructuredConcurrencyExample {
     public static void main(String[] args) {
         // Creacion del StructuredTaskScope que va a usar Taks que devuelven un Double
-        try (StructuredTaskScope scope = new StructuredTaskScope<Double>()){
+        try (var scope = new StructuredTaskScope<Double>()){
 
             // Creamos la lista de Tasks, la lanzamos con StructuredTaskScope.fork() y nos guardamos
             // en la lista el StructuredTaskScope.Subtask que nos devuelve.
-            List<StructuredTaskScope.Subtask<Double>> tasks = new ArrayList<>();
-            IntStream.range(0,5).forEach(i -> {
-                final StructuredTaskScope.Subtask<Double> fork = scope.fork(new MyTask());
-                tasks.add(fork);
-            });
+            var tasks = IntStream.range(0,5)
+                    .mapToObj(i ->  scope.fork(new MyTask()))
+                    .toList();
 
             // Esperamos que todas las task terminen
             scope.join();
 
             // Recogemos el resultado de cada StructuredTaskScope.Subtask y lo sumamos.
-            double counter = 0.0;
-            for (StructuredTaskScope.Subtask<Double> task : tasks) {
-                counter = counter+task.get();
-            }
+            double counter = tasks.stream()
+                    .mapToDouble(t -> t.get())
+                    .sum();
+
 
             // Sacamos por pantalla el resultado.
             System.out.printf("Suma = %f\n",counter);
@@ -52,11 +46,11 @@ public class StructuredConcurrencyExample {
  * El retardo es para hacer esperar a StructuredTaskScope
  */
 class MyTask implements Callable<Double>{
-    @Getter
-    private double value;
     @Override
     public Double call() throws Exception {
         Thread.sleep((long)(Math.random()*1000));
-        return Math.random();
+        final double random = Math.random();
+        System.out.println(random);
+        return random;
     }
 }
