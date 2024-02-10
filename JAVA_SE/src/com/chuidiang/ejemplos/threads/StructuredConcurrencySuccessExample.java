@@ -10,31 +10,25 @@ import java.util.stream.IntStream;
  * date 10/02/2024
  *
  * Ejemplo de StructuredTaskScope.ShutdownOnFailure.
- * Similar al ejemplo de StructuredConcurrencyExample.java, pero haciendo que las subtareas lancen
- * una excepción esporáicamente para abortar el proceso completo.
+ * Similar al ejemplo de StructuredConcurrencyExample.java, pero haciendo que el proceso termine
+ * en cuanto termina la primera subtarea
  */
-public class StructuredConcurrencyShutdownExample {
+public class StructuredConcurrencySuccessExample {
     public static void main(String[] args) {
         // Creacion del StructuredTaskScope que va a usar Taks que devuelven un Double
-        try (var scope = new StructuredTaskScope.ShutdownOnFailure()){
+        try (var scope = new StructuredTaskScope.ShutdownOnSuccess<Double>()){
 
             // Creamos la lista de Tasks, la lanzamos con StructuredTaskScope.fork() y nos guardamos
             // en la lista el StructuredTaskScope.Subtask que nos devuelve.
             var tasks = IntStream.range(0,5)
-                    .mapToObj(i ->  scope.fork(new MyShutdownTask()))
+                    .mapToObj(i ->  scope.fork(new MySuccessTask()))
                     .toList();
 
             // Esperamos que todas las task terminen
-            scope.join().throwIfFailed();
-
-            // Recogemos el resultado de cada StructuredTaskScope.Subtask y lo sumamos.
-            double counter = tasks.stream()
-                    .mapToDouble(t -> t.get())
-                    .sum();
-
+            scope.join();
 
             // Sacamos por pantalla el resultado.
-            System.out.printf("Suma = %f\n",counter);
+            System.out.printf("Primero en terminar = %f\n",scope.result());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -47,16 +41,18 @@ public class StructuredConcurrencyShutdownExample {
  * Nuestro Task debe implementar Callable.
  * El método call() devuelve un Double aleatorio tras una espera de un tiempo aleatorio entre 0 y 1 segundo.
  * El retardo es para hacer esperar a StructuredTaskScope
- * Se provoca aleatoriamente que se lance una excepción para simular un fallo en el cálculo.
+ * Cuando termine la primera tarea, veremos que se saca por pantalla la InterruptedException de las demas
  */
-class MyShutdownTask implements Callable<Double>{
+class MySuccessTask implements Callable<Double>{
     @Override
     public Double call() throws Exception {
-        Thread.sleep((long)(Math.random()*1000));
-        final double random = Math.random();
-        if (random>0.8){
-            throw new Exception("Falle");
+        try {
+            Thread.sleep((long) (Math.random() * 1000));
+        } catch (InterruptedException e){
+            e.printStackTrace();
+            throw e;
         }
+        final double random = Math.random();
         System.out.println(random);
         return random;
     }
