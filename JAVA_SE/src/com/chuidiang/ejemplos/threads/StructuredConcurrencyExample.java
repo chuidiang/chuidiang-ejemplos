@@ -1,7 +1,9 @@
 package com.chuidiang.ejemplos.threads;
 
+import java.time.Instant;
 import java.util.concurrent.Callable;
 import java.util.concurrent.StructuredTaskScope;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.IntStream;
 
 /**
@@ -23,8 +25,11 @@ public class StructuredConcurrencyExample {
                     .mapToObj(i ->  scope.fork(new MyTask()))
                     .toList();
 
-            // Esperamos que todas las task terminen
-            scope.join();
+            // Esperamos que todas las task terminen un máximo de 10 segundos.
+            scope.joinUntil(Instant.ofEpochMilli(System.currentTimeMillis()+10000));
+
+            // Si no queremos poner un límite de tiempo
+            // scope.join();
 
             // Recogemos el resultado de cada StructuredTaskScope.Subtask y lo sumamos.
             double counter = tasks.stream()
@@ -35,6 +40,8 @@ public class StructuredConcurrencyExample {
             // Sacamos por pantalla el resultado.
             System.out.printf("Suma = %f\n",counter);
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
             e.printStackTrace();
         }
     }
