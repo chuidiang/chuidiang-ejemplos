@@ -1,4 +1,4 @@
-package com.chuidiang.ejemplos.stream;
+package com.chuidiang.ejemplos.flow_pub_sub;
 
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.SubmissionPublisher;
