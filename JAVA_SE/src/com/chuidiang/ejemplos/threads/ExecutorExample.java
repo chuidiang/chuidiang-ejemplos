@@ -93,7 +93,7 @@ public class ExecutorExample {
      * @param name
      */
     private static void virtualExecutor(String name) {
-        try(ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()){
+        try(ExecutorService executorService = Executors.newFixedThreadPool(10, Thread.ofVirtual().factory())){
             invokeCallables(executorService, name);
         } catch (InterruptedException e) {
             e.printStackTrace();
