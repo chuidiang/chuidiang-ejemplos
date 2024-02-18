@@ -1,0 +1,1 @@
+Código de ejemplo de [Java Queue y BlockingQueue](https://chuidiang.org/index.php?title=Java_Queue_y_BlockingQueue)
