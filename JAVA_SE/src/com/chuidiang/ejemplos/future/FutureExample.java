@@ -11,16 +11,16 @@ import java.util.concurrent.*;
 public class FutureExample {
     /** Hace llamadas a cada uno de los ejemplos */
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException, IOException {
-//        futureTaskRunnable();
-//        futureTaskCallable();
-//        futureTaskCallableCancel();
-//        futureTaskCallableTimeout();
-//        completableFuture();
-//        completableFutureThenAcceptAsync();
-//        completableFutureChain();
-//        completableFutureJoin();
-//        completableFutureJoinException();
-//        completableFutureJoinOfAll();
+        futureTaskRunnable();
+        futureTaskCallable();
+        futureTaskCallableCancel();
+        futureTaskCallableTimeout();
+        completableFuture();
+        completableFutureThenAcceptAsync();
+        completableFutureChain();
+        completableFutureJoin();
+        completableFutureJoinException();
+        completableFutureJoinOfAll();
         completableFutureJoinAnyOff();
 
         // Espera a que terminen todos los hilos antes de terminar el programa.
@@ -278,7 +278,7 @@ public class FutureExample {
             return "Done!";
         });
         final CompletableFuture<String> completableException = CompletableFuture.supplyAsync(() -> {
-            sleep(2000);
+            sleep(1000);
             return Integer.toString(1/0);
         });
 
