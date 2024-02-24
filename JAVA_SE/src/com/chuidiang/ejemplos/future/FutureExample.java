@@ -11,7 +11,7 @@ import java.util.concurrent.*;
 public class FutureExample {
     /** Hace llamadas a cada uno de los ejemplos */
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException, IOException {
-        futureTaskRunnable();/
+        futureTaskRunnable();
         futureTaskCallable();
         futureTaskCallableCancel();
         futureTaskCallableTimeout();
