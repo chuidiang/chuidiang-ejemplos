@@ -195,7 +195,8 @@ public class FutureExample {
         ForkJoinPool.commonPool().submit(future);
 
         try {
-            System.out.println("Future Task Callable devuelve " + future.get(500, TimeUnit.MILLISECONDS));
+            String value = future.get(500, TimeUnit.MILLISECONDS);
+            System.out.println("Future Task Callable devuelve " + value);
         } catch (TimeoutException e) {
             System.out.println("Future Task Callable Timeout "+e);
         }
