@@ -65,6 +65,7 @@ public class FutureExample {
             }
         }, "Done!");
 
+//        new Thread(future).start();
         ForkJoinPool.commonPool().submit(future);
 
         while(!future.isDone()){
