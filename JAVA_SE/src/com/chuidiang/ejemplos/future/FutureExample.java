@@ -223,7 +223,7 @@ public class FutureExample {
 
     /**
      * Lanza un CompletableFuture que lanza una excepción pasado un tiempo, simulando que el proceso
-     * no ha ido bien.
+     * no ha ido bien. Con exceptionally() nos recuperamos.
      */
     private static void completableFutureJoinException(){
         System.out.println("Completable Future con Exception");
@@ -233,8 +233,8 @@ public class FutureExample {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            throw new RuntimeException("Fallo");
-        });
+            return Integer.toString(1/0); // La división 1/0 lanza excepción
+        }).exceptionally(e -> "Algo ha ido mal. La excepción  es "+e.getMessage());
 
         try {
             String value = completableException.join();
