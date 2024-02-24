@@ -11,16 +11,17 @@ import java.util.concurrent.*;
 public class FutureExample {
     /** Hace llamadas a cada uno de los ejemplos */
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException, IOException {
-        futureTaskRunnable();
-        futureTaskCallable();
-        futureTaskCallableCancel();
-        futureTaskCallableTimeout();
-        completableFuture();
-        completableFutureThenAcceptAsync();
-        completableFutureChain();
-        completableFutureJoin();
-        completableFutureJoinException();
-        completableFutureJoinOfAll();
+//        futureTaskRunnable();
+//        futureTaskCallable();
+//        futureTaskCallableCancel();
+//        futureTaskCallableTimeout();
+//        completableFuture();
+//        completableFutureThenAcceptAsync();
+//        completableFutureChain();
+//        completableFutureJoin();
+//        completableFutureJoinException();
+//        completableFutureJoinOfAll();
+        completableFutureJoinAnyOff();
 
         // Espera a que terminen todos los hilos antes de terminar el programa.
         ForkJoinPool.commonPool().awaitQuiescence(5, TimeUnit.SECONDS);
@@ -253,27 +254,36 @@ public class FutureExample {
     private static void completableFutureJoinOfAll() {
         System.out.println("CompletableFuture join ofAll");
         final CompletableFuture<String> completableReturn = CompletableFuture.supplyAsync(() -> {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                System.out.println("CompletableFuture join ofAll interrumpido "+e);
-                throw new RuntimeException("Interrumpido");
-            }
+            sleep(100);
             return "Done!";
         });
         final CompletableFuture<String> completableException = CompletableFuture.supplyAsync(() -> {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            throw new RuntimeException("Fallo");
+            sleep(2000);
+            return Integer.toString(1/0);
         });
 
         try {
             CompletableFuture.allOf(completableException, completableReturn).join();
-            System.out.println("CompletableFuture join ofAll, completableException devuelve "+completableException.join());
             System.out.println("CompletableFuture join ofAll, completableReturn devuelve "+completableReturn.join());
+            System.out.println("CompletableFuture join ofAll, completableException devuelve "+completableException.join());
+        } catch (Exception e){
+            System.out.println("CompletableFuture join ofAll da fallo global "+ e);
+        }
+    }
+
+    private static void completableFutureJoinAnyOff() {
+        System.out.println("CompletableFuture join ofAll");
+        final CompletableFuture<String> completableReturn = CompletableFuture.supplyAsync(() -> {
+            sleep(100);
+            return "Done!";
+        });
+        final CompletableFuture<String> completableException = CompletableFuture.supplyAsync(() -> {
+            sleep(2000);
+            return Integer.toString(1/0);
+        });
+
+        try {
+            System.out.println(CompletableFuture.anyOf(completableException, completableReturn).join());
         } catch (Exception e){
             System.out.println("CompletableFuture join ofAll da fallo global "+ e);
         }
