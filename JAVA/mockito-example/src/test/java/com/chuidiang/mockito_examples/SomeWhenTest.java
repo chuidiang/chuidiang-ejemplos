@@ -113,4 +113,25 @@ public class SomeWhenTest {
         byName = mockDao.findByName("a");
         Assertions.assertTrue(byName.isEmpty());
     }
+
+    @Test
+    public void doAnswerTest(){
+        IfzDao mockDao = Mockito.mock(IfzDao.class);
+
+        Mockito.doAnswer(invocationOnMock -> {
+            String parameter = invocationOnMock.getArgument(0);
+            if ("fail".equals(parameter)){
+                throw new IllegalArgumentException();
+            }
+            return null;
+        }).when(mockDao).method(Mockito.anyString());
+
+        try {
+            mockDao.method("fail");
+        } catch (IllegalArgumentException e){
+            Assertions.assertTrue(true);
+            return;
+        }
+        Assertions.fail("No se ha saltado la excepción");
+    }
 }

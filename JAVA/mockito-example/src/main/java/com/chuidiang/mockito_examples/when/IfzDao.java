@@ -12,4 +12,5 @@ public interface IfzDao {
     Data findById (int id);
     List<Data> findByName(String name);
 
+    void method(String name);
 }
