@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -26,12 +27,12 @@ public class SomeWhenTest {
      */
     @Test
     public void testSimpleWhen (){
-        IfzDao mockList = Mockito.mock(IfzDao.class);
-        Mockito.when(mockList.findById(1)).thenReturn(new Data(1,"Uno"));
+        IfzDao mockDao = Mockito.mock(IfzDao.class);
+        Mockito.when(mockDao.findById(1)).thenReturn(new Data(1,"Uno"));
 
-        Data data = mockList.findById(1);
+        Data data = mockDao.findById(1);
         Assertions.assertEquals(new Data(1,"Uno"), data);
-        data = mockList.findById(2);
+        data = mockDao.findById(2);
         Assertions.assertNull(data);
     }
 
@@ -41,9 +42,10 @@ public class SomeWhenTest {
     @Test
     public void testWhenAnyValue () {
         IfzDao mockDao = Mockito.mock(IfzDao.class);
-        Mockito.when(mockDao.findById(Mockito.anyInt())).thenAnswer(invocation -> {
-             Object argument = invocation.getArgument(0);
-             return new Data((Integer)argument, argument.toString());
+
+        Mockito.when(mockDao.findById(Mockito.anyInt())).thenAnswer(invocationOnMock -> {
+             Integer argument = invocationOnMock.getArgument(0);
+             return new Data(argument, argument.toString());
         });
 
         Data data = mockDao.findById(1);
@@ -97,5 +99,18 @@ public class SomeWhenTest {
             return;
         }
         Assertions.fail("No ha saltado la excepción.");
+    }
+
+    @Test
+    public void whenString(){
+        IfzDao mockDao = Mockito.mock(IfzDao.class);
+
+        Mockito.when(mockDao.findByName(Mockito.matches("\\d+"))).thenReturn(List.of(new Data(1,"1"), new Data(2,"2")));
+
+        List<Data> byName = mockDao.findByName("1");
+        Assertions.assertEquals(2,byName.size());
+
+        byName = mockDao.findByName("a");
+        Assertions.assertTrue(byName.isEmpty());
     }
 }
