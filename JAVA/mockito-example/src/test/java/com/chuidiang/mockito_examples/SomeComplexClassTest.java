@@ -1,23 +1,23 @@
 package com.chuidiang.mockito_examples;
 
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * @author fjabellan
+ * @author chuidiang
  * @date 15/11/2020
  */
- @RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SomeComplexClassTest {
     @InjectMocks
     SomeComplexClass someComplexClass;
@@ -44,7 +44,7 @@ public class SomeComplexClassTest {
     }
 
     @Test
-    public void aCaptorTest() throws SQLException, ClassNotFoundException, IOException {
+    public void aCaptorTest() throws SQLException, IOException {
         Mockito.when(dataBaseClass.getStringFromDataBase()).thenReturn("Hello");
         Mockito.when(networkClass.getStringFromRemoteServer()).thenReturn("World");
 
@@ -53,7 +53,6 @@ public class SomeComplexClassTest {
         ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
         Mockito.verify(outputClass).printOutput(argument.capture());
 
-        Assert.assertEquals("Hello - World",argument.getValue());
-
+        Assertions.assertEquals("Hello - World",argument.getValue());
     }
  }

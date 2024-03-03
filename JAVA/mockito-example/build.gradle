@@ -3,13 +3,21 @@ plugins {
 }
 
 repositories {
-   jcenter()
+   mavenCentral()
+}
+
+// Para junit-jupiter-engine. No es necesario para junit-vintage-engine
+test {
+    useJUnitPlatform()
 }
 
 dependencies {
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.6.0'
-    testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.6.0'
-    testCompile group: 'junit', name: 'junit', version: '4.13.1'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.11.0'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.2'
+
+    // Si quisiéramos test compatibles con JUnit 4, podemos descomentar junit-vintage-engine.
+    // testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.10.2'
 }
+
 
 

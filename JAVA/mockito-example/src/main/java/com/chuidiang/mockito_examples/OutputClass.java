@@ -1,7 +1,9 @@
 package com.chuidiang.mockito_examples;
 
 /**
- * @author fjabellan
+ * Clase para sacar resultados por pantalla
+ *
+ * @author chuidiang
  * @date 15/11/2020
  */
 public class OutputClass {
