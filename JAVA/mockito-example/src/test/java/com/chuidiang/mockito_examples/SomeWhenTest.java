@@ -2,9 +2,11 @@ package com.chuidiang.mockito_examples;
 
 import com.chuidiang.mockito_examples.when.Data;
 import com.chuidiang.mockito_examples.when.IfzDao;
+import com.chuidiang.mockito_examples.when.StaticClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -133,5 +135,19 @@ public class SomeWhenTest {
             return;
         }
         Assertions.fail("No se ha saltado la excepción");
+    }
+
+    /**
+     * Mock de una clase con métodos estáticos.
+     */
+    @Test
+    public void staticClassTest(){
+        try (MockedStatic<StaticClass> staticClassMockedStatic = Mockito.mockStatic(StaticClass.class)){
+            staticClassMockedStatic.when(StaticClass::getName).thenReturn("Mockeado");
+            staticClassMockedStatic.when(()->StaticClass.addOne(1)).thenReturn(33);
+
+            Assertions.assertEquals("Mockeado", StaticClass.getName());
+            Assertions.assertEquals(33, StaticClass.addOne(1));
+        }
     }
 }
