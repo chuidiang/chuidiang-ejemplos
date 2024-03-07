@@ -1,5 +1,7 @@
 package com.chuidiang.mockito_examples;
 
+import java.io.FilterOutputStream;
+
 /**
  * Clase para sacar resultados por pantalla
  *
@@ -9,5 +11,8 @@ package com.chuidiang.mockito_examples;
 public class OutputClass {
     public void printOutput(String theString){
         System.out.println(theString);
+    }
+    public void printPrettyOutput(String theString) {
+        System.out.println("I'm the pretty String : "+theString);
     }
 }

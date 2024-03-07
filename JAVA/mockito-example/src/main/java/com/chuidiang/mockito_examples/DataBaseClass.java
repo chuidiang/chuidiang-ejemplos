@@ -11,12 +11,12 @@ import java.sql.*;
 public class DataBaseClass {
     public String getStringFromDataBase() throws SQLException {
         String line=null;
-        try (Connection conexion = DriverManager.getConnection(
+        try (Connection connection = DriverManager.getConnection(
                 "jdbc:postgresql://servidor:5432/database",
                 "usuario",
                 "password"))
         {
-            try(PreparedStatement preparedStatement = conexion.prepareStatement("select string from table_with_string limit 1")) {
+            try(PreparedStatement preparedStatement = connection.prepareStatement("select string from table_with_string limit 1")) {
                 final ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
                     line = resultSet.getString(1);
