@@ -16,7 +16,7 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.2'
 
     // Si quisiéramos test compatibles con JUnit 4, podemos descomentar junit-vintage-engine.
-    // testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.10.2'
+     testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.10.2'
 }
 
 

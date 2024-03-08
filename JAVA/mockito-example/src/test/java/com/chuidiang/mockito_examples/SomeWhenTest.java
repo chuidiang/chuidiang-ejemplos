@@ -128,13 +128,7 @@ public class SomeWhenTest {
             return null;
         }).when(mockDao).method(Mockito.anyString());
 
-        try {
-            mockDao.method("fail");
-        } catch (IllegalArgumentException e){
-            Assertions.assertTrue(true);
-            return;
-        }
-        Assertions.fail("No se ha saltado la excepción");
+        Assertions.assertThrows(IllegalArgumentException.class, ()-> mockDao.method("fail"));
     }
 
     /**

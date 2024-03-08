@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.internal.verification.api.VerificationData;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 /**
  * Algunos ejemplos de Mockito.verify()
@@ -86,5 +86,12 @@ public class SomeVerifyTest {
             staticClassMockedStatic.verify(() -> StaticClass.getName(), Mockito.times(1));
             staticClassMockedStatic.verify(() -> StaticClass.addOne(Mockito.anyInt()), Mockito.never());
         }
+    }
+
+    @Test
+    public void exceptionVerify() throws SQLException {
+        Mockito.when(dataBaseClass.getStringFromDataBase()).thenThrow(new NoSuchElementException());
+
+        Assertions.assertThrows(NoSuchElementException.class,()->dataBaseClass.getStringFromDataBase());
     }
 }
