@@ -53,7 +53,7 @@ public class SomeVerifyTest {
         // Que se han llamado a los métodos un número determinado de veces.
         Mockito.verify(outputClass, Mockito.times(1)).printOutput(Mockito.anyString());
         Mockito.verify(dataBaseClass, Mockito.atLeast(1)).getStringFromDataBase();
-        Mockito.verify(networkClass, Mockito.atLeastOnce()).getStringFromRemoteServer();
+        Mockito.verify(networkClass, Mockito.atMostOnce()).getStringFromRemoteServer();
 
         // Verificar que no se ha llamado a un método
         Mockito.verify(outputClass, Mockito.never()).printPrettyOutput(Mockito.anyString());
@@ -62,7 +62,7 @@ public class SomeVerifyTest {
         Mockito.verifyNoMoreInteractions(outputClass, dataBaseClass, networkClass);
 
         // Que se han llamado a los métodos en el orden esperado.
-        InOrder inOrder = Mockito.inOrder(dataBaseClass, networkClass, outputClass);
+        InOrder inOrder = Mockito.inOrder(outputClass, dataBaseClass, networkClass);
         inOrder.verify(dataBaseClass).getStringFromDataBase();
         inOrder.verify(networkClass).getStringFromRemoteServer();
         inOrder.verify(outputClass).printOutput(Mockito.anyString());
@@ -75,9 +75,6 @@ public class SomeVerifyTest {
     @Test
     public void staticVerify(){
         try (MockedStatic<StaticClass> staticClassMockedStatic = Mockito.mockStatic(StaticClass.class)){
-            // Preparación, Mockito.when
-            staticClassMockedStatic.when(StaticClass::getName).thenReturn("Mockeado");
-            staticClassMockedStatic.when(()->StaticClass.addOne(1)).thenReturn(33);
 
             // Ejecución del test
             StaticClass.getName();
