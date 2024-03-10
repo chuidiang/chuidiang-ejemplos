@@ -25,7 +25,6 @@ publishing {
                 classifier "small"
             }
         }
-
     }
 }
 
