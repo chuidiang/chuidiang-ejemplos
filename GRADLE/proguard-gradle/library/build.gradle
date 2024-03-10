@@ -1,0 +1,34 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+}
+
+
+task myProguardTask(type: proguard.gradle.ProGuardTask) {
+    dependsOn 'jar'
+    configuration 'proguard.conf'
+    injars "${projectDir}/build/libs/${project.name}-${project.version}.jar"
+    outjars "${projectDir}/build/libs/${project.name}-${project.version}-small.jar"
+    libraryjars configurations.findByName('runtimeClasspath').getFiles()
+    libraryjars "${System.getProperty('java.home')}/jmods"
+}
+
+jar.finalizedBy(myProguardTask)
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact("${projectDir}/build/libs/${project.name}-${project.version}-small.jar"){
+                classifier "small"
+            }
+        }
+
+    }
+}
+
+publishMavenPublicationToMavenLocal.dependsOn(myProguardTask)
+
+myProguardTask.finalizedBy(publishMavenPublicationToMavenLocal)

@@ -1,0 +1,8 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    implementation "com.chuidiang.proguard:library:${project.version}:small"
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+}

@@ -1,0 +1,29 @@
+subprojects {
+    apply {
+        plugin 'java'
+        plugin 'maven-publish'
+    }
+
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+        dependencies {
+            classpath 'com.guardsquare:proguard-gradle:7.4.2'
+        }
+    }
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    compileJava {
+        sourceCompatibility = '21'
+        targetCompatibility = '21'
+        options.encoding = "UTF-8"
+    }
+
+    group 'com.chuidiang.proguard'
+    version '1.0-SNAPSHOT'
+}
