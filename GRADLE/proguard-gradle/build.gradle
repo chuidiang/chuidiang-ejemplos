@@ -19,8 +19,8 @@ allprojects {
     compileJava {
         sourceCompatibility = '21'
         targetCompatibility = '21'
-        options.encoding = "UTF-8"
     }
+    compileJava.options.encoding = 'UTF-8'
 
     group 'com.chuidiang.proguard'
     version '1.0-SNAPSHOT'

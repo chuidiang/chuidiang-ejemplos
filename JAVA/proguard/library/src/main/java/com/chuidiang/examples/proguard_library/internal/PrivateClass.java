@@ -19,7 +19,7 @@ public class PrivateClass implements IfzPublic {
     }
 
     private double internalAdd(double number1, double number2){
-        log.info("Toy sumando numeros");
+        log.info("Toy sumando números");
         return number1+number2;
     }
 }
