@@ -1,6 +1,7 @@
 package com.chuidiang.ejemplos.swing.jfilechooser;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 
 /**
@@ -20,7 +21,10 @@ public class JFileChooserExample {
 
         withFilterButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileFilter(new JpgFilter());
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Tablas de cálculo", "csv", "xlsx"));
+            fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Textos", "txt", "docx"));
+            fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Imágenes", "jpg", "gif"));
             final int selection = fileChooser.showOpenDialog((Component) e.getSource());
             if (selection == JFileChooser.APPROVE_OPTION){
                 System.out.println(String.format("Seleccionado %s", fileChooser.getSelectedFile().getName()));
