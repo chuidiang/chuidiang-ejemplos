@@ -1,1 +1,5 @@
 node_modules
+.editorconfig
+.vscode
+.angular
+dist
