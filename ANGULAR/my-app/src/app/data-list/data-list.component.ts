@@ -10,7 +10,7 @@ import { MyLibDirective } from '@chuidiang/my-lib';
   standalone: true,
   imports: [CommonModule, MenuDirective, MyLibDirective],
   templateUrl: './data-list.component.html',
-  styleUrl: './data-list.component.css'
+  styleUrl: './data-list.component.css',
 })
 export class DataList implements OnInit {
 
