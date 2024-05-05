@@ -4,12 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-sample-component',
   standalone: true,
   imports: [],
-  template: `
-    <p>
-      sample-component works!
-    </p>
-  `,
-  styles: ``
+  templateUrl: 'sample-component.component.html',
+  styleUrl: 'sample-component.component.css'
 })
 export class SampleComponentComponent {
 
