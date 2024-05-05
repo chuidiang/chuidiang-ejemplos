@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   template: `<div>
     <p>textModel = <span>{{textModel}}</span></p>
     <p>booleanModel = <span [class]='booleanClass'>{{booleanModel}}</span></p>
-    <p>numberModel = <span [class]='numberClass'>{{numberModel}}</span></p>
+    <p>numberModel = <span [class]="numberClass">{{numberModel}}</span></p>
   </div>
   `,
   styles: `
