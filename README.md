@@ -1,4 +1,4 @@
 chuidiang-ejemplos
 ==================
 
-Ejemplos de código de https://chuwiki.chuidiang.org
+Ejemplos de código de https://chuidiang.org
