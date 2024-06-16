@@ -17,8 +17,19 @@ import { CommonModule } from "@angular/common";
             <span>{{i}} - {{aClass}} </span>
         </ng-template></p>
         <h3>Directiva estructural ngIf</h3>
-        <p *ngIf="classes == 'bigred'; else noIf">Se cumple el if</p>
-        <ng-template #noIf><p>No se cumple el if</p></ng-template>
+
+        <!-- Ejemplo simple -->
+        <p *ngIf="classes == 'big red'">Simple: se cumple el if</p>
+
+        <!-- ejemplo simple de if con ng-template -->
+        <ng-template [ngIf]="classes == 'big red'"><p>ng-template simple: Se cumple el if</p></ng-template>
+
+        <!-- Ejemplo con if else -->
+        <p *ngIf="classes == 'bigred'; else elseBlock">Se cumple el if</p>
+        
+        <ng-template [ngIf]="classes == 'bigred'" [ngIfThen]="thenBlock" [ngIfElse]="elseBlock"]></ng-template>
+        <ng-template #thenBlock><p>Se cumple el if</p></ng-template>
+        <ng-template #elseBlock><p>No se cumple el if</p></ng-template>
     `,
     styles: `
        .big {font-size:x-large;}
