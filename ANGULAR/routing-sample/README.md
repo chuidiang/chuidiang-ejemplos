@@ -1,27 +1,11 @@
-# ModulesSamples2
+Ejemplo del tutorial en [Routing en Angular](https://chuidiang.org/index.php?title=Routing_en_Angular)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
+En app.component.ts está la página principal, con un título y una barra de navegación a las páginas "One" y "Two". 
 
-## Development server
+En one.component.ts y two.component.ts están esas dos páginas hijas, sencillas.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+En app.routes.ts está el array de rutas para las páginas hijas y el menú de navegación.
 
-## Code scaffolding
+En app.config.ts está la configuración de la aplicación, donde se indica al módulo de Routing de Angular donde está el array de rutas.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Finalmente, en main.ts está el main principal de la aplicación, donde se pasa adicionalmente la configuración de app.config.ts del arranque
