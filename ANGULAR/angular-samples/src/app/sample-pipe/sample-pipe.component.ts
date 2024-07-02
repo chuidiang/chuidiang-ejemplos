@@ -1,14 +1,15 @@
 import { Component } from "@angular/core";
-import { UpperCasePipe, LowerCasePipe, DatePipe, CurrencyPipe, DecimalPipe, PercentPipe, JsonPipe } from "@angular/common";
+import { UpperCasePipe, LowerCasePipe, DatePipe, CurrencyPipe, DecimalPipe, PercentPipe, JsonPipe, TitleCasePipe } from "@angular/common";
 import { CeroPipe } from "./custom.pipe";
 
 @Component({
     selector:'pipe-sample',
     standalone:true,
-    imports:[UpperCasePipe, LowerCasePipe, DatePipe, CurrencyPipe, DecimalPipe, PercentPipe, JsonPipe, CeroPipe],
+    imports:[UpperCasePipe, LowerCasePipe, TitleCasePipe, DatePipe, CurrencyPipe, DecimalPipe, PercentPipe, JsonPipe, CeroPipe],
     template:`
         <p>UpperCase: {{texto | uppercase}}</p>
-        <p>LpperCase: {{texto | lowercase}}</p>
+        <p>LowerCase: {{texto | lowercase}}</p>
+        <p>TitleCase: {{texto | titlecase}}</p>
         <p>Fecha defecto: {{today | date}}</p>
         <p>Fecha custom: {{today | date:'y:M:d H:m:s'}}</p>
         <p>Fecha corta: {{today | date:'short'}}</p>
@@ -26,7 +27,7 @@ import { CeroPipe } from "./custom.pipe";
     `
 })
 export class SamplePipe {
-    texto: string = 'Texto de Prueba'
+    texto: string = 'Texto de prueba'
     today: number = Date.now();
     amount: number = 1.234567;
     value: number = 0;
