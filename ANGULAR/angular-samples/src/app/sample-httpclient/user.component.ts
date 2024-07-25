@@ -11,14 +11,15 @@ import { CommonModule } from '@angular/common';
     <li *ngFor="let item of items">{{item.name}}, {{item.age}}</li>
 </ul>
 <button (click)="addItem()">Add</button>
-<button (click)="deleteItem(1)">Remove</button>
+<button (click)="deleteItem(0)">Remove First</button>
+<button (click)="updateItem(0)">Update First</button>
   `,
   styles: []
 })
 export class UserComponent implements OnInit {
   items: any[] = [];
   newItem: any = { name: 'New Item', age: 44 };
-  updatedItem: any = { name: 'Updated Item' };
+  updatedItem: any = { name: 'Updated Item', age: 33 };
 
   constructor(private dataService: DataService) { 
     this.dataService = dataService
@@ -42,16 +43,15 @@ export class UserComponent implements OnInit {
 
   updateItem(id: number): void {
     this.dataService.updateItem(id, this.updatedItem).subscribe(data => {
-      const index = this.items.findIndex(item => item.id === id);
-      if (index !== -1) {
-        this.items[index] = data;
-      }
+        this.items[id] = data;
     });
   }
 
   deleteItem(id: number): void {
     this.dataService.deleteItem(id).subscribe(() => {
-      this.items = this.items.filter(item => item.id !== id);
+      console.log("Borrando");
+      this.items.splice(id,1);
+      console.log("items = "+this.items);
     });
   }
 }
