@@ -2,10 +2,13 @@
 # Ejemplo de web service con python Flask
 
 from flask import Flask, abort, request
+from flask_cors import CORS
+
 import traceback
 import json
 
 app = Flask(__name__)
+CORS(app)
 
 
 # Datos de usuario
