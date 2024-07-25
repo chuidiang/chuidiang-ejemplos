@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HttpClientModule } from '@angular/common/http';
 
+/**
+ * Servicio con el HttpClient para hacer llamadas.
+ * Para que HttpClient esté accesible, es necesario en app.config.ts, en providers,
+ * poner un provideHttpClient(). 
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
   private apiUrl = 'http://localhost:5000/users';
 
+  /**
+   * Recbie por inyección el HttpClient para poder hacer llamadas REST al servidor.
+   * @param http 
+   */
   constructor(private http: HttpClient) { }
 
   // GET request
