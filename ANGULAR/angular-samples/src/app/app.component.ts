@@ -3,16 +3,14 @@ import { SampleComponentComponent } from './sample-component/sample-component.co
 import { SampleModelDirectiveComponent } from './sample-model-directive/sample-model-directive.component';
 import { SampleDirectives } from './sample-model-directive/sample-directive.component';
 import { SamplePipe } from './sample-pipe/sample-pipe.component';
-import { RouterOutlet } from '@angular/router';
-import { RouterLink } from '@angular/router';
 import { ServiceComponent } from './sample-service/service.component';
+import { UserComponent } from './sample-httpclient/user.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [SampleComponentComponent, SampleModelDirectiveComponent, SampleDirectives,
-    SamplePipe, ServiceComponent
-  ],
+    SamplePipe, ServiceComponent, UserComponent],
   template: `<h1>Welcome to {{title}}!</h1>
      <h2>Sample Component</h2>
      <app-sample-component></app-sample-component>
@@ -22,7 +20,8 @@ import { ServiceComponent } from './sample-service/service.component';
      <app-directive-samples></app-directive-samples>
      <h2>Sample Pipe</h2>
      <pipe-sample></pipe-sample>
-     <service-component></service-component>`,
+     <service-component></service-component>
+     <users></users>`,
   styles: 'h1 {background-color:lightgray}'
 })
 export class AppComponent {
