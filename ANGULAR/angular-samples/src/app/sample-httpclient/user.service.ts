@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 
 /**
  * Servicio con el HttpClient para hacer llamadas.
@@ -21,7 +21,12 @@ export class DataService {
 
   // GET request
   getItems(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(this.apiUrl).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log(error.status);
+        return throwError(() => new Error("Ha habido algún error")); 
+      })
+    );
   }
 
   // POST request

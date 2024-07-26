@@ -45,9 +45,11 @@ export class UserComponent implements OnInit {
    * Pide y guarda los items al servidor REST 
    */
   getItems(): void {
-    this.dataService.getItems().subscribe(data => {
+    this.dataService.getItems().subscribe({ next: data => {
       this.items = data;
-    });
+    }, error: (error:Error) => {
+      console.log(error.message)
+    }});
   }
 
   /**
