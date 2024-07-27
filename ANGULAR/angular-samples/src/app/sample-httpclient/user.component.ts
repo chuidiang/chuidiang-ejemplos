@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './user.service';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'users',
@@ -45,11 +46,9 @@ export class UserComponent implements OnInit {
    * Pide y guarda los items al servidor REST 
    */
   getItems(): void {
-    this.dataService.getItems().subscribe({ next: data => {
+    this.dataService.getItems().subscribe(data => {
       this.items = data;
-    }, error: (error:Error) => {
-      console.log(error.message)
-    }});
+    });
   }
 
   /**
@@ -80,8 +79,12 @@ export class UserComponent implements OnInit {
    * @param id 
    */
   deleteItem(id: number): void {
-    this.dataService.deleteItem(id).subscribe(() => {
-      this.items.splice(id,1);
-    });
+    this.dataService.deleteItem(id).subscribe({
+      next: () => {
+        this.items.splice(id,1);
+      }, 
+      error: (error:HttpErrorResponse) => {
+        console.log("Hay un error: " + error.message)}
+      });
   }
 }

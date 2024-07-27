@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, EMPTY, Observable } from 'rxjs';
 
 /**
  * Servicio con el HttpClient para hacer llamadas.
@@ -21,12 +21,7 @@ export class DataService {
 
   // GET request
   getItems(): Observable<any> {
-    return this.http.get<any>(this.apiUrl).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log(error.status);
-        return throwError(() => new Error("Ha habido algún error")); 
-      })
-    );
+    return this.http.get<any>(this.apiUrl);
   }
 
   // POST request
@@ -41,6 +36,12 @@ export class DataService {
 
   // DELETE request
   deleteItem(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
+      catchError((error:HttpErrorResponse) => {
+        console.log("Error en servicio "+error.message);
+        return EMPTY;
+        // return throwError(()=> new Error("Error en borrado"));
+      })
+    );
   }
 }
