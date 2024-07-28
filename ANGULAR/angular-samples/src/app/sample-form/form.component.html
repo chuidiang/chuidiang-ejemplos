@@ -1,0 +1,25 @@
+<h2>Ejemplo de Formulario</h2>
+<!-- Formulario que pide un nombre y email, verficando que se rellena y son correctos -->
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <div>
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" name="name" ngModel required minlength="3">
+      <div *ngIf="myForm.controls['name']?.invalid && (myForm.controls['name']?.dirty || myForm.controls['name']?.touched)">
+        <small *ngIf="myForm.controls['name']?.errors?.['required']">El nombre es requerido.</small>
+        <small *ngIf="myForm.controls['name']?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</small>
+      </div>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" ngModel required email>
+      <div *ngIf="myForm.controls['email']?.invalid && (myForm.controls['email']?.dirty || myForm.controls['email']?.touched)">
+        <small *ngIf="myForm.controls['email']?.errors?.['required']">El email es requerido.</small>
+        <small *ngIf="myForm.controls['email']?.errors?.['email']">El email no es válido.</small>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!myForm.valid">Enviar</button>
+  </form>
+  <p>Enviado : </p>
+  <p>name = {{name}}</p>
+  <p>email = {{email}}</p>
+  
