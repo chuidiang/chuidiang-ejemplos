@@ -29,16 +29,16 @@ public class EventProducer {
     /** Cada segundo, un evento y se notifica a los SseEmitters */
     @Scheduled(fixedRate = 1000)
     public void newEvent(){
-            emitters.forEach(emitter -> {
-                executorService.submit(()-> {
-                    try {
-                        emitter.send(new Data("Mensaje", counter));
-                    } catch (IOException e) {
-                        System.out.println(e.getMessage());
-                    }
-                });
+        System.out.println("Emitiendo "+ counter++);
+        emitters.forEach(emitter -> {
+            executorService.submit(()-> {
+                try {
+                    emitter.send(new Data("Mensaje", counter));
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             });
-            System.out.println("Emitido "+ counter++);
+        });
     }
 
     public void add(SseEmitter sseEmitter) {
