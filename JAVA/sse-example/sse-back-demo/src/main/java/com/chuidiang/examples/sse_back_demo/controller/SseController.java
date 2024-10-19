@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.io.Reader;
-
 /**
  * @author fjabellan 17/10/2024
  * Crea y devuelve un SseEmitter por cada petición desde el front http://localhost:8080/sse
@@ -21,7 +19,7 @@ public class SseController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/sse")
-    public SseEmitter streamSse(Reader reader) {
+    public SseEmitter streamSse() {
         // Timeout indefinido 0L
         SseEmitter sseEmitter = new SseEmitter(0L);
 

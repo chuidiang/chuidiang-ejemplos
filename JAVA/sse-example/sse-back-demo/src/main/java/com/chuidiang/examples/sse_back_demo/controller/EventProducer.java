@@ -41,14 +41,18 @@ public class EventProducer {
         });
     }
 
+    /** Añade un nuevo SseEmitter a la lista.
+     * Se llama a este método cuando un nuevo cliente se conecta */
     public void add(SseEmitter sseEmitter) {
         emitters.add(sseEmitter);
+        System.out.println("Añadido SseEmitter. Hay "+emitters.size());
     }
 
+    /** Elimina un SseEmitter de la lista.
+     * Se llama a este método cuando un cliente se desconecta */
     public void remove(SseEmitter sseEmitter){
-        System.out.println("Intento borrar");
         emitters.remove(sseEmitter);
-        System.out.println("Quedan "+emitters.size());
+        System.out.println("Borrado SseEmitter. Quedan "+emitters.size());
     }
 
 }
