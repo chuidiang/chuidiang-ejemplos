@@ -1,0 +1,35 @@
+
+    <h2>Ejemplo de formulario reactivo</h2>
+  
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">Nombre:</label>
+        <input id="name" type="text" formControlName="name">
+        <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+          <small>El nombre es requerido</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="email">Correo Electrónico:</label>
+        <input id="email" type="email" formControlName="email">
+        <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+          <small>Correo inválido</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="password">Contraseña:</label>
+        <input id="password" type="password" formControlName="password">
+        <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+          <small>La contraseña debe tener al menos 6 caracteres</small>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="userForm.invalid">Registrar</button>
+    </form>
+    <p>Enviado</p>
+    <p>{{name}}</p>
+    <p>{{email}}</p>
+    <p>{{password}}</p>
+  
