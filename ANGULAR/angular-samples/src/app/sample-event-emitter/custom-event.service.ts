@@ -12,4 +12,9 @@ export class CustomEventService {
   emitCustomEvent(data: ShipData) {
     this.customEvent.emit(data);
   }
+
+  // Método para suscribirse
+  subscribeCustomeEvent (subscriptor: (valor: ShipData) => void) {
+    this.customEvent.subscribe(subscriptor);
+  }
 }

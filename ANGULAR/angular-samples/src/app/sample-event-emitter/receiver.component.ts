@@ -22,7 +22,7 @@ export class ReceiverComponent implements OnInit {
 
   ngOnInit() {
     // Suscribirse al evento del servicio para recibir los datos del objeto ShipData
-    this.eventService.customEvent.subscribe((data: ShipData) => {
+    this.eventService.subscribeCustomeEvent((data: ShipData) => {
       this.receivedShipData = data;
     });
   }
