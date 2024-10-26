@@ -10,13 +10,15 @@ import { ReactiveForm } from './sample-reactive-form/reactive-form.component';
 import { ParentComponent } from './sample-input-output/parent.component';
 import { SenderComponent } from './sample-event-emitter/sender.component';
 import { ReceiverComponent } from './sample-event-emitter/receiver.component';
+import { SubjectSendComponent } from './sample-subjects/subject-send.component';
+import { SubjectReceiverComponent } from './sample-subjects/subject-receiver.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [SampleComponentComponent, SampleModelDirectiveComponent, SampleDirectives,
     SamplePipe, ServiceComponent, UserComponent, FormComponent, ReactiveForm, ParentComponent,
-    SenderComponent, ReceiverComponent],
+    SenderComponent, ReceiverComponent, SubjectSendComponent, SubjectReceiverComponent],
   template: `<h1>Welcome to {{title}}!</h1>
      <h2>Sample Component</h2>
      <app-sample-component></app-sample-component>
@@ -33,7 +35,10 @@ import { ReceiverComponent } from './sample-event-emitter/receiver.component';
      <app-parent></app-parent>
      <h2>EventEmitter Example</h2>
      <app-sender></app-sender>
-     <app-receiver></app-receiver>`,
+     <app-receiver></app-receiver>
+     <h2>Subjects Example</h2>
+     <subject-sender></subject-sender>
+     <subject-receiver></subject-receiver>`,
   styles: 'h1 {background-color:lightgray}'
 })
 export class AppComponent {
