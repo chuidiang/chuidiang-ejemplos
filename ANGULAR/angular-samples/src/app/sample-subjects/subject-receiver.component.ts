@@ -35,19 +35,19 @@ export class SubjectReceiverComponent {
 
   subscribe() {
 
-    this.dataService.data.subscribe(data => {
+    this.dataService.subscribeSubjectData(data => {
       this.receivedData.push(data);
     });
 
-    this.dataService.behaviorData.subscribe(data => {
+    this.dataService.subscribeBehaviorSubjectData(data => {
         this.behaviorData.push(data);
     });
 
-    this.dataService.replayData.subscribe(data => {
+    this.dataService.subscribeReplaySubjectData(data => {
       this.replayData.push(data);
     });
 
-    this.dataService.asyncData.subscribe(data => {
+    this.dataService.subscribeAsyncSubjectData(data => {
         this.asyncData.push(data);
       });
   }

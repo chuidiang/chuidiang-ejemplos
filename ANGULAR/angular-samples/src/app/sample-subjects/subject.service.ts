@@ -12,10 +12,6 @@ export class SubjectService {
   private behaviorSubjectData = new BehaviorSubject<Number>(-1); // Estado inicial vacío
   private replaySubjectData = new ReplaySubject<Number>(3); // Recuerda los tres últimos eventos
   private asyncSubjectData = new AsyncSubject<Number>();
-  data = this.subjectData.asObservable();
-  behaviorData = this.behaviorSubjectData.asObservable();
-  replayData = this.replaySubjectData.asObservable();
-  asyncData = this.asyncSubjectData.asObservable();
 
   complete(){
     this.asyncSubjectData.complete();
@@ -26,5 +22,21 @@ export class SubjectService {
       this.behaviorSubjectData.next(data);
       this.replaySubjectData.next(data);
       this.asyncSubjectData.next(data);
+  }
+
+  subscribeSubjectData(observer: (value: Number) => void) {
+    this.subjectData.subscribe(observer);
+  }
+
+  subscribeBehaviorSubjectData(observer: (value: Number) => void) {
+    this.behaviorSubjectData.subscribe(observer);
+  }
+
+  subscribeReplaySubjectData(observer: (value: Number) => void) {
+    this.replaySubjectData.subscribe(observer);
+  }
+
+  subscribeAsyncSubjectData(observer: (value: Number) => void) {
+    this.asyncSubjectData.subscribe(observer);
   }
 }
