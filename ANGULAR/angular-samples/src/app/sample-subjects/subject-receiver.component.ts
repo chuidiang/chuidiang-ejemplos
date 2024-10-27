@@ -1,45 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SubjectService } from './subject.service';
-import { interval } from 'rxjs';
-import { take } from 'rxjs';
+import { NgFor } from '@angular/common';
 
+/**
+ * Componente que recibe datos del servicio.
+ * Tiene cuatro suscriptores, uno por cada tipo de Subject: Subject, BehaviorSubject, ReplaySubject y AsyncSubjet
+ * No están suscritos en el arranque, hay que pulsar el botón "Subscribe" para que se suscriban.
+ * Con el botón "Complete Async" se llama al método complete() de AsyncSubject.
+ * 
+ * Para la prueba con el resto de componentes, en el sender, pulsa varias veces el botón enviar.
+ * Luego en este pulsa "Subscribe" y fíjate en qué recibe cada suscriptor.
+ * Pulsa en el sender "Complete Async" y fíjate en qué recibe el AsyncSubject.
+ * Sigue luego, en el sender, enviando más datos y fíjate qué recibe cada uno.
+ */
 @Component({
   selector: 'subject-receiver',
   standalone: true,
+  imports: [NgFor],
   template: `
     <button (click)="subscribe()">Subscribe</button>
-    <p>Dato recibido de Subject: {{ receivedData }}</p>
-    <p>Dato recibido de BehaviorSubject: {{ behaviorData }}</p>
-    <p>Dato recibido de ReplaySubject: {{ replayData }}</p>
-    
-    <p>Dato recibido de AsyncSubject: {{ asyncData }}</p>
+    <p>Dato recibido de Subject: <ng-template ngFor let-aData [ngForOf]="receivedData">{{ aData }} - </ng-template></p>
+    <p>Dato recibido de BehaviorSubject: <ng-template ngFor let-aBehaviorData [ngForOf]="behaviorData"><span>{{ aBehaviorData }} - </span></ng-template></p>
+    <p>Dato recibido de ReplaySubject: <ng-template ngFor let-aReplayData [ngForOf]="replayData"><span>{{ aReplayData }} - </span></ng-template></p>
+    <p>Dato recibido de AsyncSubject: <ng-template ngFor let-aAsyncData [ngForOf]="asyncData"><span>{{ aAsyncData }} - </span></ng-template></p>
   `
 })
 export class SubjectReceiverComponent {
-  receivedData: Number |null = null;
-  behaviorData: Number |null = null;
-  replayData: Number |null = null;
-  asyncData: Number |null = null;
+  receivedData: Number[] = [];
+  behaviorData: Number[] = [];
+  replayData: Number[] = [];
+  asyncData: Number[] = [];
 
   constructor(private dataService: SubjectService) {}
 
   subscribe() {
 
     this.dataService.data.subscribe(data => {
-      this.receivedData = data;
+      this.receivedData.push(data);
     });
 
     this.dataService.behaviorData.subscribe(data => {
-        this.behaviorData = data;
+        this.behaviorData.push(data);
     });
 
     this.dataService.replayData.subscribe(data => {
-      this.replayData = data;
+      this.replayData.push(data);
     });
 
-    this.dataService.complete();
     this.dataService.asyncData.subscribe(data => {
-        this.asyncData = data;
+        this.asyncData.push(data);
       });
   }
 }
