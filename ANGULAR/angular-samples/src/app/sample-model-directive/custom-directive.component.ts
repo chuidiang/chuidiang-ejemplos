@@ -9,7 +9,7 @@ import { ShowAfterDelayDirective } from "./show-after-delay.directive";
     template: `
         <h2>Ejemplo custom directive</h2>
         <p appHighlight>Texto highlight</p>
-        <p *appShowAfterDelay="10000">Esto sale tras 10 segundos</p>
+        <p *appShowAfterDelay="10000;'otro':'eso'">Esto sale tras 10 segundos</p>
     `
 })
 export class CustomDirectiveComponent {
