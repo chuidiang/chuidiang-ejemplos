@@ -1,4 +1,4 @@
-# Directivas personalizadas
+# Directivas personalizadas en Angular
 
 Código de ejemplo de los tutoriales:
 
