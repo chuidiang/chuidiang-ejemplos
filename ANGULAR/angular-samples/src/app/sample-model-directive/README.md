@@ -2,8 +2,9 @@
 
 Código de ejemplo de los tutoriales:
 
-- [Conceptos de Directivas en Angular](https://chuidiang.org/index.php?title=Directivas_Angular)
+- [Conceptos de Directivas](https://chuidiang.org/index.php?title=Directivas_Angular)
 - [Data Binding](https://chuidiang.org/index.php?title=Angular_Data_Binding)
+- [HostListener](https://chuidiang.org/index.php?title=HostListener_en_Angular)
 - Ejemplos de directivas de atributo
     - [Ejemplos con ngClass](https://chuidiang.org/index.php?title=Angular_ngClass)
     - [Directivas pesonalizadas de atributo](https://chuidiang.org/index.php?title=Directivas_personalizadas_de_atributo_en_Angular)
