@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [MatButtonModule, MatIconModule],
   template: `
+    <!-- Todos los posibles button se pueden ver en https://material.angular.io/components/button/overview -->
      <button mat-raised-button color="primary">Primary</button>
      <button mat-flat-button color="accent">Accent</button>
      <button mat-stroked-button color="warn">Warn</button>
