@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
      <button mat-stroked-button>Warn</button>
      <button mat-fab extended color="warn">
         <!-- Listado de todos los posibles iconos en https://fonts.google.com/icons -->
-        <mat-icon>share</mat-icon>Home
+        <mat-icon>home</mat-icon>Home
      </button>
   `
 })
